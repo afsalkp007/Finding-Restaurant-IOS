@@ -226,23 +226,23 @@
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="195.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image" translatesAutoresizingMaskIntoConstraints="NO" id="mbO-uj-bCK" userLabel="StreetImage">
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="siena_map_thumb" translatesAutoresizingMaskIntoConstraints="NO" id="mbO-uj-bCK" userLabel="StreetImage">
                                                     <rect key="frame" x="10" y="42.5" width="112" height="111.5"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="mbO-uj-bCK" secondAttribute="height" multiplier="1:1" id="vRc-Eh-Kll"/>
                                                     </constraints>
                                                 </imageView>
-                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-WD-WGY">
-                                                    <rect key="frame" x="142" y="32" width="168" height="133"/>
+                                                <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-WD-WGY">
+                                                    <rect key="frame" x="142" y="29.5" width="168" height="138"/>
                                                     <subviews>
-                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="民族東路410巷2弄18號" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ma-7f-RmY" userLabel="AddressLabel">
-                                                            <rect key="frame" x="0.0" y="0.0" width="162" height="18"/>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ma-7f-RmY" userLabel="AddressLabel">
+                                                            <rect key="frame" x="0.0" y="0.0" width="0.0" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="Nvz-n6-TzR">
-                                                            <rect key="frame" x="0.0" y="23" width="141.5" height="18"/>
+                                                            <rect key="frame" x="0.0" y="24" width="141.5" height="18"/>
                                                             <subviews>
                                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Phone: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vNW-j0-KO5" userLabel="PhoneTitle">
                                                                     <rect key="frame" x="0.0" y="0.0" width="55" height="18"/>
@@ -259,25 +259,25 @@
                                                             </subviews>
                                                         </stackView>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Seafood, Thai" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="nHQ-A2-UhM" userLabel="RestaurantType">
-                                                            <rect key="frame" x="0.0" y="46" width="168" height="18"/>
+                                                            <rect key="frame" x="0.0" y="48" width="168" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="4.5 stars" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9mv-Hk-i8P" userLabel="Rating">
-                                                            <rect key="frame" x="0.0" y="69" width="65" height="18"/>
+                                                            <rect key="frame" x="0.0" y="72" width="65" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <color key="textColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="$$$$$" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BKd-Dz-8kz" userLabel="Price">
-                                                            <rect key="frame" x="0.0" y="92" width="51" height="18"/>
+                                                            <rect key="frame" x="0.0" y="96" width="51" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="180 reviews" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="6d1-QS-6Gl" userLabel="Reviews">
-                                                            <rect key="frame" x="0.0" y="115" width="158" height="18"/>
+                                                            <rect key="frame" x="0.0" y="120" width="158" height="18"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
                                                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
@@ -289,6 +289,7 @@
                                                 </stackView>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstItem="W0k-WD-WGY" firstAttribute="trailing" secondItem="0b1-Wh-6Vl" secondAttribute="trailing" constant="-10" id="Ssv-Ds-w71"/>
                                                 <constraint firstItem="mbO-uj-bCK" firstAttribute="centerY" secondItem="0b1-Wh-6Vl" secondAttribute="centerY" id="aL6-zn-6Vv"/>
                                                 <constraint firstItem="nHQ-A2-UhM" firstAttribute="trailing" secondItem="0b1-Wh-6Vl" secondAttribute="trailing" constant="-10" id="g5m-Qf-gL5"/>
                                                 <constraint firstItem="W0k-WD-WGY" firstAttribute="leading" secondItem="mbO-uj-bCK" secondAttribute="trailing" constant="20.000000000000057" id="ijw-2y-wj3"/>
@@ -367,5 +368,6 @@
     </scenes>
     <resources>
         <image name="no_image" width="426" height="320"/>
+        <image name="siena_map_thumb" width="106" height="73"/>
     </resources>
 </document>

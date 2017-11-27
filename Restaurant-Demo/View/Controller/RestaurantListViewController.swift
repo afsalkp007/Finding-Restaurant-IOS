@@ -14,23 +14,31 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     private static let CELL_ID = "menu_cell"
     
     private var mScNameSearchController:UISearchController?
-    private var mFilteredRetaruantInfos:[YelpRestaruantInfo]?
-    private var mAllRestaruantInfos:[YelpRestaruantInfo]?
+    private var mFilteredRetaruantInfos:[YelpRestaruantSummaryInfo]?
+    private var mAllRestaruantInfos:[YelpRestaruantSummaryInfo]?
     private var mJsonDecoder:JSONDecoder?
-    private var mYelpAuthenticationInfo:YelpAuthenticationInfo?
-    private var mYelpSearchInfo:YelpSearchInfo?
+    private var mAuthenticationInfo:YelpAuthenticationInfo?
+    private var mSearchInfo:YelpSearchInfo?
     private var mLoadingAlertController:UIAlertController?
+    private var mIsFirst = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.mAllRestaruantInfos = [YelpRestaruantInfo]()
+        self.mAllRestaruantInfos = [YelpRestaruantSummaryInfo]()
         self.mFilteredRetaruantInfos = nil
         self.mJsonDecoder = JSONDecoder()
         self.mJsonDecoder?.dateDecodingStrategy = .iso8601
         
         initView()
-        fetchData()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        // Only the first time need to fetch data from API
+        if self.mIsFirst {
+            self.mIsFirst = false
+            fetchData()
+        }
     }
     
     func initView() {
@@ -66,19 +74,28 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         Alamofire.request("https://api.yelp.com/oauth2/token", method: .post, parameters: parameters).responseJSON {
             response in
             if response.error == nil, let authenticationInfo = try? self.mJsonDecoder?.decode(YelpAuthenticationInfo.self, from: response.data!) {
-                self.mYelpAuthenticationInfo = authenticationInfo
+                self.mAuthenticationInfo = authenticationInfo
                 parameters = ["term":"Restaurants", "location":"Taipei, Taiwan", "locale":"zh_TW"]
                 let headers: HTTPHeaders = [
-                    "Authorization": "Bearer \(self.mYelpAuthenticationInfo?.access_token ?? "")",
+                    "Authorization": "Bearer \(self.mAuthenticationInfo?.access_token ?? "")",
                     "Accept": "application/json"
                 ]
                 
                 Alamofire.request("https://api.yelp.com/v3/businesses/search", method: .get, parameters: parameters, headers: headers).responseJSON {
                     response in
                     if response.error == nil, let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: response.data!) {
-                        self.mYelpSearchInfo = searchInfo
-                        self.mAllRestaruantInfos = self.mYelpSearchInfo?.businesses
+                        self.mSearchInfo = searchInfo
+                        self.mAllRestaruantInfos = self.mSearchInfo?.businesses
                         
+                        // Compose the categories string
+                        for i in stride(from: 0, to: (self.mAllRestaruantInfos?.count)!, by: 1) {
+                            var categoriyTitles:[String] = [String]()
+                            
+                            for categoryInfo in self.mAllRestaruantInfos![i].categories! {
+                                categoriyTitles.append(categoryInfo.title ?? "")
+                            }
+                            self.mAllRestaruantInfos![i].categoriesStr = categoriyTitles.joined(separator: ",")
+                        }
                         self.tableView.reloadData()
                     } else {
                         print("Error = \(response.error.debugDescription), or mYelpSearchInfo = nil")
@@ -101,23 +118,36 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         loadingIndicator.startAnimating();
         self.mLoadingAlertController?.view.addSubview(loadingIndicator)
-        present(self.mLoadingAlertController!, animated: true, completion: nil)
+        self.present(self.mLoadingAlertController!, animated: true, completion: nil)
     }
     
     func closeLoadingDialog() {
         if self.mLoadingAlertController != nil {
-            self.mLoadingAlertController?.dismiss(animated: true, completion: nil)
+            self.presentedViewController?.dismiss(animated: true, completion: nil)
+            self.mLoadingAlertController = nil
         }
     }
     
     // MARK: - UISearchResultsUpdating
-    func filterTable(searchText:String) {
-        // TODO: Apply search text
-        self.tableView.reloadData()
-    }
-    
     func updateSearchResults(for searchController: UISearchController) {
-        print("Search Text = \(searchController.searchBar.text ?? "")")
+        var keyword = searchController.searchBar.text ?? ""
+        keyword = keyword.trimmingCharacters(in: .whitespaces)
+        
+        if keyword.count == 0 {
+            self.mFilteredRetaruantInfos = nil
+        } else {
+            self.mFilteredRetaruantInfos = [YelpRestaruantSummaryInfo]()
+            
+            for info in self.mAllRestaruantInfos! {
+                if (info.name?.contains(keyword))! || (info.location?.display_address?.contains(keyword))! ||
+                    (info.categoriesStr?.contains(keyword))! {
+                    self.mFilteredRetaruantInfos?.append(info)
+                }
+            }
+            self.mFilteredRetaruantInfos = (self.mFilteredRetaruantInfos?.count ?? 0) <= 0 ? nil : self.mFilteredRetaruantInfos
+        }
+        
+        self.tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -143,18 +173,13 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         cell.mLbRatingLabel.text = (restaurantInfo.rating != nil) ? "\(restaurantInfo.rating ?? 0) starts" : ""
         cell.mLbAddressLabel.text = restaurantInfo.location?.display_address?.joined()
         cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder: UIImage(named: "no_image"))
-        
-        var categoriyTitles:[String] = [String]()
-        for categoryInfo in restaurantInfo.categories! {
-            categoriyTitles.append(categoryInfo.title ?? "")
-        }
-        cell.mLbTypeLabel.text = categoriyTitles.joined(separator: ",")
+        cell.mLbTypeLabel.text = restaurantInfo.categoriesStr
         
         return cell
     }
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let restaurantInfos:[YelpRestaruantInfo]? = (self.mFilteredRetaruantInfos != nil) ? self.mFilteredRetaruantInfos : self.mAllRestaruantInfos
+        let restaurantInfos:[YelpRestaruantSummaryInfo]? = (self.mFilteredRetaruantInfos != nil) ? self.mFilteredRetaruantInfos : self.mAllRestaruantInfos
         let selectedInfo = restaurantInfos![indexPath.row]
         
         performSegue(withIdentifier: "show_restaurant_detail", sender: selectedInfo)
@@ -164,8 +189,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destViewController = segue.destination as! RestaurantDetailViewController
-        let restaurantInfo = sender as! YelpRestaruantInfo
+        let restaurantInfo = sender as! YelpRestaruantSummaryInfo
         
-        destViewController.mRestaurantInfo = restaurantInfo
+        destViewController.mRestaurantSummaryInfo = restaurantInfo
+        destViewController.mAuthenticationInfo = self.mAuthenticationInfo
     }    
 }

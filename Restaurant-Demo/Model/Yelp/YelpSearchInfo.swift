@@ -9,7 +9,7 @@
 import Foundation
 
 struct YelpSearchInfo: Codable {
-    var businesses:[YelpRestaruantInfo]?
+    var businesses:[YelpRestaruantSummaryInfo]?
     var total:Int?
 }
 
