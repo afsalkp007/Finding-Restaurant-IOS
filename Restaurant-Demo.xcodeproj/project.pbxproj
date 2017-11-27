@@ -7,23 +7,45 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2E2B89AE12CE8DF43B0DC2CD /* Pods_Restaurant_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56FA223AC361E25967D09776 /* Pods_Restaurant_Demo.framework */; };
 		ED332D5F1FC8759C00279333 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D5E1FC8759C00279333 /* AppDelegate.swift */; };
 		ED332D641FC8759C00279333 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED332D621FC8759C00279333 /* Main.storyboard */; };
 		ED332D661FC8759C00279333 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED332D651FC8759C00279333 /* Assets.xcassets */; };
 		ED332D691FC8759C00279333 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED332D671FC8759C00279333 /* LaunchScreen.storyboard */; };
-		ED332D741FC87A4400279333 /* MenuTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D731FC87A4400279333 /* MenuTableViewController.swift */; };
-		ED332D771FC994B600279333 /* img1.png in Resources */ = {isa = PBXBuildFile; fileRef = ED332D761FC994B600279333 /* img1.png */; };
+		ED332D741FC87A4400279333 /* RestaurantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D731FC87A4400279333 /* RestaurantListViewController.swift */; };
+		ED332D791FCA2EBA00279333 /* YelpApiConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D781FCA2EBA00279333 /* YelpApiConfigs.swift */; };
+		ED332D7C1FCA487700279333 /* YelpSearchInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D7B1FCA487700279333 /* YelpSearchInfo.swift */; };
+		ED332D7E1FCA4C4B00279333 /* YelpAuthenticationInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D7D1FCA4C4B00279333 /* YelpAuthenticationInfo.swift */; };
+		ED332D801FCA52DE00279333 /* YelpRestaruantInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D7F1FCA52DE00279333 /* YelpRestaruantInfo.swift */; };
+		ED332D821FCA52F100279333 /* YelpRestaurantLocation.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D811FCA52F100279333 /* YelpRestaurantLocation.swift */; };
+		ED332D841FCA530500279333 /* YelpRestaurantCoordinates.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D831FCA530500279333 /* YelpRestaurantCoordinates.swift */; };
+		ED3559CB1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559CA1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift */; };
+		ED3559CE1FCBBB9100935DFF /* YelpRestaurantCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559CD1FCBBB9100935DFF /* YelpRestaurantCategory.swift */; };
+		ED3559D11FCC2A8000935DFF /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559D01FCC2A8000935DFF /* RestaurantDetailViewController.swift */; };
+		ED3559D51FCC50A200935DFF /* EdgeInsetLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559D41FCC50A200935DFF /* EdgeInsetLabel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		2435F04E3F6CA4002227B204 /* Pods-Restaurant-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo.release.xcconfig"; sourceTree = "<group>"; };
+		56FA223AC361E25967D09776 /* Pods_Restaurant_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Restaurant_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		C98A83A8860B1730E915B2DF /* Pods-Restaurant-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo.debug.xcconfig"; sourceTree = "<group>"; };
 		ED332D5B1FC8759C00279333 /* Restaurant-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Restaurant-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED332D5E1FC8759C00279333 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED332D631FC8759C00279333 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ED332D651FC8759C00279333 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		ED332D681FC8759C00279333 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ED332D6A1FC8759C00279333 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		ED332D731FC87A4400279333 /* MenuTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuTableViewController.swift; sourceTree = "<group>"; };
-		ED332D761FC994B600279333 /* img1.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = img1.png; sourceTree = "<group>"; };
+		ED332D731FC87A4400279333 /* RestaurantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListViewController.swift; sourceTree = "<group>"; };
+		ED332D781FCA2EBA00279333 /* YelpApiConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiConfigs.swift; sourceTree = "<group>"; };
+		ED332D7B1FCA487700279333 /* YelpSearchInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpSearchInfo.swift; sourceTree = "<group>"; };
+		ED332D7D1FCA4C4B00279333 /* YelpAuthenticationInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpAuthenticationInfo.swift; sourceTree = "<group>"; };
+		ED332D7F1FCA52DE00279333 /* YelpRestaruantInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaruantInfo.swift; sourceTree = "<group>"; };
+		ED332D811FCA52F100279333 /* YelpRestaurantLocation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaurantLocation.swift; sourceTree = "<group>"; };
+		ED332D831FCA530500279333 /* YelpRestaurantCoordinates.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaurantCoordinates.swift; sourceTree = "<group>"; };
+		ED3559CA1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantInfoTableViewCell.swift; sourceTree = "<group>"; };
+		ED3559CD1FCBBB9100935DFF /* YelpRestaurantCategory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaurantCategory.swift; sourceTree = "<group>"; };
+		ED3559D01FCC2A8000935DFF /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
+		ED3559D41FCC50A200935DFF /* EdgeInsetLabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +53,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2E2B89AE12CE8DF43B0DC2CD /* Pods_Restaurant_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04D86E31A2BEACEF5A726FC7 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				C98A83A8860B1730E915B2DF /* Pods-Restaurant-Demo.debug.xcconfig */,
+				2435F04E3F6CA4002227B204 /* Pods-Restaurant-Demo.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		470E2A394931423AD94D32B8 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				56FA223AC361E25967D09776 /* Pods_Restaurant_Demo.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		ED332D521FC8759C00279333 = {
 			isa = PBXGroup;
 			children = (
 				ED332D5D1FC8759C00279333 /* Restaurant-Demo */,
 				ED332D5C1FC8759C00279333 /* Products */,
+				04D86E31A2BEACEF5A726FC7 /* Pods */,
+				470E2A394931423AD94D32B8 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,7 +98,8 @@
 		ED332D5D1FC8759C00279333 /* Restaurant-Demo */ = {
 			isa = PBXGroup;
 			children = (
-				ED332D751FC994A600279333 /* images */,
+				ED332D851FCA76B300279333 /* util */,
+				ED332D7A1FCA481900279333 /* API */,
 				ED332D721FC8760A00279333 /* Presenter */,
 				ED332D711FC875F700279333 /* Model */,
 				ED332D701FC875CC00279333 /* View */,
@@ -72,7 +115,10 @@
 		ED332D701FC875CC00279333 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				ED332D731FC87A4400279333 /* MenuTableViewController.swift */,
+				ED3559D31FCC508000935DFF /* Component */,
+				ED3559D21FCC507800935DFF /* Cell */,
+				ED3559CC1FCBACBE00935DFF /* Controller */,
+				ED3559CA1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -80,6 +126,7 @@
 		ED332D711FC875F700279333 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				ED3559CF1FCBBF4E00935DFF /* Yelp */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -91,12 +138,56 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
-		ED332D751FC994A600279333 /* images */ = {
+		ED332D7A1FCA481900279333 /* API */ = {
 			isa = PBXGroup;
 			children = (
-				ED332D761FC994B600279333 /* img1.png */,
+				ED332D781FCA2EBA00279333 /* YelpApiConfigs.swift */,
 			);
-			path = images;
+			path = API;
+			sourceTree = "<group>";
+		};
+		ED332D851FCA76B300279333 /* util */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = util;
+			sourceTree = "<group>";
+		};
+		ED3559CC1FCBACBE00935DFF /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ED332D731FC87A4400279333 /* RestaurantListViewController.swift */,
+				ED3559D01FCC2A8000935DFF /* RestaurantDetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		ED3559CF1FCBBF4E00935DFF /* Yelp */ = {
+			isa = PBXGroup;
+			children = (
+				ED332D7B1FCA487700279333 /* YelpSearchInfo.swift */,
+				ED332D7D1FCA4C4B00279333 /* YelpAuthenticationInfo.swift */,
+				ED332D7F1FCA52DE00279333 /* YelpRestaruantInfo.swift */,
+				ED332D811FCA52F100279333 /* YelpRestaurantLocation.swift */,
+				ED332D831FCA530500279333 /* YelpRestaurantCoordinates.swift */,
+				ED3559CD1FCBBB9100935DFF /* YelpRestaurantCategory.swift */,
+			);
+			path = Yelp;
+			sourceTree = "<group>";
+		};
+		ED3559D21FCC507800935DFF /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Cell;
+			sourceTree = "<group>";
+		};
+		ED3559D31FCC508000935DFF /* Component */ = {
+			isa = PBXGroup;
+			children = (
+				ED3559D41FCC50A200935DFF /* EdgeInsetLabel.swift */,
+			);
+			path = Component;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -106,9 +197,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ED332D6D1FC8759C00279333 /* Build configuration list for PBXNativeTarget "Restaurant-Demo" */;
 			buildPhases = (
+				456ADFAB717F3A0F22472627 /* [CP] Check Pods Manifest.lock */,
 				ED332D571FC8759C00279333 /* Sources */,
 				ED332D581FC8759C00279333 /* Frameworks */,
 				ED332D591FC8759C00279333 /* Resources */,
+				D8321EECCA270CB2C2DA8A21 /* [CP] Embed Pods Frameworks */,
+				FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -159,7 +253,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED332D691FC8759C00279333 /* LaunchScreen.storyboard in Resources */,
-				ED332D771FC994B600279333 /* img1.png in Resources */,
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
 			);
@@ -167,13 +260,71 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		456ADFAB717F3A0F22472627 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		D8321EECCA270CB2C2DA8A21 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		ED332D571FC8759C00279333 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ED332D741FC87A4400279333 /* MenuTableViewController.swift in Sources */,
+				ED332D741FC87A4400279333 /* RestaurantListViewController.swift in Sources */,
+				ED332D7C1FCA487700279333 /* YelpSearchInfo.swift in Sources */,
 				ED332D5F1FC8759C00279333 /* AppDelegate.swift in Sources */,
+				ED3559D51FCC50A200935DFF /* EdgeInsetLabel.swift in Sources */,
+				ED332D7E1FCA4C4B00279333 /* YelpAuthenticationInfo.swift in Sources */,
+				ED332D821FCA52F100279333 /* YelpRestaurantLocation.swift in Sources */,
+				ED332D841FCA530500279333 /* YelpRestaurantCoordinates.swift in Sources */,
+				ED3559D11FCC2A8000935DFF /* RestaurantDetailViewController.swift in Sources */,
+				ED332D801FCA52DE00279333 /* YelpRestaruantInfo.swift in Sources */,
+				ED3559CB1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift in Sources */,
+				ED332D791FCA2EBA00279333 /* YelpApiConfigs.swift in Sources */,
+				ED3559CE1FCBBB9100935DFF /* YelpRestaurantCategory.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -308,6 +459,7 @@
 		};
 		ED332D6E1FC8759C00279333 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = C98A83A8860B1730E915B2DF /* Pods-Restaurant-Demo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -323,6 +475,7 @@
 		};
 		ED332D6F1FC8759C00279333 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 2435F04E3F6CA4002227B204 /* Pods-Restaurant-Demo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
