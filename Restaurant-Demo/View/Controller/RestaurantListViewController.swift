@@ -144,9 +144,8 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
                     self.mFilteredRetaruantInfos?.append(info)
                 }
             }
-            self.mFilteredRetaruantInfos = (self.mFilteredRetaruantInfos?.count ?? 0) <= 0 ? nil : self.mFilteredRetaruantInfos
+            
         }
-        
         self.tableView.reloadData()
     }
     
