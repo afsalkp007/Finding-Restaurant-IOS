@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpRestaruantSummaryInfo: Codable {
+class YelpRestaruantSummaryInfo: YelpBaseRestaurantInfo, Codable {
     var id:String?
     var name:String?
     var image_url:String?

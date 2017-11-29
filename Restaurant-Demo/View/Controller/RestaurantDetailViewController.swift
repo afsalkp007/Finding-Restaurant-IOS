@@ -17,11 +17,11 @@ class RestaurantDetailViewController: UITableViewController {
     @IBOutlet weak var mLbAddressLabel: UILabel!
     @IBOutlet weak var mLbPhoneLabel: UILabel!
     @IBOutlet weak var mLbTypeLabel: UILabel!
-    @IBOutlet weak var mLbRatingLabel: UILabel!
     @IBOutlet weak var mLbPriceLabel: UILabel!
     @IBOutlet weak var mLbReviews: UILabel!
     @IBOutlet weak var mLbIsOpenStatusLabel: UILabel!
     @IBOutlet var mIvSubPhotos: [UIImageView]!
+    @IBOutlet weak var mIvRatingImage: UIImageView!
     
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
@@ -85,7 +85,7 @@ class RestaurantDetailViewController: UITableViewController {
             categoriyTitles.append(categoryInfo.title ?? "")
         }
         self.mLbTypeLabel.text = categoriyTitles.joined(separator: ",")
-        self.mLbRatingLabel.text = "\(self.mRestaurantDetailInfo?.rating ?? 0) starts"
+        self.mIvRatingImage.image = self.mRestaurantDetailInfo?.getRatingImage(rating: self.mRestaurantDetailInfo?.rating ?? 0.0)
         self.mLbPriceLabel.text = self.mRestaurantDetailInfo?.price ?? ""
         self.mLbReviews.text = "\(self.mRestaurantDetailInfo?.review_count ?? 0) reviews"
         self.mLbIsOpenStatusLabel.text = (self.mRestaurantDetailInfo?.is_closed)! ? "CLOSE" : "OPEN"

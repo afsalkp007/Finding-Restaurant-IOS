@@ -17,8 +17,7 @@ class RestaurantInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var mIvPhotoImageView: UIImageView!
     @IBOutlet weak var mLbReviewsLabel: UILabel!
     @IBOutlet weak var mLbPriceLabel: UILabel!
-    @IBOutlet weak var mLbRatingLabel: UILabel!
-    
+    @IBOutlet weak var mIvRatingImage: UIImageView!
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code

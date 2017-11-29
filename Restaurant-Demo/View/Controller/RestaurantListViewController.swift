@@ -169,9 +169,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         cell.mLbDistanceLabel.text = String(format: "%.2fm", arguments: [restaurantInfo.distance!])
         cell.mLbPriceLabel.text = restaurantInfo.price ?? ""
         cell.mLbReviewsLabel.text = (restaurantInfo.review_count != nil) ? "\(restaurantInfo.review_count ?? 0) reviews" : ""
-        cell.mLbRatingLabel.text = (restaurantInfo.rating != nil) ? "\(restaurantInfo.rating ?? 0) starts" : ""
         cell.mLbAddressLabel.text = restaurantInfo.location?.display_address?.joined()
         cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder: UIImage(named: "no_image"))
+        cell.mIvRatingImage.image = restaurantInfo.getRatingImage(rating: restaurantInfo.rating ?? 0.0)
         cell.mLbTypeLabel.text = restaurantInfo.categoriesStr
         
         return cell
