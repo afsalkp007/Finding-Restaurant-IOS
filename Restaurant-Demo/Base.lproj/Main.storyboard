@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="juF-yO-G6q">
-    <device id="retina4_0" orientation="portrait">
+    <device id="retina3_5" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
@@ -34,7 +34,7 @@
             <objects>
                 <tableViewController id="QI0-2P-SA7" userLabel="RestaurantList" customClass="RestaurantListViewController" customModule="Restaurant_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b1d-mR-WaM">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
@@ -163,64 +163,34 @@
             <objects>
                 <tableViewController id="DBo-70-woK" customClass="RestaurantDetailViewController" customModule="Restaurant_Demo" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pCv-J9-gCh">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <sections>
                             <tableViewSection id="ekR-Te-cW5">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="175" id="8yX-dO-iSs">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="175"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="196" id="8yX-dO-iSs">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8yX-dO-iSs" id="nhw-lh-MpI">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="174.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="195.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image" translatesAutoresizingMaskIntoConstraints="NO" id="Mwz-ws-9Tp" userLabel="MainPhoto">
-                                                    <rect key="frame" x="88.5" y="15" width="143" height="143"/>
-                                                    <constraints>
-                                                        <constraint firstAttribute="width" secondItem="Mwz-ws-9Tp" secondAttribute="height" multiplier="1:1" id="Ivu-Nq-82e"/>
-                                                    </constraints>
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="195.5"/>
                                                 </imageView>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OPEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhz-uC-g0b" customClass="EdgeInsetLabel" customModule="Restaurant_Demo" customModuleProvider="target">
-                                                    <rect key="frame" x="251.5" y="140" width="36" height="18"/>
-                                                    <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                                                    <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
-                                                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                    <userDefinedRuntimeAttributes>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
-                                                            <integer key="value" value="7"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
-                                                            <real key="value" value="3"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
-                                                            <real key="value" value="3"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="topTextInset">
-                                                            <real key="value" value="3"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                        <userDefinedRuntimeAttribute type="number" keyPath="bottomTextInset">
-                                                            <real key="value" value="3"/>
-                                                        </userDefinedRuntimeAttribute>
-                                                    </userDefinedRuntimeAttributes>
-                                                </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="rhz-uC-g0b" firstAttribute="bottom" secondItem="Mwz-ws-9Tp" secondAttribute="bottom" id="CrW-0W-yVd"/>
-                                                <constraint firstItem="rhz-uC-g0b" firstAttribute="leading" secondItem="Mwz-ws-9Tp" secondAttribute="trailing" constant="20" id="Ctd-3X-6VK"/>
-                                                <constraint firstAttribute="bottom" secondItem="Mwz-ws-9Tp" secondAttribute="bottom" constant="16.5" id="Uac-Cd-Npt"/>
-                                                <constraint firstItem="Mwz-ws-9Tp" firstAttribute="top" secondItem="nhw-lh-MpI" secondAttribute="top" constant="15" id="fCm-ef-v4V"/>
-                                                <constraint firstItem="rhz-uC-g0b" firstAttribute="trailing" relation="lessThanOrEqual" secondItem="nhw-lh-MpI" secondAttribute="trailing" constant="-30" id="fjm-WN-bVq"/>
-                                                <constraint firstItem="Mwz-ws-9Tp" firstAttribute="centerX" secondItem="nhw-lh-MpI" secondAttribute="centerX" id="ncE-yg-dBr"/>
+                                                <constraint firstItem="Mwz-ws-9Tp" firstAttribute="leading" secondItem="nhw-lh-MpI" secondAttribute="leading" id="009-s7-5uS"/>
+                                                <constraint firstAttribute="bottom" secondItem="Mwz-ws-9Tp" secondAttribute="bottom" id="Uac-Cd-Npt"/>
+                                                <constraint firstItem="Mwz-ws-9Tp" firstAttribute="top" secondItem="nhw-lh-MpI" secondAttribute="top" id="fCm-ef-v4V"/>
+                                                <constraint firstAttribute="trailing" secondItem="Mwz-ws-9Tp" secondAttribute="trailing" id="z0w-bp-xcq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="196" id="Ltt-7y-bn0">
-                                        <rect key="frame" x="0.0" y="175" width="320" height="196"/>
+                                        <rect key="frame" x="0.0" y="196" width="320" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ltt-7y-bn0" id="0b1-Wh-6Vl">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="195.5"/>
@@ -233,7 +203,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="W0k-WD-WGY">
-                                                    <rect key="frame" x="142" y="29.5" width="168" height="138"/>
+                                                    <rect key="frame" x="142" y="17.5" width="168" height="162"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="   " textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="0Ma-7f-RmY" userLabel="AddressLabel">
                                                             <rect key="frame" x="0.0" y="0.0" width="0.0" height="18"/>
@@ -282,6 +252,31 @@
                                                             <color key="textColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
+                                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="OPEN" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhz-uC-g0b" customClass="EdgeInsetLabel" customModule="Restaurant_Demo" customModuleProvider="target">
+                                                            <rect key="frame" x="0.0" y="144" width="36" height="18"/>
+                                                            <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                                                            <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="10"/>
+                                                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                            <nil key="highlightedColor"/>
+                                                            <userDefinedRuntimeAttributes>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="layer.cornerRadius">
+                                                                    <integer key="value" value="7"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="boolean" keyPath="layer.masksToBounds" value="YES"/>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="leftTextInset">
+                                                                    <real key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="rightTextInset">
+                                                                    <real key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="topTextInset">
+                                                                    <real key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                                <userDefinedRuntimeAttribute type="number" keyPath="bottomTextInset">
+                                                                    <real key="value" value="3"/>
+                                                                </userDefinedRuntimeAttribute>
+                                                            </userDefinedRuntimeAttributes>
+                                                        </label>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="6d1-QS-6Gl" firstAttribute="trailing" secondItem="W0k-WD-WGY" secondAttribute="trailing" constant="-10" id="JRy-Qr-d7e"/>
@@ -300,7 +295,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="237" id="07e-cc-UhL">
-                                        <rect key="frame" x="0.0" y="371" width="320" height="237"/>
+                                        <rect key="frame" x="0.0" y="392" width="320" height="237"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="07e-cc-UhL" id="ZSH-wt-VuG">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="236.5"/>

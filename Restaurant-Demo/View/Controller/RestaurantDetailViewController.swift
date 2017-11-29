@@ -75,7 +75,7 @@ class RestaurantDetailViewController: UITableViewController {
             return;
         }
         
-        self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.image_url)!))
+        self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.image_url)!), placeholder: UIImage(named: "no_image"))
         //mIvStreetImageView: UIImageView!
         self.mLbAddressLabel.text = self.mRestaurantDetailInfo?.location?.display_address?.joined()
         self.mLbPhoneLabel.text = self.mRestaurantDetailInfo?.phone
@@ -91,7 +91,7 @@ class RestaurantDetailViewController: UITableViewController {
         self.mLbIsOpenStatusLabel.text = (self.mRestaurantDetailInfo?.is_closed)! ? "CLOSE" : "OPEN"
         
         for i in stride(from: 0, to: (self.mRestaurantDetailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
-            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.photos![i])!))
+            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.photos![i])!), placeholder: UIImage(named: "no_image"))
         }
     }
     
