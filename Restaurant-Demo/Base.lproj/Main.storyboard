@@ -150,7 +150,7 @@
                             <outlet property="delegate" destination="QI0-2P-SA7" id="R6y-u8-5y4"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="餐廳列表" id="hgq-53-wO3"/>
+                    <navigationItem key="navigationItem" title="餐廳列表" id="WR0-3Y-3ld"/>
                     <connections>
                         <segue destination="DBo-70-woK" kind="show" identifier="show_restaurant_detail" id="wzb-9W-aOx"/>
                     </connections>
