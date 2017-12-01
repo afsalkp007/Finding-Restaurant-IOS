@@ -76,7 +76,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         self.mIvRatingImage.image = self.mRestaurantDetailInfo?.getRatingImage(rating: self.mRestaurantDetailInfo?.rating ?? 0.0)
         self.mLbPriceLabel.text = self.mRestaurantDetailInfo?.price ?? ""
         self.mLbReviews.text = "\(self.mRestaurantDetailInfo?.review_count ?? 0) reviews"
-        self.mLbIsOpenStatusLabel.text = (self.mRestaurantDetailInfo?.is_closed)! ? "CLOSE" : "OPEN"
+        self.mLbIsOpenStatusLabel.text = (self.mRestaurantDetailInfo?.hours![0].is_open_now)! ? "OPEN" : "CLOSE"
         
         for i in stride(from: 0, to: (self.mRestaurantDetailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
             self.mIvSubPhotos[i].kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.photos![i])!), placeholder: UIImage(named: "no_image"))

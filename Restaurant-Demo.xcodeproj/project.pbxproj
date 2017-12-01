@@ -29,6 +29,8 @@
 		EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */; };
 		EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */; };
 		EDCCEE521FD202230072883A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE511FD202230072883A /* Util.swift */; };
+		EDCCEE541FD20C3B0072883A /* YelpRestaurantHoursInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE531FD20C3B0072883A /* YelpRestaurantHoursInfo.swift */; };
+		EDCCEE561FD20C7D0072883A /* YelpResaruantBusinessTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -58,6 +60,8 @@
 		EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiUtil.swift; sourceTree = "<group>"; };
 		EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiCallbackProtocol.swift; sourceTree = "<group>"; };
 		EDCCEE511FD202230072883A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		EDCCEE531FD20C3B0072883A /* YelpRestaurantHoursInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaurantHoursInfo.swift; sourceTree = "<group>"; };
+		EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpResaruantBusinessTime.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -180,6 +184,8 @@
 				ED332D811FCA52F100279333 /* YelpRestaurantLocation.swift */,
 				ED332D831FCA530500279333 /* YelpRestaurantCoordinates.swift */,
 				ED3559CD1FCBBB9100935DFF /* YelpRestaurantCategory.swift */,
+				EDCCEE531FD20C3B0072883A /* YelpRestaurantHoursInfo.swift */,
+				EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */,
 			);
 			path = Yelp;
 			sourceTree = "<group>";
@@ -341,6 +347,7 @@
 				ED332D7C1FCA487700279333 /* YelpSearchInfo.swift in Sources */,
 				ED332D5F1FC8759C00279333 /* AppDelegate.swift in Sources */,
 				ED3559D51FCC50A200935DFF /* EdgeInsetLabel.swift in Sources */,
+				EDCCEE561FD20C7D0072883A /* YelpResaruantBusinessTime.swift in Sources */,
 				ED332D7E1FCA4C4B00279333 /* YelpAuthenticationInfo.swift in Sources */,
 				EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */,
 				ED332D821FCA52F100279333 /* YelpRestaurantLocation.swift in Sources */,
@@ -349,6 +356,7 @@
 				ED332D801FCA52DE00279333 /* YelpRestaruantSummaryInfo.swift in Sources */,
 				ED3559D91FCF0D0200935DFF /* RatingEnum.swift in Sources */,
 				ED3559CB1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift in Sources */,
+				EDCCEE541FD20C3B0072883A /* YelpRestaurantHoursInfo.swift in Sources */,
 				ED332D791FCA2EBA00279333 /* YelpApiConfigs.swift in Sources */,
 				EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */,
 				ED3559DB1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift in Sources */,
