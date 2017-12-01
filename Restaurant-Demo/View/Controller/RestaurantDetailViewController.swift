@@ -46,13 +46,13 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         self.navigationItem.title = mRestaurantSummaryInfo?.name ?? ""
     }
     
+    // MARK: - API Callback
     func fetchData() {
         if mRestaurantSummaryInfo == nil {
             return
         }
         
         let id = ((self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!
-        
         // Coz id has chinese words, so I need to do Url-Encoding before calling API
         showLoadingDialog(loadingContent: "Loading Data...")
         YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS, id: id, locale: "zh_TW", callback: self)
@@ -97,12 +97,11 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     
     func closeLoadingDialog() {
         if self.mLoadingAlertController != nil {
-            self.presentedViewController?.dismiss(animated: true, completion: nil)
+            self.mLoadingAlertController?.dismiss(animated: true, completion: nil)
             self.mLoadingAlertController = nil
         }
     }
     
-    // MARK: - API Callback
     func onError(apiTag: String, errorMsg: String) {
         closeLoadingDialog()
     }
@@ -115,6 +114,5 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
             }
         }
         closeLoadingDialog()
-    }
-    
+    }    
 }

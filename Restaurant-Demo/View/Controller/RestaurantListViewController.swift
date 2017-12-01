@@ -66,30 +66,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         self.mScNameSearchController?.searchBar.searchBarStyle = .prominent
     }
     
-    func fetchData() {
-        showLoadingDialog(loadingContent: "Loading Data...")
-        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
-    }
-    
-    func showLoadingDialog(loadingContent:String) {
-        self.mLoadingAlertController = UIAlertController(title: nil, message: loadingContent, preferredStyle: .alert)
-        self.mLoadingAlertController?.view.tintColor = UIColor.black
-        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x:10,y:5, width:50, height:50))
-        
-        loadingIndicator.hidesWhenStopped = true
-        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
-        loadingIndicator.startAnimating();
-        self.mLoadingAlertController?.view.addSubview(loadingIndicator)
-        self.present(self.mLoadingAlertController!, animated: true, completion: nil)
-    }
-    
-    func closeLoadingDialog() {
-        if self.mLoadingAlertController != nil {
-            self.presentedViewController?.dismiss(animated: true, completion: nil)
-            self.mLoadingAlertController = nil
-        }
-    }
-    
     // MARK: - UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
         var keyword = searchController.searchBar.text ?? ""
@@ -156,6 +132,30 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     // MARK: - API Callback
+    func fetchData() {
+        showLoadingDialog(loadingContent: "Loading Data...")
+        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
+    }
+    
+    func showLoadingDialog(loadingContent:String) {
+        self.mLoadingAlertController = UIAlertController(title: nil, message: loadingContent, preferredStyle: .alert)
+        self.mLoadingAlertController?.view.tintColor = UIColor.black
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x:10,y:5, width:50, height:50))
+        
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
+        loadingIndicator.startAnimating();
+        self.mLoadingAlertController?.view.addSubview(loadingIndicator)
+        self.present(self.mLoadingAlertController!, animated: true, completion: nil)
+    }
+    
+    func closeLoadingDialog() {
+        if self.mLoadingAlertController != nil {
+            self.mLoadingAlertController?.dismiss(animated: true, completion: nil)
+            self.mLoadingAlertController = nil
+        }
+    }
+    
     func onError(apiTag: String, errorMsg: String) {
         self.closeLoadingDialog()
     }
