@@ -10,7 +10,9 @@ import UIKit
 import Kingfisher
 import Alamofire
 
-class RestaurantDetailViewController: UITableViewController {
+class RestaurantDetailViewController: UITableViewController, ApiCallback {
+    
+    private static let API_TAG_BUSINESS = "API_TAG_BUSINESS"
     
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
     @IBOutlet weak var mIvStreetImageView: UIImageView!
@@ -25,15 +27,13 @@ class RestaurantDetailViewController: UITableViewController {
     
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
-    var mAuthenticationInfo:YelpAuthenticationInfo?
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
     var mRestaurantDetailInfo:YelpRestaruantDetailInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.mJsonDecoder = JSONDecoder()
-        self.mJsonDecoder?.dateDecodingStrategy = .iso8601
+        self.mJsonDecoder = Util.getJsonDecoder()
         initView()
     }
     
@@ -51,23 +51,11 @@ class RestaurantDetailViewController: UITableViewController {
             return
         }
         
-        // Coz id has chinese words, so I need to do Url-Encoding before calling API
         let id = ((self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!
-        let parameters:Parameters = ["locale":"zh_TW"]
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(self.mAuthenticationInfo?.access_token ?? "")",
-            "Accept": "application/json"
-        ]
+        
+        // Coz id has chinese words, so I need to do Url-Encoding before calling API
         showLoadingDialog(loadingContent: "Loading Data...")
-        Alamofire.request("https://api.yelp.com/v3/businesses/\(id)", method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers).responseJSON { (response) in
-            if response.error == nil, let detailInfo = try?self.mJsonDecoder?.decode(YelpRestaruantDetailInfo.self, from: response.data!) {
-                self.mRestaurantDetailInfo = detailInfo
-                self.updateView()
-            } else {
-                print("Error = \(response.error.debugDescription), or mRestaurantDetailInfo = nil")
-            }
-            self.closeLoadingDialog()
-        }
+        YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS, id: id, locale: "zh_TW", callback: self)
     }
     
     func updateView() {
@@ -112,6 +100,21 @@ class RestaurantDetailViewController: UITableViewController {
             self.presentedViewController?.dismiss(animated: true, completion: nil)
             self.mLoadingAlertController = nil
         }
+    }
+    
+    // MARK: - API Callback
+    func onError(apiTag: String, errorMsg: String) {
+        closeLoadingDialog()
+    }
+    
+    func onSuccess(apiTag: String, jsonData: Data?) {
+        if apiTag == RestaurantDetailViewController.API_TAG_BUSINESS {
+            if let detailInfo = try?self.mJsonDecoder?.decode(YelpRestaruantDetailInfo.self, from: jsonData!) {
+                self.mRestaurantDetailInfo = detailInfo
+                self.updateView()
+            }
+        }
+        closeLoadingDialog()
     }
     
 }

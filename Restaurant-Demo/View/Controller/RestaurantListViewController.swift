@@ -7,17 +7,18 @@
 //
 
 import UIKit
-import Alamofire
 import Kingfisher
 
-class RestaurantListViewController: UITableViewController, UISearchResultsUpdating {
+class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback {
+    
+    private static let API_TAG_REQUEST_TOKEN = "API_TAG_REQUEST_TOKEN"
+    private static let API_TAG_BUSINESS_SEARCH = "API_TAG_BUSINESS_SEARCH"
     private static let CELL_ID = "menu_cell"
     
     private var mScNameSearchController:UISearchController?
     private var mFilteredRetaruantInfos:[YelpRestaruantSummaryInfo]?
     private var mAllRestaruantInfos:[YelpRestaruantSummaryInfo]?
     private var mJsonDecoder:JSONDecoder?
-    private var mAuthenticationInfo:YelpAuthenticationInfo?
     private var mSearchInfo:YelpSearchInfo?
     private var mLoadingAlertController:UIAlertController?
     private var mIsFirst = true
@@ -27,7 +28,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         
         self.mAllRestaruantInfos = [YelpRestaruantSummaryInfo]()
         self.mFilteredRetaruantInfos = nil
-        self.mJsonDecoder = JSONDecoder()
+        self.mJsonDecoder = Util.getJsonDecoder()
         self.mJsonDecoder?.dateDecodingStrategy = .iso8601
         
         initView()
@@ -66,47 +67,8 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     func fetchData() {
-        var parameters: Parameters = ["grant_type": YelpApiConfigs.OAUTH_GRANT_TYPYE
-            , "client_id":YelpApiConfigs.CLIENT_ID
-            , "client_secret":YelpApiConfigs.CLIENT_SECRET]
-        
         showLoadingDialog(loadingContent: "Loading Data...")
-        Alamofire.request("https://api.yelp.com/oauth2/token", method: .post, parameters: parameters).responseJSON {
-            response in
-            if response.error == nil, let authenticationInfo = try? self.mJsonDecoder?.decode(YelpAuthenticationInfo.self, from: response.data!) {
-                self.mAuthenticationInfo = authenticationInfo
-                parameters = ["term":"Restaurants", "location":"Taipei, Taiwan", "locale":"zh_TW"]
-                let headers: HTTPHeaders = [
-                    "Authorization": "Bearer \(self.mAuthenticationInfo?.access_token ?? "")",
-                    "Accept": "application/json"
-                ]
-                
-                Alamofire.request("https://api.yelp.com/v3/businesses/search", method: .get, parameters: parameters, headers: headers).responseJSON {
-                    response in
-                    if response.error == nil, let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: response.data!) {
-                        self.mSearchInfo = searchInfo
-                        self.mAllRestaruantInfos = self.mSearchInfo?.businesses
-                        
-                        // Compose the categories string
-                        for i in stride(from: 0, to: (self.mAllRestaruantInfos?.count)!, by: 1) {
-                            var categoriyTitles:[String] = [String]()
-                            
-                            for categoryInfo in self.mAllRestaruantInfos![i].categories! {
-                                categoriyTitles.append(categoryInfo.title ?? "")
-                            }
-                            self.mAllRestaruantInfos![i].categoriesStr = categoriyTitles.joined(separator: ",")
-                        }
-                        self.tableView.reloadData()
-                    } else {
-                        print("Error = \(response.error.debugDescription), or mYelpSearchInfo = nil")
-                    }
-                    self.closeLoadingDialog()
-                }
-            } else {
-                print("Error = \(response.error.debugDescription), or YelpAuthenticationInfo = nil")
-                self.closeLoadingDialog()
-            }
-        }
+        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
     }
     
     func showLoadingDialog(loadingContent:String) {
@@ -191,6 +153,33 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         let restaurantInfo = sender as! YelpRestaruantSummaryInfo
         
         destViewController.mRestaurantSummaryInfo = restaurantInfo
-        destViewController.mAuthenticationInfo = self.mAuthenticationInfo
-    }    
+    }
+    
+    // MARK: - API Callback
+    func onError(apiTag: String, errorMsg: String) {
+        self.closeLoadingDialog()
+    }
+    
+    func onSuccess(apiTag: String, jsonData: Data?) {
+        if apiTag == RestaurantListViewController.API_TAG_REQUEST_TOKEN {
+            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", location: "Taipei, Taiwan", locale: "zh_TW", callback: self)
+        } else if apiTag == RestaurantListViewController.API_TAG_BUSINESS_SEARCH {
+            if let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: jsonData!) {
+                self.mSearchInfo = searchInfo
+                self.mAllRestaruantInfos = self.mSearchInfo?.businesses
+                
+                // Compose the categories string
+                for i in stride(from: 0, to: (self.mAllRestaruantInfos?.count)!, by: 1) {
+                    var categoriyTitles:[String] = [String]()
+                    
+                    for categoryInfo in self.mAllRestaruantInfos![i].categories! {
+                        categoriyTitles.append(categoryInfo.title ?? "")
+                    }
+                    self.mAllRestaruantInfos![i].categoriesStr = categoriyTitles.joined(separator: ",")
+                }
+                self.tableView.reloadData()
+            }
+            self.closeLoadingDialog()
+        }
+    }
 }
