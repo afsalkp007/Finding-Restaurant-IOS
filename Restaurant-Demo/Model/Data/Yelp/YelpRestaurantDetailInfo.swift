@@ -20,4 +20,5 @@ class YelpRestaruantDetailInfo: YelpBaseRestaurantInfo, Codable {
     var location:YelpRestaurantLocation?
     var coordinates:YelpRestaurantCoordinates?
     var photos:[String]?
+    var hours:[YelpRestaurantHoursInfo]?
 }

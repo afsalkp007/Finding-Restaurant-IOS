@@ -10,7 +10,9 @@ import UIKit
 import Kingfisher
 import Alamofire
 
-class RestaurantDetailViewController: UITableViewController {
+class RestaurantDetailViewController: UITableViewController, ApiCallback {
+    
+    private static let API_TAG_BUSINESS = "API_TAG_BUSINESS"
     
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
     @IBOutlet weak var mIvStreetImageView: UIImageView!
@@ -25,15 +27,13 @@ class RestaurantDetailViewController: UITableViewController {
     
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
-    var mAuthenticationInfo:YelpAuthenticationInfo?
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
     var mRestaurantDetailInfo:YelpRestaruantDetailInfo?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.mJsonDecoder = JSONDecoder()
-        self.mJsonDecoder?.dateDecodingStrategy = .iso8601
+        self.mJsonDecoder = Util.getJsonDecoder()
         initView()
     }
     
@@ -46,28 +46,16 @@ class RestaurantDetailViewController: UITableViewController {
         self.navigationItem.title = mRestaurantSummaryInfo?.name ?? ""
     }
     
+    // MARK: - API Callback
     func fetchData() {
         if mRestaurantSummaryInfo == nil {
             return
         }
         
-        // Coz id has chinese words, so I need to do Url-Encoding before calling API
         let id = ((self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!
-        let parameters:Parameters = ["locale":"zh_TW"]
-        let headers: HTTPHeaders = [
-            "Authorization": "Bearer \(self.mAuthenticationInfo?.access_token ?? "")",
-            "Accept": "application/json"
-        ]
+        // Coz id has chinese words, so I need to do Url-Encoding before calling API
         showLoadingDialog(loadingContent: "Loading Data...")
-        Alamofire.request("https://api.yelp.com/v3/businesses/\(id)", method: .get, parameters: parameters, encoding: URLEncoding.queryString, headers: headers).responseJSON { (response) in
-            if response.error == nil, let detailInfo = try?self.mJsonDecoder?.decode(YelpRestaruantDetailInfo.self, from: response.data!) {
-                self.mRestaurantDetailInfo = detailInfo
-                self.updateView()
-            } else {
-                print("Error = \(response.error.debugDescription), or mRestaurantDetailInfo = nil")
-            }
-            self.closeLoadingDialog()
-        }
+        YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS, id: id, locale: "zh_TW", callback: self)
     }
     
     func updateView() {
@@ -75,7 +63,7 @@ class RestaurantDetailViewController: UITableViewController {
             return;
         }
         
-        self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.image_url)!), placeholder: UIImage(named: "no_image"))
+        self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.image_url)!), placeholder: #imageLiteral(resourceName: "no_image"))
         //mIvStreetImageView: UIImageView!
         self.mLbAddressLabel.text = self.mRestaurantDetailInfo?.location?.display_address?.joined()
         self.mLbPhoneLabel.text = self.mRestaurantDetailInfo?.phone
@@ -88,10 +76,10 @@ class RestaurantDetailViewController: UITableViewController {
         self.mIvRatingImage.image = self.mRestaurantDetailInfo?.getRatingImage(rating: self.mRestaurantDetailInfo?.rating ?? 0.0)
         self.mLbPriceLabel.text = self.mRestaurantDetailInfo?.price ?? ""
         self.mLbReviews.text = "\(self.mRestaurantDetailInfo?.review_count ?? 0) reviews"
-        self.mLbIsOpenStatusLabel.text = (self.mRestaurantDetailInfo?.is_closed)! ? "CLOSE" : "OPEN"
+        self.mLbIsOpenStatusLabel.text = (self.mRestaurantDetailInfo?.hours![0].is_open_now)! ? "OPEN" : "CLOSE"
         
         for i in stride(from: 0, to: (self.mRestaurantDetailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
-            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.photos![i])!), placeholder: UIImage(named: "no_image"))
+            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
         }
     }
     
@@ -109,9 +97,22 @@ class RestaurantDetailViewController: UITableViewController {
     
     func closeLoadingDialog() {
         if self.mLoadingAlertController != nil {
-            self.presentedViewController?.dismiss(animated: true, completion: nil)
+            self.mLoadingAlertController?.dismiss(animated: true, completion: nil)
             self.mLoadingAlertController = nil
         }
     }
     
+    func onError(apiTag: String, errorMsg: String) {
+        closeLoadingDialog()
+    }
+    
+    func onSuccess(apiTag: String, jsonData: Data?) {
+        if apiTag == RestaurantDetailViewController.API_TAG_BUSINESS {
+            if let detailInfo = try?self.mJsonDecoder?.decode(YelpRestaruantDetailInfo.self, from: jsonData!) {
+                self.mRestaurantDetailInfo = detailInfo
+                self.updateView()
+            }
+        }
+        closeLoadingDialog()
+    }    
 }
