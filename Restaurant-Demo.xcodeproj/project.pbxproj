@@ -95,6 +95,22 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		ED1314461FD315ED000A6FD2 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		ED1314471FD38C82000A6FD2 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				ED3559CF1FCBBF4E00935DFF /* Yelp */,
+				ED3559D81FCF0D0200935DFF /* RatingEnum.swift */,
+			);
+			path = Data;
+			sourceTree = "<group>";
+		};
 		ED332D521FC8759C00279333 = {
 			isa = PBXGroup;
 			children = (
@@ -118,7 +134,7 @@
 			children = (
 				EDCCEE501FD202080072883A /* Util */,
 				ED332D7A1FCA481900279333 /* API */,
-				ED332D721FC8760A00279333 /* Presenter */,
+				ED1314461FD315ED000A6FD2 /* Presenter */,
 				ED332D711FC875F700279333 /* Model */,
 				ED332D701FC875CC00279333 /* View */,
 				ED332D5E1FC8759C00279333 /* AppDelegate.swift */,
@@ -143,17 +159,9 @@
 		ED332D711FC875F700279333 /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				ED3559CF1FCBBF4E00935DFF /* Yelp */,
-				ED3559D81FCF0D0200935DFF /* RatingEnum.swift */,
+				ED1314471FD38C82000A6FD2 /* Data */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		ED332D721FC8760A00279333 /* Presenter */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Presenter;
 			sourceTree = "<group>";
 		};
 		ED332D7A1FCA481900279333 /* API */ = {
