@@ -8,5 +8,8 @@ target 'Restaurant-Demo' do
   # Pods for Restaurant-Demo
   pod 'Alamofire', '~> 4.5'
   pod 'Kingfisher', '~> 4.0'
+  pod 'GooglePlaces'
+  pod 'GooglePlacePicker'
+  pod 'GoogleMaps'
 
 end

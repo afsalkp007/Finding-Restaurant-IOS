@@ -8,29 +8,26 @@
 
 import UIKit
 import Kingfisher
+import GooglePlaces
+import GooglePlacePicker
 
-class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback {
+class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback, GMSPlacePickerViewControllerDelegate {
     
     private static let API_TAG_REQUEST_TOKEN = "API_TAG_REQUEST_TOKEN"
     private static let API_TAG_BUSINESS_SEARCH = "API_TAG_BUSINESS_SEARCH"
     private static let CELL_ID = "menu_cell"
     
     private var mScNameSearchController:UISearchController?
-    private var mFilteredRetaruantInfos:[YelpRestaruantSummaryInfo]?
-    private var mAllRestaruantInfos:[YelpRestaruantSummaryInfo]?
+    private var mFilteredRetaruantInfos:[YelpRestaruantSummaryInfo]? = nil
+    private var mAllRestaruantInfos:[YelpRestaruantSummaryInfo]? = [YelpRestaruantSummaryInfo]()
     private var mJsonDecoder:JSONDecoder?
     private var mSearchInfo:YelpSearchInfo?
     private var mLoadingAlertController:UIAlertController?
     private var mIsFirst = true
+    private var mLocationMgr:CLLocationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.mAllRestaruantInfos = [YelpRestaruantSummaryInfo]()
-        self.mFilteredRetaruantInfos = nil
-        self.mJsonDecoder = Util.getJsonDecoder()
-        self.mJsonDecoder?.dateDecodingStrategy = .iso8601
-        
         initView()
     }
     
@@ -38,7 +35,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Only the first time need to fetch data from API
         if self.mIsFirst {
             self.mIsFirst = false
-            fetchData()
+            initConfig()
         }
     }
     
@@ -76,9 +73,31 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         floaty.itemTitleColor = UIColor.darkGray
         // Locate user's location
         floaty.addItem(icon: #imageLiteral(resourceName: "location_icon")) { (floatItem) in
-            print("Location float pressed")
+            if CLLocationManager.authorizationStatus() == .notDetermined {
+                // 1. 還沒有詢問過用戶以獲得權限
+                self.mLocationMgr?.requestAlwaysAuthorization()
+            } else if CLLocationManager.authorizationStatus() == .denied {
+                // 2. 用戶不同意
+                print("Location services were previously denied. Please enable location services for this app in Settings.")
+            } else if CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
+                
+                let config = GMSPlacePickerConfig(viewport: nil)
+                let placePicker = GMSPlacePickerViewController(config: config)
+                placePicker.delegate = self as GMSPlacePickerViewControllerDelegate
+                
+                self.present(placePicker, animated: true, completion: nil)
+            }
         }
         self.view.addSubview(floaty)
+    }
+    
+    func initConfig() {
+        self.mJsonDecoder = Util.getJsonDecoder()
+        self.mJsonDecoder?.dateDecodingStrategy = .iso8601
+        self.mLocationMgr = CLLocationManager()
+        
+        showLoadingDialog(loadingContent: "Loading Data...")
+        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
     }
     
     // MARK: - UISearchResultsUpdating
@@ -147,10 +166,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     // MARK: - API Callback
-    func fetchData() {
-        showLoadingDialog(loadingContent: "Loading Data...")
-        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
-    }
     
     func showLoadingDialog(loadingContent:String) {
         self.mLoadingAlertController = UIAlertController(title: nil, message: loadingContent, preferredStyle: .alert)
@@ -177,7 +192,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     
     func onSuccess(apiTag: String, jsonData: Data?) {
         if apiTag == RestaurantListViewController.API_TAG_REQUEST_TOKEN {
-            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", location: "Taipei, Taiwan", locale: "zh_TW", callback: self)
+            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: 25.047908 , lng: 121.517315, locale: "zh_TW", callback: self)
         } else if apiTag == RestaurantListViewController.API_TAG_BUSINESS_SEARCH {
             if let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: jsonData!) {
                 self.mSearchInfo = searchInfo
@@ -196,5 +211,23 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             }
             self.closeLoadingDialog()
         }
+    }
+    
+    
+    // MARK: - PlacePicker callback
+    
+    // To receive the results from the place picker 'self' will need to conform to
+    // GMSPlacePickerViewControllerDelegate and implement this code.
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+        
+        showLoadingDialog(loadingContent: "Loading Data...")
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: place.coordinate.latitude , lng: place.coordinate.longitude, locale: "zh_TW", callback: self)
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
     }
 }
