@@ -64,6 +64,21 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Hide the search bar when scrolling up, Default is true. if setup as false it will always display
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.mScNameSearchController?.searchBar.searchBarStyle = .prominent
+        
+        /* Add the float button */
+        let floaty = Floaty()
+        floaty.buttonImage = #imageLiteral(resourceName: "menu_icon")
+        floaty.openAnimationType = .pop
+        floaty.hasShadow = false
+        floaty.sticky = true
+        floaty.paddingX = 20
+        floaty.paddingY = 20
+        floaty.itemTitleColor = UIColor.darkGray
+        // Locate user's location
+        floaty.addItem(icon: #imageLiteral(resourceName: "location_icon")) { (floatItem) in
+            print("Location float pressed")
+        }
+        self.view.addSubview(floaty)
     }
     
     // MARK: - UISearchResultsUpdating
