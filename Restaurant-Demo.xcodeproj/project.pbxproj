@@ -34,7 +34,6 @@
 		EDA28C6C1FD5262100DD2902 /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C651FD5262100DD2902 /* FloatyItem.swift */; };
 		EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */; };
 		EDA28C711FD637EF00DD2902 /* PanoramaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */; };
-		EDA28C731FD642BF00DD2902 /* AlertUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C721FD642BF00DD2902 /* AlertUtil.swift */; };
 		EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */; };
 		EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */; };
 		EDCCEE521FD202230072883A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE511FD202230072883A /* Util.swift */; };
@@ -76,7 +75,6 @@
 		EDA28C661FD5262100DD2902 /* Floaty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Floaty.h; sourceTree = "<group>"; };
 		EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramaViewController.swift; sourceTree = "<group>"; };
-		EDA28C721FD642BF00DD2902 /* AlertUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertUtil.swift; sourceTree = "<group>"; };
 		EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiUtil.swift; sourceTree = "<group>"; };
 		EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiCallbackProtocol.swift; sourceTree = "<group>"; };
 		EDCCEE511FD202230072883A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -265,7 +263,6 @@
 			isa = PBXGroup;
 			children = (
 				EDCCEE511FD202230072883A /* Util.swift */,
-				EDA28C721FD642BF00DD2902 /* AlertUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -426,7 +423,6 @@
 				EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */,
 				ED3559CE1FCBBB9100935DFF /* YelpRestaurantCategory.swift in Sources */,
 				ED3559D71FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift in Sources */,
-				EDA28C731FD642BF00DD2902 /* AlertUtil.swift in Sources */,
 				EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
