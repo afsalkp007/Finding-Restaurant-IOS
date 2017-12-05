@@ -11,7 +11,7 @@ import Kingfisher
 import GooglePlaces
 import GooglePlacePicker
 
-class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback, GMSPlacePickerViewControllerDelegate {
+class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback, GMSPlacePickerViewControllerDelegate, LocationStatusDelegate {
     
     private static let API_TAG_REQUEST_TOKEN = "API_TAG_REQUEST_TOKEN"
     private static let API_TAG_BUSINESS_SEARCH = "API_TAG_BUSINESS_SEARCH"
@@ -24,7 +24,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     private var mSearchInfo:YelpSearchInfo?
     private var mLoadingAlertController:UIAlertController?
     private var mIsFirst = true
-    private var mLocationMgr:CLLocationManager?
+    private var mLocationMgr:LocationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +64,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         
         /* Add the float button */
         let floaty = Floaty()
-        floaty.buttonImage = #imageLiteral(resourceName: "menu_icon")
+        floaty.buttonImage =  #imageLiteral(resourceName: "menu_icon")
         floaty.openAnimationType = .pop
         floaty.hasShadow = false
         floaty.sticky = true
@@ -72,21 +72,21 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         floaty.paddingY = 20
         floaty.itemTitleColor = UIColor.darkGray
         // Locate user's location
-        floaty.addItem(icon: #imageLiteral(resourceName: "location_icon")) { (floatItem) in
-            if CLLocationManager.authorizationStatus() == .notDetermined {
-                // 1. 還沒有詢問過用戶以獲得權限
-                self.mLocationMgr?.requestAlwaysAuthorization()
-            } else if CLLocationManager.authorizationStatus() == .denied {
-                // 2. 用戶不同意
-                print("Location services were previously denied. Please enable location services for this app in Settings.")
-            } else if CLLocationManager.authorizationStatus() == .authorizedAlways || CLLocationManager.authorizationStatus() == .authorizedWhenInUse {
-                
-                let config = GMSPlacePickerConfig(viewport: nil)
-                let placePicker = GMSPlacePickerViewController(config: config)
-                placePicker.delegate = self as GMSPlacePickerViewControllerDelegate
-                
-                self.present(placePicker, animated: true, completion: nil)
+        floaty.addItem(icon:  #imageLiteral(resourceName: "location_icon")) { (floatItem) in
+            
+            guard (self.mLocationMgr?.isAuthorized())! else {
+                self.showAlertDialog(title: "Notice!!!", content: "Location services were previously denied. Please enable location services for this app in Settings.") {
+                    action in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                return
             }
+            
+            let config = GMSPlacePickerConfig(viewport: nil)
+            let placePicker = GMSPlacePickerViewController(config: config)
+            placePicker.delegate = self as GMSPlacePickerViewControllerDelegate
+            
+            self.present(placePicker, animated: true, completion: nil)
         }
         self.view.addSubview(floaty)
     }
@@ -94,9 +94,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     func initConfig() {
         self.mJsonDecoder = Util.getJsonDecoder()
         self.mJsonDecoder?.dateDecodingStrategy = .iso8601
-        self.mLocationMgr = CLLocationManager()
+        self.mLocationMgr = LocationManager.getInstance()
         
-        showLoadingDialog(loadingContent: "Loading Data...")
+        self.mLocationMgr?.setDelegate(delegate: self)
         YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
     }
     
@@ -142,7 +142,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         cell.mLbPriceLabel.text = restaurantInfo.price ?? ""
         cell.mLbReviewsLabel.text = (restaurantInfo.review_count != nil) ? "\(restaurantInfo.review_count ?? 0) reviews" : ""
         cell.mLbAddressLabel.text = restaurantInfo.location?.display_address?.joined()
-        cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder: #imageLiteral(resourceName: "no_image"))
+        cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder:  #imageLiteral(resourceName: "no_image"))
         cell.mIvRatingImage.image = restaurantInfo.getRatingImage(rating: restaurantInfo.rating ?? 0.0)
         cell.mLbTypeLabel.text = restaurantInfo.categoriesStr
         
@@ -165,7 +165,14 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         destViewController.mRestaurantSummaryInfo = restaurantInfo
     }
     
-    // MARK: - API Callback
+    // MARK: - AlertController
+    
+    func showAlertDialog(title:String, content:String, handler:((UIAlertAction) -> Swift.Void)?) {
+        let alertDialog = UIAlertController(title: title, message: content, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:handler)
+        alertDialog.addAction(okAction)
+        self.present(alertDialog, animated: true, completion: nil)
+    }
     
     func showLoadingDialog(loadingContent:String) {
         self.mLoadingAlertController = UIAlertController(title: nil, message: loadingContent, preferredStyle: .alert)
@@ -186,13 +193,15 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         }
     }
     
+    // MARK: - API Callback
+    
     func onError(apiTag: String, errorMsg: String) {
         self.closeLoadingDialog()
     }
     
     func onSuccess(apiTag: String, jsonData: Data?) {
         if apiTag == RestaurantListViewController.API_TAG_REQUEST_TOKEN {
-            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: 25.047908 , lng: 121.517315, locale: "zh_TW", callback: self)
+            self.mLocationMgr?.requestLocationUpdate()
         } else if apiTag == RestaurantListViewController.API_TAG_BUSINESS_SEARCH {
             if let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: jsonData!) {
                 self.mSearchInfo = searchInfo
@@ -213,6 +222,25 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         }
     }
     
+    // MARK: - LocationStatusDelegate
+    
+    func isLocationAuthorized(isAuthorized: Bool) {
+        guard isAuthorized else {
+            // Use the taipei station as default location
+            showLoadingDialog(loadingContent: "Loading Data...")
+            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: 25.047908 , lng: 121.517315, locale: "zh_TW", callback: self)
+            return
+        }
+        
+        self.mLocationMgr?.requestLocationUpdate()
+    }
+    
+    func didUpdateLocation(location: CLLocation) {
+        self.mLocationMgr?.setDelegate(delegate: nil)
+        self.mLocationMgr?.stopLocationUpdate()
+        showLoadingDialog(loadingContent: "Loading Data...")
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: location.coordinate.latitude , lng: location.coordinate.longitude, locale: "zh_TW", callback: self)
+    }
     
     // MARK: - PlacePicker callback
     
@@ -231,3 +259,4 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         viewController.dismiss(animated: true, completion: nil)
     }
 }
+
