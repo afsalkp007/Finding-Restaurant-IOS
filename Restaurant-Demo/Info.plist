@@ -4,8 +4,6 @@
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Request a location information for some functionalities, e.g: Nearby restaurant information, Pick user location and so on</string>
-	<key>NSLocationAlwaysAndWhenInUseUsageDescription</key>
-	<string>Request a location information for some functionalities, e.g: Nearby restaurant information, Pick user location and so on</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>$(DEVELOPMENT_LANGUAGE)</string>
 	<key>CFBundleExecutable</key>
