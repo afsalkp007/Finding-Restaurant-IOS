@@ -15,7 +15,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     private static let API_TAG_BUSINESS = "API_TAG_BUSINESS"
     
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
-    @IBOutlet weak var mIvStreetImageView: UIImageView!
+    @IBOutlet weak var mIvStaticMapImageView: UIImageView!
     @IBOutlet weak var mLbAddressLabel: UILabel!
     @IBOutlet weak var mLbPhoneLabel: UILabel!
     @IBOutlet weak var mLbTypeLabel: UILabel!
@@ -43,7 +43,11 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     
     func initView() {
         self.navigationItem.largeTitleDisplayMode = .never
-        self.navigationItem.title = mRestaurantSummaryInfo?.name ?? ""
+        self.navigationItem.title = self.mRestaurantSummaryInfo?.name ?? ""
+        let lat = self.mRestaurantSummaryInfo?.coordinates?.latitude
+        let lng = self.mRestaurantSummaryInfo?.coordinates?.longitude
+        
+        self.mIvStaticMapImageView.kf.setImage(with: URL(string: GoogleApiUtil.createStaticMapUrl(lat: lat!, lng: lng!, w: 200, h: 200)), placeholder:  #imageLiteral(resourceName: "no_image"))
     }
     
     // MARK: - API Callback

@@ -34,12 +34,12 @@
 		EDA28C6C1FD5262100DD2902 /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C651FD5262100DD2902 /* FloatyItem.swift */; };
 		EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */; };
 		EDA28C711FD637EF00DD2902 /* PanoramaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */; };
+		EDA28C751FD6780B00DD2902 /* GoogleApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */; };
 		EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */; };
 		EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */; };
 		EDCCEE521FD202230072883A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE511FD202230072883A /* Util.swift */; };
 		EDCCEE541FD20C3B0072883A /* YelpRestaurantHoursInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE531FD20C3B0072883A /* YelpRestaurantHoursInfo.swift */; };
 		EDCCEE561FD20C7D0072883A /* YelpResaruantBusinessTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */; };
-		EDCCEE581FD20F8C0072883A /* GoogleApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE571FD20F8C0072883A /* GoogleApiUtil.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -75,12 +75,12 @@
 		EDA28C661FD5262100DD2902 /* Floaty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Floaty.h; sourceTree = "<group>"; };
 		EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramaViewController.swift; sourceTree = "<group>"; };
+		EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiUtil.swift; sourceTree = "<group>"; };
 		EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiUtil.swift; sourceTree = "<group>"; };
 		EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiCallbackProtocol.swift; sourceTree = "<group>"; };
 		EDCCEE511FD202230072883A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		EDCCEE531FD20C3B0072883A /* YelpRestaurantHoursInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaurantHoursInfo.swift; sourceTree = "<group>"; };
 		EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpResaruantBusinessTime.swift; sourceTree = "<group>"; };
-		EDCCEE571FD20F8C0072883A /* GoogleApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiUtil.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,7 +188,6 @@
 				ED332D781FCA2EBA00279333 /* YelpApiConfigs.swift */,
 				EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */,
 				EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */,
-				EDCCEE571FD20F8C0072883A /* GoogleApiUtil.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -263,6 +262,7 @@
 			isa = PBXGroup;
 			children = (
 				EDCCEE511FD202230072883A /* Util.swift */,
+				EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */,
 			);
 			path = Util;
 			sourceTree = "<group>";
@@ -404,12 +404,12 @@
 				ED3559D51FCC50A200935DFF /* EdgeInsetLabel.swift in Sources */,
 				EDCCEE561FD20C7D0072883A /* YelpResaruantBusinessTime.swift in Sources */,
 				EDA28C6C1FD5262100DD2902 /* FloatyItem.swift in Sources */,
-				EDCCEE581FD20F8C0072883A /* GoogleApiUtil.swift in Sources */,
 				ED332D7E1FCA4C4B00279333 /* YelpAuthenticationInfo.swift in Sources */,
 				EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */,
 				EDA28C6A1FD5262100DD2902 /* Floaty.swift in Sources */,
 				ED332D821FCA52F100279333 /* YelpRestaurantLocation.swift in Sources */,
 				ED332D841FCA530500279333 /* YelpRestaurantCoordinates.swift in Sources */,
+				EDA28C751FD6780B00DD2902 /* GoogleApiUtil.swift in Sources */,
 				ED3559D11FCC2A8000935DFF /* RestaurantDetailViewController.swift in Sources */,
 				ED332D801FCA52DE00279333 /* YelpRestaruantSummaryInfo.swift in Sources */,
 				EDA28C711FD637EF00DD2902 /* PanoramaViewController.swift in Sources */,
