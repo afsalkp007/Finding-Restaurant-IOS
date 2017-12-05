@@ -40,8 +40,8 @@ class YelpApiUtil {
     }
     
     // MARK: - Business
-    static func businessSearch(apiTag:String, term:String, location:String, locale:String, callback:ApiCallback) {
-        let parameters: Parameters = ["term":term, "location":location, "locale":locale]
+    static func businessSearch(apiTag:String, term:String, lat:Double, lng:Double, locale:String, callback:ApiCallback) {
+        let parameters: Parameters = ["term":term, "latitude":lat, "longitude":lng, "locale":locale]
         
         apiRequest(apiTag: apiTag, url: YelpApiConfigs.BUSINESS_SEARCH_API_URL, callback: callback, headers: sHeaders, method: .get, parameters:parameters)
     }

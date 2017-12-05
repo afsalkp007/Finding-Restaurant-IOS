@@ -8,29 +8,26 @@
 
 import UIKit
 import Kingfisher
+import GooglePlaces
+import GooglePlacePicker
 
-class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback {
+class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback, GMSPlacePickerViewControllerDelegate, LocationStatusDelegate {
     
     private static let API_TAG_REQUEST_TOKEN = "API_TAG_REQUEST_TOKEN"
     private static let API_TAG_BUSINESS_SEARCH = "API_TAG_BUSINESS_SEARCH"
     private static let CELL_ID = "menu_cell"
     
     private var mScNameSearchController:UISearchController?
-    private var mFilteredRetaruantInfos:[YelpRestaruantSummaryInfo]?
-    private var mAllRestaruantInfos:[YelpRestaruantSummaryInfo]?
+    private var mFilteredRetaruantInfos:[YelpRestaruantSummaryInfo]? = nil
+    private var mAllRestaruantInfos:[YelpRestaruantSummaryInfo]? = [YelpRestaruantSummaryInfo]()
     private var mJsonDecoder:JSONDecoder?
     private var mSearchInfo:YelpSearchInfo?
     private var mLoadingAlertController:UIAlertController?
     private var mIsFirst = true
+    private var mLocationMgr:LocationManager?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.mAllRestaruantInfos = [YelpRestaruantSummaryInfo]()
-        self.mFilteredRetaruantInfos = nil
-        self.mJsonDecoder = Util.getJsonDecoder()
-        self.mJsonDecoder?.dateDecodingStrategy = .iso8601
-        
         initView()
     }
     
@@ -38,7 +35,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Only the first time need to fetch data from API
         if self.mIsFirst {
             self.mIsFirst = false
-            fetchData()
+            initConfig()
         }
     }
     
@@ -64,6 +61,43 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Hide the search bar when scrolling up, Default is true. if setup as false it will always display
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.mScNameSearchController?.searchBar.searchBarStyle = .prominent
+        
+        /* Add the float button */
+        let floaty = Floaty()
+        floaty.buttonImage =  #imageLiteral(resourceName: "menu_icon")
+        floaty.openAnimationType = .pop
+        floaty.hasShadow = false
+        floaty.sticky = true
+        floaty.paddingX = 20
+        floaty.paddingY = 20
+        floaty.itemTitleColor = UIColor.darkGray
+        // Locate user's location
+        floaty.addItem(icon:  #imageLiteral(resourceName: "location_icon")) { (floatItem) in
+            
+            guard (self.mLocationMgr?.isAuthorized())! else {
+                self.showAlertDialog(title: "Notice!!!", content: "Location services were previously denied. Please enable location services for this app in Settings.") {
+                    action in
+                    self.dismiss(animated: true, completion: nil)
+                }
+                return
+            }
+            
+            let config = GMSPlacePickerConfig(viewport: nil)
+            let placePicker = GMSPlacePickerViewController(config: config)
+            placePicker.delegate = self as GMSPlacePickerViewControllerDelegate
+            
+            self.present(placePicker, animated: true, completion: nil)
+        }
+        self.view.addSubview(floaty)
+    }
+    
+    func initConfig() {
+        self.mJsonDecoder = Util.getJsonDecoder()
+        self.mJsonDecoder?.dateDecodingStrategy = .iso8601
+        self.mLocationMgr = LocationManager.getInstance()
+        
+        self.mLocationMgr?.setDelegate(delegate: self)
+        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
     }
     
     // MARK: - UISearchResultsUpdating
@@ -108,7 +142,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         cell.mLbPriceLabel.text = restaurantInfo.price ?? ""
         cell.mLbReviewsLabel.text = (restaurantInfo.review_count != nil) ? "\(restaurantInfo.review_count ?? 0) reviews" : ""
         cell.mLbAddressLabel.text = restaurantInfo.location?.display_address?.joined()
-        cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder: #imageLiteral(resourceName: "no_image"))
+        cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder:  #imageLiteral(resourceName: "no_image"))
         cell.mIvRatingImage.image = restaurantInfo.getRatingImage(rating: restaurantInfo.rating ?? 0.0)
         cell.mLbTypeLabel.text = restaurantInfo.categoriesStr
         
@@ -131,10 +165,13 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         destViewController.mRestaurantSummaryInfo = restaurantInfo
     }
     
-    // MARK: - API Callback
-    func fetchData() {
-        showLoadingDialog(loadingContent: "Loading Data...")
-        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
+    // MARK: - AlertController
+    
+    func showAlertDialog(title:String, content:String, handler:((UIAlertAction) -> Swift.Void)?) {
+        let alertDialog = UIAlertController(title: title, message: content, preferredStyle: .alert)
+        let okAction = UIAlertAction(title: "OK", style: UIAlertActionStyle.default, handler:handler)
+        alertDialog.addAction(okAction)
+        self.present(alertDialog, animated: true, completion: nil)
     }
     
     func showLoadingDialog(loadingContent:String) {
@@ -156,13 +193,15 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         }
     }
     
+    // MARK: - API Callback
+    
     func onError(apiTag: String, errorMsg: String) {
         self.closeLoadingDialog()
     }
     
     func onSuccess(apiTag: String, jsonData: Data?) {
         if apiTag == RestaurantListViewController.API_TAG_REQUEST_TOKEN {
-            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", location: "Taipei, Taiwan", locale: "zh_TW", callback: self)
+            self.mLocationMgr?.requestLocationUpdate()
         } else if apiTag == RestaurantListViewController.API_TAG_BUSINESS_SEARCH {
             if let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: jsonData!) {
                 self.mSearchInfo = searchInfo
@@ -182,4 +221,42 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             self.closeLoadingDialog()
         }
     }
+    
+    // MARK: - LocationStatusDelegate
+    
+    func isLocationAuthorized(isAuthorized: Bool) {
+        guard isAuthorized else {
+            // Use the taipei station as default location
+            showLoadingDialog(loadingContent: "Loading Data...")
+            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: 25.047908 , lng: 121.517315, locale: "zh_TW", callback: self)
+            return
+        }
+        
+        self.mLocationMgr?.requestLocationUpdate()
+    }
+    
+    func didUpdateLocation(location: CLLocation) {
+        self.mLocationMgr?.setDelegate(delegate: nil)
+        self.mLocationMgr?.stopLocationUpdate()
+        showLoadingDialog(loadingContent: "Loading Data...")
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: location.coordinate.latitude , lng: location.coordinate.longitude, locale: "zh_TW", callback: self)
+    }
+    
+    // MARK: - PlacePicker callback
+    
+    // To receive the results from the place picker 'self' will need to conform to
+    // GMSPlacePickerViewControllerDelegate and implement this code.
+    func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+        
+        showLoadingDialog(loadingContent: "Loading Data...")
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: place.coordinate.latitude , lng: place.coordinate.longitude, locale: "zh_TW", callback: self)
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        // Dismiss the place picker, as it cannot dismiss itself.
+        viewController.dismiss(animated: true, completion: nil)
+    }
 }
+
