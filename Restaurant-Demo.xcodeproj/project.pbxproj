@@ -26,6 +26,8 @@
 		ED3559D71FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559D61FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift */; };
 		ED3559D91FCF0D0200935DFF /* RatingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559D81FCF0D0200935DFF /* RatingEnum.swift */; };
 		ED3559DB1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559DA1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift */; };
+		ED5B5F9F1FDA377300E8B198 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */; };
+		ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */; };
 		EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C601FD5262100DD2902 /* FloatyViewController.swift */; };
 		EDA28C681FD5262100DD2902 /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C611FD5262100DD2902 /* FloatyWindow.swift */; };
 		EDA28C691FD5262100DD2902 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C621FD5262100DD2902 /* FloatyManager.swift */; };
@@ -66,6 +68,8 @@
 		ED3559D61FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaurantDetailInfo.swift; sourceTree = "<group>"; };
 		ED3559D81FCF0D0200935DFF /* RatingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingEnum.swift; sourceTree = "<group>"; };
 		ED3559DA1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBaseRestaurantInfo.swift; sourceTree = "<group>"; };
+		ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
+		ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabelExtension.swift; sourceTree = "<group>"; };
 		EDA28C601FD5262100DD2902 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		EDA28C611FD5262100DD2902 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
 		EDA28C621FD5262100DD2902 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
@@ -167,6 +171,7 @@
 		ED332D701FC875CC00279333 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				ED5B5F9D1FDA373600E8B198 /* Extension */,
 				ED3559D31FCC508000935DFF /* Component */,
 				ED3559D21FCC507800935DFF /* Cell */,
 				ED3559CC1FCBACBE00935DFF /* Controller */,
@@ -234,6 +239,15 @@
 				ED3559D41FCC50A200935DFF /* EdgeInsetLabel.swift */,
 			);
 			path = Component;
+			sourceTree = "<group>";
+		};
+		ED5B5F9D1FDA373600E8B198 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */,
+				ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		EDA28C5F1FD525AE00DD2902 /* Floaty */ = {
@@ -396,6 +410,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EDA28C691FD5262100DD2902 /* FloatyManager.swift in Sources */,
+				ED5B5F9F1FDA377300E8B198 /* NavigationControllerExtension.swift in Sources */,
 				ED332D741FC87A4400279333 /* RestaurantListViewController.swift in Sources */,
 				EDCCEE521FD202230072883A /* Util.swift in Sources */,
 				EDA28C681FD5262100DD2902 /* FloatyWindow.swift in Sources */,
@@ -415,6 +430,7 @@
 				EDA28C711FD637EF00DD2902 /* PanoramaViewController.swift in Sources */,
 				ED3559D91FCF0D0200935DFF /* RatingEnum.swift in Sources */,
 				EDA28C6B1FD5262100DD2902 /* FloatyDelegate.swift in Sources */,
+				ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */,
 				ED3559CB1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift in Sources */,
 				EDCCEE541FD20C3B0072883A /* YelpRestaurantHoursInfo.swift in Sources */,
 				ED332D791FCA2EBA00279333 /* YelpApiConfigs.swift in Sources */,
