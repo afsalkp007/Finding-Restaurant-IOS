@@ -123,7 +123,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     
     // MARK: - Table view data source
     override func numberOfSections(in tableView: UITableView) -> Int {
-        // #warning Incomplete implementation, return the number of sections
         return 1
     }
     
@@ -149,6 +148,8 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         return cell
     }
     
+     // MARK: - Table view data delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurantInfos:[YelpRestaruantSummaryInfo]? = (self.mFilteredRetaruantInfos != nil) ? self.mFilteredRetaruantInfos : self.mAllRestaruantInfos
         let selectedInfo = restaurantInfos![indexPath.row]
@@ -157,7 +158,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     // MARK: - Prepare Segue
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let destViewController = segue.destination as! RestaurantDetailViewController
         let restaurantInfo = sender as! YelpRestaruantSummaryInfo
@@ -244,9 +245,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     
     // MARK: - PlacePicker callback
     
-    // To receive the results from the place picker 'self' will need to conform to
-    // GMSPlacePickerViewControllerDelegate and implement this code.
     func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
+        // To receive the results from the place picker 'self' will need to conform to
+        // GMSPlacePickerViewControllerDelegate and implement this code.
         // Dismiss the place picker, as it cannot dismiss itself.
         viewController.dismiss(animated: true, completion: nil)
         
