@@ -148,7 +148,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     
     func closeLoadingDialog() {
         if self.mLoadingAlertController != nil {
-            self.mLoadingAlertController?.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             self.mLoadingAlertController = nil
         }
     }

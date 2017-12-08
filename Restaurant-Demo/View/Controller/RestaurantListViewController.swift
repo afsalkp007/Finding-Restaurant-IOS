@@ -154,6 +154,8 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         let restaurantInfos:[YelpRestaruantSummaryInfo]? = (self.mFilteredRetaruantInfos != nil) ? self.mFilteredRetaruantInfos : self.mAllRestaruantInfos
         let selectedInfo = restaurantInfos![indexPath.row]
         
+        // TODO: It's workaround to avoid the crash when searchcontroller is activie and go back from detail page
+        self.mScNameSearchController?.isActive = false
         performSegue(withIdentifier: "show_restaurant_detail", sender: selectedInfo)
     }
     
@@ -189,7 +191,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     
     func closeLoadingDialog() {
         if self.mLoadingAlertController != nil {
-            self.mLoadingAlertController?.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             self.mLoadingAlertController = nil
         }
     }
