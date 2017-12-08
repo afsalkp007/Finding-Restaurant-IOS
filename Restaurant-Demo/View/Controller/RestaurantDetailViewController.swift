@@ -82,7 +82,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         self.mLbTypeLabel.text = categoriyTitles.joined(separator: ",")
         self.mIvRatingImage.image = self.mRestaurantDetailInfo?.getRatingImage(rating: self.mRestaurantDetailInfo?.rating ?? 0.0)
         self.mLbPriceLabel.text = self.mRestaurantDetailInfo?.price ?? ""
-        self.mLbReviews.text = "\(self.mRestaurantDetailInfo?.review_count ?? 0) reviews"
+        self.mLbReviews.text = "\(self.mRestaurantDetailInfo?.review_count ?? 0) 評論"
         
         self.mLbIsOpenStatusLabel.text = "N/A"
         if let hours = self.mRestaurantDetailInfo?.hours, let isOpenNow = hours[0].is_open_now {
