@@ -17,7 +17,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
     @IBOutlet weak var mIvStaticMapImageView: UIImageView!
     @IBOutlet weak var mLbAddressLabel: UILabel!
-    @IBOutlet weak var mLbPhoneLabel: UILabel!
+    @IBOutlet weak var mBtnPhoneButton: UIButton!
     @IBOutlet weak var mLbTypeLabel: UILabel!
     @IBOutlet weak var mLbPriceLabel: UILabel!
     @IBOutlet weak var mLbReviews: UILabel!
@@ -73,7 +73,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.image_url)!), placeholder: #imageLiteral(resourceName: "no_image"))
         //mIvStreetImageView: UIImageView!
         self.mLbAddressLabel.text = self.mRestaurantDetailInfo?.location?.display_address?.joined()
-        self.mLbPhoneLabel.text = self.mRestaurantDetailInfo?.phone
+    self.mBtnPhoneButton.setTitle(self.mRestaurantDetailInfo?.phone, for: .normal)
         
         var categoriyTitles:[String] = [String]()
         for categoryInfo in (self.mRestaurantSummaryInfo?.categories)! {
@@ -94,7 +94,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         }
     }
     
-    
+    // MARK: - onStaticMapPressed
     @IBAction func onStaticMapPressed(_ sender: Any) {
         let lat = self.mRestaurantSummaryInfo?.coordinates?.latitude
         let lng = self.mRestaurantSummaryInfo?.coordinates?.longitude
@@ -122,6 +122,17 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         present(alertController, animated: true, completion: nil)
     }
     
+    // MARK: - onPhoneButtonPressed
+    @IBAction func onPhoneButtonPressed(_ sender: Any) {
+        let rawPhoneNum = self.mBtnPhoneButton.titleLabel?.text ?? ""
+        let phoneNum = rawPhoneNum.replacingOccurrences(of: "+", with: "")
+        let url = URL(string: "tel://\(phoneNum)")
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url!)
+        } else {
+            UIApplication.shared.openURL(url!)
+        }
+    }
     
     func showLoadingDialog(loadingContent:String) {
         self.mLoadingAlertController = UIAlertController(title: nil, message: loadingContent, preferredStyle: .alert)
@@ -137,7 +148,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     
     func closeLoadingDialog() {
         if self.mLoadingAlertController != nil {
-            self.mLoadingAlertController?.dismiss(animated: true, completion: nil)
+            self.dismiss(animated: true, completion: nil)
             self.mLoadingAlertController = nil
         }
     }
