@@ -11,22 +11,29 @@ import GoogleMaps
 
 class PanoramaViewController: UIViewController, GMSMapViewDelegate {
     
-
+    var mLat:Double = 25.047908
+    var mLng:Double = 121.517315
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.navigationController?.presentTransparentNavigationBar()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.navigationController?.hideTransparentNavigationBar()
+    }
+
     override func loadView() {
         let panoView = GMSPanoramaView(frame: .zero)
         self.view = panoView
         
-        panoView.moveNearCoordinate(CLLocationCoordinate2D(latitude: -33.732, longitude:150.312))
+        panoView.moveNearCoordinate(CLLocationCoordinate2D(latitude: self.mLat, longitude:self.mLng))
+    }
+    
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
 }
