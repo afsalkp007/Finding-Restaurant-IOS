@@ -175,7 +175,14 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             destViewController.mRestaurantSummaryInfo = restaurantInfo
         } else if identifier == "show_restaurant_filter" {
             // TODO: [TODO] implement show_restaurant_filter
+            print("\(#function)")
         }
+    }
+    
+    // MARK: - Unwind Segue
+    
+    @IBAction func unwindToRestaurantList(segue: UIStoryboardSegue) {
+        print("\(#function)")
     }
     
     // MARK: - AlertController
