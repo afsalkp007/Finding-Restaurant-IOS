@@ -62,7 +62,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.mScNameSearchController?.searchBar.searchBarStyle = .prominent
         
-        /* Add the float button */
+        /* Init float button */
         let floaty = Floaty()
         floaty.buttonImage =  #imageLiteral(resourceName: "menu_icon")
         floaty.openAnimationType = .pop
@@ -87,6 +87,10 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             placePicker.delegate = self as GMSPlacePickerViewControllerDelegate
             
             self.present(placePicker, animated: true, completion: nil)
+        }
+        floaty.addItem(icon:  #imageLiteral(resourceName: "filter")) { (floatItem) in
+            print("Filter button is pressed")
+            self.performSegue(withIdentifier: "show_restaurant_filter", sender: nil)
         }
         self.view.addSubview(floaty)
     }
@@ -148,7 +152,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         return cell
     }
     
-     // MARK: - Table view data delegate
+    // MARK: - Table view data delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurantInfos:[YelpRestaruantSummaryInfo]? = (self.mFilteredRetaruantInfos != nil) ? self.mFilteredRetaruantInfos : self.mAllRestaruantInfos
@@ -162,10 +166,16 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     // MARK: - Prepare Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destViewController = segue.destination as! RestaurantDetailViewController
-        let restaurantInfo = sender as! YelpRestaruantSummaryInfo
+        let identifier = segue.identifier;
         
-        destViewController.mRestaurantSummaryInfo = restaurantInfo
+        if identifier == "show_restaurant_detail" {
+            let destViewController = segue.destination as! RestaurantDetailViewController
+            let restaurantInfo = sender as! YelpRestaruantSummaryInfo
+            
+            destViewController.mRestaurantSummaryInfo = restaurantInfo
+        } else if identifier == "show_restaurant_filter" {
+            // TODO: [TODO] implement show_restaurant_filter
+        }
     }
     
     // MARK: - AlertController
