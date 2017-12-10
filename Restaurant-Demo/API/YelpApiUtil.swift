@@ -40,8 +40,15 @@ class YelpApiUtil {
     }
     
     // MARK: - businessSearch
-    static func businessSearch(apiTag:String, term:String, lat:Double, lng:Double, locale:String, callback:ApiCallback) {
-        let parameters: Parameters = ["term":term, "latitude":lat, "longitude":lng, "locale":locale]
+    static func businessSearch(apiTag:String, term:String, lat:Double, lng:Double, locale:String, openAt:Int? = nil, sortBy:String? = nil, price:Int? = nil, callback:ApiCallback) {
+        
+        var parameters: Parameters = ["term":term, "latitude":lat, "longitude":lng, "locale":locale, "limit":50]
+        
+        if let openAt = openAt, let sortBy = sortBy, let price = price {
+            parameters.updateValue(openAt, forKey: "open_at")
+            parameters.updateValue(sortBy, forKey: "sort_by")
+            parameters.updateValue(price, forKey: "price")
+        }
         
         apiRequest(apiTag: apiTag, url: YelpApiConfigs.BUSINESS_SEARCH_API_URL, callback: callback, headers: sHeaders, method: .get, parameters:parameters)
     }

@@ -153,11 +153,160 @@
                     <navigationItem key="navigationItem" title="餐廳列表" id="WR0-3Y-3ld"/>
                     <connections>
                         <segue destination="DBo-70-woK" kind="show" identifier="show_restaurant_detail" id="wzb-9W-aOx"/>
+                        <segue destination="zkB-R6-Zg2" kind="presentation" identifier="show_restaurant_filter" modalTransitionStyle="coverVertical" id="Jpp-8G-1uC"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eke-BA-HOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="780" y="-52.5"/>
+        </scene>
+        <!--Restaurant Filter View Controller-->
+        <scene sceneID="Xrp-nb-cBL">
+            <objects>
+                <tableViewController id="zkB-R6-Zg2" customClass="RestaurantFilterViewController" customModule="Restaurant_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" scrollEnabled="NO" dataMode="static" style="plain" separatorStyle="none" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="rdm-qu-NHH">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <inset key="separatorInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                        <navigationBar key="tableHeaderView" contentMode="scaleToFill" id="o5K-OI-acL">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="78"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                            <items>
+                                <navigationItem title="過濾條件" prompt=" " id="3ie-aT-1GV">
+                                    <barButtonItem key="leftBarButtonItem" title="取消" id="V8x-Gl-NMH">
+                                        <connections>
+                                            <action selector="onCancelItemPressed:" destination="zkB-R6-Zg2" id="J5O-LA-qc1"/>
+                                        </connections>
+                                    </barButtonItem>
+                                    <barButtonItem key="rightBarButtonItem" title="套用" id="TQL-H9-3Oo">
+                                        <connections>
+                                            <action selector="onApplyItemPressed:" destination="zkB-R6-Zg2" id="Qog-6j-CaO"/>
+                                        </connections>
+                                    </barButtonItem>
+                                </navigationItem>
+                            </items>
+                        </navigationBar>
+                        <sections>
+                            <tableViewSection id="zyV-I8-u13" colorLabel="IBBuiltInLabel-Red">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="W2m-tw-kxd">
+                                        <rect key="frame" x="0.0" y="78" width="320" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="W2m-tw-kxd" id="khf-8y-qjA">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="8F2-qX-MpY">
+                                                    <rect key="frame" x="30" y="45.5" width="260" height="29"/>
+                                                    <segments>
+                                                        <segment title="$"/>
+                                                        <segment title="$$"/>
+                                                        <segment title="$$$"/>
+                                                        <segment title="$$$$"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="消費程度" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5gr-da-Jga">
+                                                    <rect key="frame" x="30" y="15" width="69.5" height="20.5"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="8F2-qX-MpY" firstAttribute="leading" secondItem="khf-8y-qjA" secondAttribute="leading" constant="30" id="3kv-ze-f6J"/>
+                                                <constraint firstItem="8F2-qX-MpY" firstAttribute="trailing" secondItem="khf-8y-qjA" secondAttribute="trailing" constant="-30" id="MHn-zD-Ian"/>
+                                                <constraint firstItem="5gr-da-Jga" firstAttribute="leading" secondItem="khf-8y-qjA" secondAttribute="leading" constant="30" id="Xjx-pa-DPm"/>
+                                                <constraint firstItem="5gr-da-Jga" firstAttribute="top" secondItem="khf-8y-qjA" secondAttribute="top" constant="15" id="Zzq-MC-qf6"/>
+                                                <constraint firstItem="8F2-qX-MpY" firstAttribute="top" secondItem="5gr-da-Jga" secondAttribute="bottom" constant="10" id="wcC-DF-T7X"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="199" id="ban-tG-VPi">
+                                        <rect key="frame" x="0.0" y="168" width="320" height="199"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="ban-tG-VPi" id="Z0Y-2N-oFN">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="199"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="營業時間" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BaZ-7d-85x">
+                                                    <rect key="frame" x="30" y="15" width="91" height="20.5"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="91" id="sAw-aE-w1a"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <datePicker contentMode="scaleToFill" verticalCompressionResistancePriority="749" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="dateAndTime" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="tcG-Ad-QF5">
+                                                    <rect key="frame" x="0.0" y="45.5" width="320" height="153.5"/>
+                                                    <date key="date" timeIntervalSinceReferenceDate="534564945.85102397">
+                                                        <!--2017-12-10 02:15:45 +0000-->
+                                                    </date>
+                                                </datePicker>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="tcG-Ad-QF5" firstAttribute="top" secondItem="BaZ-7d-85x" secondAttribute="bottom" constant="10" id="2Ma-KH-bJQ"/>
+                                                <constraint firstAttribute="bottom" secondItem="tcG-Ad-QF5" secondAttribute="bottom" id="5Za-L3-fq2"/>
+                                                <constraint firstItem="tcG-Ad-QF5" firstAttribute="leading" secondItem="Z0Y-2N-oFN" secondAttribute="leading" id="ebm-Lc-PgR"/>
+                                                <constraint firstItem="tcG-Ad-QF5" firstAttribute="trailing" secondItem="Z0Y-2N-oFN" secondAttribute="trailing" id="mpq-Qa-DRn"/>
+                                                <constraint firstItem="BaZ-7d-85x" firstAttribute="top" secondItem="Z0Y-2N-oFN" secondAttribute="top" constant="15" id="nbN-xR-FkD"/>
+                                                <constraint firstItem="BaZ-7d-85x" firstAttribute="leading" secondItem="Z0Y-2N-oFN" secondAttribute="leading" constant="30" id="yu1-i5-Ep5"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="90" id="lsX-qI-k3J">
+                                        <rect key="frame" x="0.0" y="367" width="320" height="90"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="lsX-qI-k3J" id="c8p-n3-tjQ">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="90"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="b3m-W0-kJl">
+                                                    <rect key="frame" x="30" y="46" width="260" height="29"/>
+                                                    <segments>
+                                                        <segment title="最佳配對"/>
+                                                        <segment title="距離"/>
+                                                        <segment title="評分"/>
+                                                        <segment title="最多評論"/>
+                                                    </segments>
+                                                </segmentedControl>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="排序依據" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsU-7H-Tdu">
+                                                    <rect key="frame" x="30" y="15" width="70" height="21"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="b3m-W0-kJl" firstAttribute="leading" secondItem="c8p-n3-tjQ" secondAttribute="leading" constant="30" id="5wQ-cn-9VK"/>
+                                                <constraint firstItem="QsU-7H-Tdu" firstAttribute="leading" secondItem="c8p-n3-tjQ" secondAttribute="leading" constant="30" id="Fwq-Nv-oF2"/>
+                                                <constraint firstItem="QsU-7H-Tdu" firstAttribute="top" secondItem="c8p-n3-tjQ" secondAttribute="top" constant="15" id="IIq-jC-ip3"/>
+                                                <constraint firstItem="b3m-W0-kJl" firstAttribute="top" secondItem="QsU-7H-Tdu" secondAttribute="bottom" constant="10" id="Y16-4M-KCB"/>
+                                                <constraint firstItem="b3m-W0-kJl" firstAttribute="trailing" secondItem="c8p-n3-tjQ" secondAttribute="trailing" constant="-30" id="leI-tA-yIA"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                        </sections>
+                        <connections>
+                            <outlet property="dataSource" destination="zkB-R6-Zg2" id="HCY-gd-fSL"/>
+                            <outlet property="delegate" destination="zkB-R6-Zg2" id="rNK-KF-JDU"/>
+                        </connections>
+                    </tableView>
+                    <connections>
+                        <outlet property="mDpBusinessTimeDatePicker" destination="tcG-Ad-QF5" id="7Md-KW-0sl"/>
+                        <outlet property="mScPriceSegmentedControl" destination="8F2-qX-MpY" id="RwI-8r-Q74"/>
+                        <outlet property="mScSortRuleSegmentedControl" destination="b3m-W0-kJl" id="Qna-o7-Hka"/>
+                        <segue destination="ZKW-eA-x1T" kind="unwind" identifier="press_apply_unwind_segue" unwindAction="unwindToRestaurantListWithSegue:" id="NOp-F5-l1u"/>
+                        <segue destination="ZKW-eA-x1T" kind="unwind" identifier="press_cancel_unwind_segue" unwindAction="unwindToRestaurantListWithSegue:" id="ZHP-mE-k3T"/>
+                    </connections>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ta7-9Y-tVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <exit id="ZKW-eA-x1T" userLabel="Exit" sceneMemberID="exit"/>
+            </objects>
+            <point key="canvasLocation" x="712.5" y="912.5"/>
         </scene>
         <!--Restaurant Detail View Controller-->
         <scene sceneID="uSb-Sz-bDa">

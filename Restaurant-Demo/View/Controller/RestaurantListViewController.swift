@@ -24,7 +24,10 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     private var mSearchInfo:YelpSearchInfo?
     private var mLoadingAlertController:UIAlertController?
     private var mIsFirst = true
+    private var mIsNeedReFetch = false
     private var mLocationMgr:LocationManager?
+    var mFilterConfig:FilterConfigs?
+    var mCurLocation:CLLocation?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +39,20 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         if self.mIsFirst {
             self.mIsFirst = false
             initConfig()
+        } else if self.mIsNeedReFetch {
+            
+            self.mIsNeedReFetch = false
+            
+            showLoadingDialog(loadingContent: "Loading Data...")
+            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
+                , term: "Restaurants"
+                , lat: (self.mCurLocation?.coordinate.latitude)!
+                , lng: (self.mCurLocation?.coordinate.longitude)!
+                , locale: "zh_TW"
+                , openAt: (self.mFilterConfig != nil) ? self.mFilterConfig?.mOpenAt : nil
+                , sortBy: (self.mFilterConfig != nil) ? self.mFilterConfig?.mSortingRule : nil
+                , price: (self.mFilterConfig != nil) ? self.mFilterConfig?.mPrice : nil
+                , callback: self)
         }
     }
     
@@ -62,7 +79,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.mScNameSearchController?.searchBar.searchBarStyle = .prominent
         
-        /* Add the float button */
+        /* Init float button */
         let floaty = Floaty()
         floaty.buttonImage =  #imageLiteral(resourceName: "menu_icon")
         floaty.openAnimationType = .pop
@@ -88,6 +105,10 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             
             self.present(placePicker, animated: true, completion: nil)
         }
+        floaty.addItem(icon:  #imageLiteral(resourceName: "filter")) { (floatItem) in
+            print("Filter button is pressed")
+            self.performSegue(withIdentifier: "show_restaurant_filter", sender: nil)
+        }
         self.view.addSubview(floaty)
     }
     
@@ -95,9 +116,11 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         self.mJsonDecoder = Util.getJsonDecoder()
         self.mJsonDecoder?.dateDecodingStrategy = .iso8601
         self.mLocationMgr = LocationManager.getInstance()
+        self.mCurLocation = CLLocation(latitude: 25.047908, longitude: 121.517315)
         
         self.mLocationMgr?.setDelegate(delegate: self)
-        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN, callback: self)
+        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN
+            , callback: self)
     }
     
     // MARK: - UISearchResultsUpdating
@@ -148,7 +171,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         return cell
     }
     
-     // MARK: - Table view data delegate
+    // MARK: - Table view data delegate
     
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurantInfos:[YelpRestaruantSummaryInfo]? = (self.mFilteredRetaruantInfos != nil) ? self.mFilteredRetaruantInfos : self.mAllRestaruantInfos
@@ -162,10 +185,24 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     // MARK: - Prepare Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        let destViewController = segue.destination as! RestaurantDetailViewController
-        let restaurantInfo = sender as! YelpRestaruantSummaryInfo
+        let identifier = segue.identifier;
         
-        destViewController.mRestaurantSummaryInfo = restaurantInfo
+        if identifier == "show_restaurant_detail" {
+            let destViewController = segue.destination as! RestaurantDetailViewController
+            let restaurantInfo = sender as! YelpRestaruantSummaryInfo
+            
+            destViewController.mRestaurantSummaryInfo = restaurantInfo
+        }
+    }
+    
+    // MARK: - Unwind Segue
+    
+    @IBAction func unwindToRestaurantList(segue: UIStoryboardSegue) {
+        let segueIdentifier = segue.identifier
+        
+        if segueIdentifier == "press_apply_unwind_segue" {
+            self.mIsNeedReFetch = true
+        }
     }
     
     // MARK: - AlertController
@@ -208,7 +245,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         } else if apiTag == RestaurantListViewController.API_TAG_BUSINESS_SEARCH {
             if let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: jsonData!) {
                 self.mSearchInfo = searchInfo
-                self.mAllRestaruantInfos = self.mSearchInfo?.businesses
+                self.mAllRestaruantInfos = self.mSearchInfo?.businesses ?? [YelpRestaruantSummaryInfo]()
                 
                 // Compose the categories string
                 for i in stride(from: 0, to: (self.mAllRestaruantInfos?.count)!, by: 1) {
@@ -231,7 +268,15 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         guard isAuthorized else {
             // Use the taipei station as default location
             showLoadingDialog(loadingContent: "Loading Data...")
-            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: 25.047908 , lng: 121.517315, locale: "zh_TW", callback: self)
+            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
+                , term: "Restaurants"
+                , lat: (self.mCurLocation?.coordinate.latitude)!
+                , lng: (self.mCurLocation?.coordinate.longitude)!
+                , locale: "zh_TW"
+                , openAt: (self.mFilterConfig != nil) ? self.mFilterConfig?.mOpenAt : nil
+                , sortBy: (self.mFilterConfig != nil) ? self.mFilterConfig?.mSortingRule : nil
+                , price: (self.mFilterConfig != nil) ? self.mFilterConfig?.mPrice : nil
+                , callback: self)
             return
         }
         
@@ -239,10 +284,21 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     func didUpdateLocation(location: CLLocation) {
+        
+        self.mCurLocation = location
+        
         self.mLocationMgr?.setDelegate(delegate: nil)
         self.mLocationMgr?.stopLocationUpdate()
         showLoadingDialog(loadingContent: "Loading Data...")
-        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: location.coordinate.latitude , lng: location.coordinate.longitude, locale: "zh_TW", callback: self)
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
+            , term: "Restaurants"
+            , lat: location.coordinate.latitude
+            , lng: location.coordinate.longitude
+            , locale: "zh_TW"
+            , openAt: (self.mFilterConfig != nil) ? self.mFilterConfig?.mOpenAt : nil
+            , sortBy: (self.mFilterConfig != nil) ? self.mFilterConfig?.mSortingRule : nil
+            , price: (self.mFilterConfig != nil) ? self.mFilterConfig?.mPrice : nil
+            , callback: self)
     }
     
     // MARK: - PlacePicker callback
@@ -254,7 +310,15 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         viewController.dismiss(animated: true, completion: nil)
         
         showLoadingDialog(loadingContent: "Loading Data...")
-        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH, term: "Restaurants", lat: place.coordinate.latitude , lng: place.coordinate.longitude, locale: "zh_TW", callback: self)
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
+            , term: "Restaurants"
+            , lat: place.coordinate.latitude
+            , lng: place.coordinate.longitude
+            , locale: "zh_TW"
+            , openAt: (self.mFilterConfig != nil) ? self.mFilterConfig?.mOpenAt : nil
+            , sortBy: (self.mFilterConfig != nil) ? self.mFilterConfig?.mSortingRule : nil
+            , price: (self.mFilterConfig != nil) ? self.mFilterConfig?.mPrice : nil
+            , callback: self)
     }
     
     func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {

@@ -28,6 +28,8 @@
 		ED3559DB1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559DA1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift */; };
 		ED5B5F9F1FDA377300E8B198 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */; };
 		ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */; };
+		ED5B5FAF1FDC634F00E8B198 /* RestaurantFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */; };
+		ED5B5FB11FDD5DC700E8B198 /* FilterConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */; };
 		EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C601FD5262100DD2902 /* FloatyViewController.swift */; };
 		EDA28C681FD5262100DD2902 /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C611FD5262100DD2902 /* FloatyWindow.swift */; };
 		EDA28C691FD5262100DD2902 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C621FD5262100DD2902 /* FloatyManager.swift */; };
@@ -70,6 +72,8 @@
 		ED3559DA1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBaseRestaurantInfo.swift; sourceTree = "<group>"; };
 		ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabelExtension.swift; sourceTree = "<group>"; };
+		ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterViewController.swift; sourceTree = "<group>"; };
+		ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigs.swift; sourceTree = "<group>"; };
 		EDA28C601FD5262100DD2902 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		EDA28C611FD5262100DD2902 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
 		EDA28C621FD5262100DD2902 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
@@ -128,6 +132,7 @@
 			children = (
 				ED3559CF1FCBBF4E00935DFF /* Yelp */,
 				ED3559D81FCF0D0200935DFF /* RatingEnum.swift */,
+				ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */,
 			);
 			path = Data;
 			sourceTree = "<group>";
@@ -203,6 +208,7 @@
 				ED332D731FC87A4400279333 /* RestaurantListViewController.swift */,
 				ED3559D01FCC2A8000935DFF /* RestaurantDetailViewController.swift */,
 				EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */,
+				ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -420,6 +426,7 @@
 				EDCCEE561FD20C7D0072883A /* YelpResaruantBusinessTime.swift in Sources */,
 				EDA28C6C1FD5262100DD2902 /* FloatyItem.swift in Sources */,
 				ED332D7E1FCA4C4B00279333 /* YelpAuthenticationInfo.swift in Sources */,
+				ED5B5FB11FDD5DC700E8B198 /* FilterConfigs.swift in Sources */,
 				EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */,
 				EDA28C6A1FD5262100DD2902 /* Floaty.swift in Sources */,
 				ED332D821FCA52F100279333 /* YelpRestaurantLocation.swift in Sources */,
@@ -438,6 +445,7 @@
 				ED3559DB1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift in Sources */,
 				EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */,
 				ED3559CE1FCBBB9100935DFF /* YelpRestaurantCategory.swift in Sources */,
+				ED5B5FAF1FDC634F00E8B198 /* RestaurantFilterViewController.swift in Sources */,
 				ED3559D71FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift in Sources */,
 				EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */,
 			);

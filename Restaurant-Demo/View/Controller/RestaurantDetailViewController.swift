@@ -34,8 +34,8 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        self.mJsonDecoder = Util.getJsonDecoder()
         initView()
+        initConfig()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -52,6 +52,10 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         let lng = self.mRestaurantSummaryInfo?.coordinates?.longitude
         
         self.mIvStaticMapImageView.kf.setImage(with: URL(string: GoogleApiUtil.createStaticMapUrl(lat: lat!, lng: lng!, w: 200, h: 200)), placeholder:  #imageLiteral(resourceName: "no_image"))
+    }
+    
+    func initConfig() {
+        self.mJsonDecoder = Util.getJsonDecoder()
     }
     
     func fetchData() {
