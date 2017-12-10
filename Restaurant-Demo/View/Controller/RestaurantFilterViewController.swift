@@ -9,28 +9,61 @@
 import UIKit
 
 class RestaurantFilterViewController: UITableViewController {
-
+    
+    @IBOutlet weak var mScPriceSegmentedControl: UISegmentedControl!
+    @IBOutlet weak var mDpBusinessTimeDatePicker: UIDatePicker!
+    @IBOutlet weak var mScSortRuleSegmentedControl: UISegmentedControl!
+    
+    var mFilterConfigs:FilterConfigs?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        initConfig()
     }
-
+    
+    func initConfig() {
+        self.mFilterConfigs = FilterConfigs()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - prepare
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        print("\(#function)")
-    }
-    
-    
-    // MARK: - onCancelItemPressed
-    @IBAction func onCancelItemPressed(_ sender: Any) {
-        performSegue(withIdentifier: "press_cancel_unwind_segue", sender: nil)
+        guard let target = segue.destination as? RestaurantListViewController else {
+            return
+        }
+        
+        let segueIdentifier = segue.identifier
+        target.mFilterConfig = (segueIdentifier == "press_apply_unwind_segue") ? self.mFilterConfigs : nil
     }
     
     // MARK: - onApplyItemPressed
     @IBAction func onApplyItemPressed(_ sender: Any) {
+        self.mFilterConfigs?.mPrice = self.mScPriceSegmentedControl.selectedSegmentIndex + 1
+        self.mFilterConfigs?.mOpenAt = Int(self.mDpBusinessTimeDatePicker.date.timeIntervalSince1970)
+        self.mFilterConfigs?.mSortingRule = mapSortingRuleToStr(index: self.mScSortRuleSegmentedControl.selectedSegmentIndex)
         performSegue(withIdentifier: "press_apply_unwind_segue", sender: nil)
+    }
+    
+    func mapSortingRuleToStr(index:Int) -> String {
+        switch index {
+        case 0:
+            return "best_match"
+        case 1:
+            return "distance"
+        case 2:
+            return "rating"
+        case 3:
+            return "review_count"
+        default:
+            return "distance"
+        }
+    }
+    
+    // MARK: - onCancelItemPressed
+    @IBAction func onCancelItemPressed(_ sender: Any) {
+        performSegue(withIdentifier: "press_cancel_unwind_segue", sender: nil)
     }
 }

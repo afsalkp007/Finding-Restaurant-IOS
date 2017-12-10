@@ -268,7 +268,7 @@
                                                         <segment title="最佳配對"/>
                                                         <segment title="距離"/>
                                                         <segment title="評分"/>
-                                                        <segment title="最多瀏覽"/>
+                                                        <segment title="最多評論"/>
                                                     </segments>
                                                 </segmentedControl>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="排序依據" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QsU-7H-Tdu">
@@ -296,6 +296,9 @@
                         </connections>
                     </tableView>
                     <connections>
+                        <outlet property="mDpBusinessTimeDatePicker" destination="tcG-Ad-QF5" id="7Md-KW-0sl"/>
+                        <outlet property="mScPriceSegmentedControl" destination="8F2-qX-MpY" id="RwI-8r-Q74"/>
+                        <outlet property="mScSortRuleSegmentedControl" destination="b3m-W0-kJl" id="Qna-o7-Hka"/>
                         <segue destination="ZKW-eA-x1T" kind="unwind" identifier="press_apply_unwind_segue" unwindAction="unwindToRestaurantListWithSegue:" id="NOp-F5-l1u"/>
                         <segue destination="ZKW-eA-x1T" kind="unwind" identifier="press_cancel_unwind_segue" unwindAction="unwindToRestaurantListWithSegue:" id="ZHP-mE-k3T"/>
                     </connections>
