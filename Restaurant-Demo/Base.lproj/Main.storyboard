@@ -176,12 +176,12 @@
                                 <navigationItem title="過濾條件" prompt=" " id="3ie-aT-1GV">
                                     <barButtonItem key="leftBarButtonItem" title="取消" id="V8x-Gl-NMH">
                                         <connections>
-                                            <segue destination="ZKW-eA-x1T" kind="unwind" unwindAction="unwindToRestaurantListWithSegue:" id="WO5-Ku-nKb"/>
+                                            <action selector="onCancelItemPressed:" destination="zkB-R6-Zg2" id="J5O-LA-qc1"/>
                                         </connections>
                                     </barButtonItem>
                                     <barButtonItem key="rightBarButtonItem" title="套用" id="TQL-H9-3Oo">
                                         <connections>
-                                            <segue destination="ZKW-eA-x1T" kind="unwind" unwindAction="unwindToRestaurantListWithSegue:" id="Z4x-Z8-CTd"/>
+                                            <action selector="onApplyItemPressed:" destination="zkB-R6-Zg2" id="Qog-6j-CaO"/>
                                         </connections>
                                     </barButtonItem>
                                 </navigationItem>
@@ -295,6 +295,10 @@
                             <outlet property="delegate" destination="zkB-R6-Zg2" id="rNK-KF-JDU"/>
                         </connections>
                     </tableView>
+                    <connections>
+                        <segue destination="ZKW-eA-x1T" kind="unwind" identifier="press_apply_unwind_segue" unwindAction="unwindToRestaurantListWithSegue:" id="NOp-F5-l1u"/>
+                        <segue destination="ZKW-eA-x1T" kind="unwind" identifier="press_cancel_unwind_segue" unwindAction="unwindToRestaurantListWithSegue:" id="ZHP-mE-k3T"/>
+                    </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ta7-9Y-tVj" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <exit id="ZKW-eA-x1T" userLabel="Exit" sceneMemberID="exit"/>
