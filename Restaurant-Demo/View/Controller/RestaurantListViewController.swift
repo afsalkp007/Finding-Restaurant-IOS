@@ -18,6 +18,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     private static let CELL_ID = "menu_cell"
     
     private var mScNameSearchController:UISearchController?
+    private var mRcRefreshControl:UIRefreshControl?
     private var mFilteredRetaruantInfos:[YelpRestaruantSummaryInfo]? = nil
     private var mAllRestaruantInfos:[YelpRestaruantSummaryInfo]? = [YelpRestaruantSummaryInfo]()
     private var mJsonDecoder:JSONDecoder?
@@ -61,8 +62,16 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         self.navigationController?.navigationBar.prefersLargeTitles = true
         
         /* Init TableView  */
+        self.mRcRefreshControl = UIRefreshControl()
         self.tableView.rowHeight = UITableViewAutomaticDimension
         self.tableView.estimatedRowHeight = 30
+        if #available(iOS 10.0, *) {
+            self.tableView.refreshControl = self.mRcRefreshControl
+        } else {
+            self.tableView.addSubview(self.mRcRefreshControl!)
+        }
+        self.mRcRefreshControl?.addTarget(self, action: #selector(refreshListToDefaultConfigs), for:.valueChanged)
+        self.mRcRefreshControl?.attributedTitle = NSAttributedString(string: "Loading Data...")
         
         /* Init SearchController */
         self.mScNameSearchController = UISearchController(searchResultsController: nil)
@@ -78,7 +87,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Hide the search bar when scrolling up, Default is true. if setup as false it will always display
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.mScNameSearchController?.searchBar.searchBarStyle = .prominent
-        
+
         /* Init float button */
         let floaty = Floaty()
         floaty.buttonImage =  #imageLiteral(resourceName: "menu_icon")
@@ -182,6 +191,18 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         performSegue(withIdentifier: "show_restaurant_detail", sender: selectedInfo)
     }
     
+    // MARK: - UIRefreshController pull-to-refresh target
+    @objc func refreshListToDefaultConfigs(_ sender: Any) {
+        // Use the taipei station as default location
+        self.mFilterConfig = nil
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
+            , term: "Restaurants"
+            , lat: (self.mCurLocation?.coordinate.latitude)!
+            , lng: (self.mCurLocation?.coordinate.longitude)!
+            , locale: "zh_TW"
+            , callback: self)
+    }
+    
     // MARK: - Prepare Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -259,6 +280,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
                 self.tableView.reloadData()
             }
             self.closeLoadingDialog()
+            self.mRcRefreshControl?.endRefreshing()
         }
     }
     
