@@ -331,16 +331,8 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Dismiss the place picker, as it cannot dismiss itself.
         viewController.dismiss(animated: true, completion: nil)
         
-        showLoadingDialog(loadingContent: "Loading Data...")
-        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
-            , term: "Restaurants"
-            , lat: place.coordinate.latitude
-            , lng: place.coordinate.longitude
-            , locale: "zh_TW"
-            , openAt: (self.mFilterConfig != nil) ? self.mFilterConfig?.mOpenAt : nil
-            , sortBy: (self.mFilterConfig != nil) ? self.mFilterConfig?.mSortingRule : nil
-            , price: (self.mFilterConfig != nil) ? self.mFilterConfig?.mPrice : nil
-            , callback: self)
+        self.mCurLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
+        self.mIsNeedReFetch = true
     }
     
     func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
