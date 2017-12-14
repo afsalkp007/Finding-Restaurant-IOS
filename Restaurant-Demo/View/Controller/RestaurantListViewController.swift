@@ -26,7 +26,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     private var mLoadingAlertController:UIAlertController?
     private var mIsFirst = true
     private var mIsNeedReFetch = false
-    private var mLocationMgr:LocationManager?
     var mFilterConfig:FilterConfigs?
     var mCurLocation:CLLocation?
     
@@ -100,7 +99,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Locate user's location
         floaty.addItem(icon:  #imageLiteral(resourceName: "location_icon")) { (floatItem) in
             
-            guard (self.mLocationMgr?.isAuthorized())! else {
+            guard LocationManager.shared.isAuthorized() else {
                 self.showAlertDialog(title: "Notice!!!", content: "Location services were previously denied. Please enable location services for this app in Settings.") {
                     action in
                     self.dismiss(animated: true, completion: nil)
@@ -124,10 +123,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     func initConfig() {
         self.mJsonDecoder = Util.getJsonDecoder()
         self.mJsonDecoder?.dateDecodingStrategy = .iso8601
-        self.mLocationMgr = LocationManager.getInstance()
         self.mCurLocation = CLLocation(latitude: 25.047908, longitude: 121.517315)
         
-        self.mLocationMgr?.setDelegate(delegate: self)
+        LocationManager.shared.setDelegate(delegate: self)
         YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN
             , callback: self)
     }
@@ -262,7 +260,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     
     func onSuccess(apiTag: String, jsonData: Data?) {
         if apiTag == RestaurantListViewController.API_TAG_REQUEST_TOKEN {
-            self.mLocationMgr?.requestLocationUpdate()
+            LocationManager.shared.requestLocationUpdate()
         } else if apiTag == RestaurantListViewController.API_TAG_BUSINESS_SEARCH {
             if let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: jsonData!) {
                 self.mSearchInfo = searchInfo
@@ -302,15 +300,15 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             return
         }
         
-        self.mLocationMgr?.requestLocationUpdate()
+        LocationManager.shared.requestLocationUpdate()
     }
     
     func didUpdateLocation(location: CLLocation) {
         
         self.mCurLocation = location
         
-        self.mLocationMgr?.setDelegate(delegate: nil)
-        self.mLocationMgr?.stopLocationUpdate()
+        LocationManager.shared.setDelegate(delegate: nil)
+        LocationManager.shared.stopLocationUpdate()
         showLoadingDialog(loadingContent: "Loading Data...")
         YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
             , term: "Restaurants"

@@ -16,19 +16,14 @@ protocol LocationStatusDelegate {
 
 class LocationManager: NSObject, CLLocationManagerDelegate {
     
-    private static var sInstance:LocationManager?
+    static var shared:LocationManager = LocationManager()
     
     private var mLocationMgr:CLLocationManager?
     private var mDelegate:LocationStatusDelegate?
     
-    static func getInstance() -> LocationManager? {
-        
-        if sInstance == nil {
-            sInstance = LocationManager()
-            sInstance?.mLocationMgr = CLLocationManager()
-            sInstance?.mLocationMgr?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
-        }
-        return sInstance
+    private override init() {
+        self.mLocationMgr = CLLocationManager()
+        self.mLocationMgr?.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
     }
     
     func setDelegate(delegate:LocationStatusDelegate?
