@@ -11,5 +11,6 @@ target 'Restaurant-Demo' do
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  pod 'TagListView', '~> 1.0'
 
 end

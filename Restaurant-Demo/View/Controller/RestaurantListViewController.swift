@@ -10,12 +10,16 @@ import UIKit
 import Kingfisher
 import GooglePlaces
 import GooglePlacePicker
+import TagListView
 
-class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback, GMSPlacePickerViewControllerDelegate, LocationStatusDelegate {
+class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback, GMSPlacePickerViewControllerDelegate, LocationStatusDelegate, TagListViewDelegate {
     
     private static let API_TAG_REQUEST_TOKEN = "API_TAG_REQUEST_TOKEN"
     private static let API_TAG_BUSINESS_SEARCH = "API_TAG_BUSINESS_SEARCH"
     private static let CELL_ID = "menu_cell"
+    
+    @IBOutlet weak var mVFilterRuleListContainerView: UIView!
+    @IBOutlet weak var mTlvFilterRuleTagList: TagListView!
     
     private var mScNameSearchController:UISearchController?
     private var mRcRefreshControl:UIRefreshControl?
@@ -43,15 +47,16 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             
             self.mIsNeedReFetch = false
             
+            initFilterRuleList()
             showLoadingDialog(loadingContent: "Loading Data...")
             YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
                 , term: "Restaurants"
                 , lat: (self.mCurLocation?.coordinate.latitude)!
                 , lng: (self.mCurLocation?.coordinate.longitude)!
                 , locale: "zh_TW"
-                , openAt: (self.mFilterConfig != nil) ? self.mFilterConfig?.mOpenAt : nil
-                , sortBy: (self.mFilterConfig != nil) ? self.mFilterConfig?.mSortingRule : nil
-                , price: (self.mFilterConfig != nil) ? self.mFilterConfig?.mPrice : nil
+                , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
+                , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
+                , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
                 , callback: self)
         }
     }
@@ -71,6 +76,10 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         }
         self.mRcRefreshControl?.addTarget(self, action: #selector(refreshListToDefaultConfigs), for:.valueChanged)
         self.mRcRefreshControl?.attributedTitle = NSAttributedString(string: "Loading Data...")
+        
+        /* Init tag list view */
+        self.mTlvFilterRuleTagList.textFont = UIFont.systemFont(ofSize: 16)
+        self.mTlvFilterRuleTagList.delegate = self
         
         /* Init SearchController */
         self.mScNameSearchController = UISearchController(searchResultsController: nil)
@@ -114,41 +123,40 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             self.present(placePicker, animated: true, completion: nil)
         }
         floaty.addItem(icon:  #imageLiteral(resourceName: "filter")) { (floatItem) in
-            print("Filter button is pressed")
             self.performSegue(withIdentifier: "show_restaurant_filter", sender: nil)
         }
         self.view.addSubview(floaty)
+    }
+    
+    func initFilterRuleList() {
+        var tags:[String] = [];
+        
+        self.mTlvFilterRuleTagList.removeAllTags()
+        if let filterConfig = self.mFilterConfig {
+            if let sortRule = filterConfig.mSortingRule {
+                tags.append(sortRule)
+            }
+//          if let openAt = filterConfig.mOpenAt {
+//
+//          }
+            if let priceStr = filterConfig.mPriceStr {
+                tags.append(priceStr)
+            }
+        }
+        self.mTlvFilterRuleTagList.addTags(tags)
     }
     
     func initConfig() {
         self.mJsonDecoder = Util.getJsonDecoder()
         self.mJsonDecoder?.dateDecodingStrategy = .iso8601
         self.mCurLocation = CLLocation(latitude: 25.047908, longitude: 121.517315)
+        self.mFilterConfig = FilterConfigs()
+        self.mFilterConfig?.mSortingRule = "best_match"
         
+        initFilterRuleList()
         LocationManager.shared.setDelegate(delegate: self)
         YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN
             , callback: self)
-    }
-    
-    // MARK: - UISearchResultsUpdating
-    func updateSearchResults(for searchController: UISearchController) {
-        var keyword = searchController.searchBar.text ?? ""
-        keyword = keyword.trimmingCharacters(in: .whitespaces)
-        
-        if keyword.count == 0 {
-            self.mFilteredRetaruantInfos = nil
-        } else {
-            self.mFilteredRetaruantInfos = [YelpRestaruantSummaryInfo]()
-            
-            for info in self.mAllRestaruantInfos! {
-                if (info.name?.contains(keyword))! || (info.location?.display_address?.contains(keyword))! ||
-                    (info.categoriesStr?.contains(keyword))! {
-                    self.mFilteredRetaruantInfos?.append(info)
-                }
-            }
-            
-        }
-        self.tableView.reloadData()
     }
     
     // MARK: - Table view data source
@@ -282,6 +290,27 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         }
     }
     
+    // MARK: - UISearchResultsUpdating
+    func updateSearchResults(for searchController: UISearchController) {
+        var keyword = searchController.searchBar.text ?? ""
+        keyword = keyword.trimmingCharacters(in: .whitespaces)
+        
+        if keyword.count == 0 {
+            self.mFilteredRetaruantInfos = nil
+        } else {
+            self.mFilteredRetaruantInfos = [YelpRestaruantSummaryInfo]()
+            
+            for info in self.mAllRestaruantInfos! {
+                if (info.name?.contains(keyword))! || (info.location?.display_address?.contains(keyword))! ||
+                    (info.categoriesStr?.contains(keyword))! {
+                    self.mFilteredRetaruantInfos?.append(info)
+                }
+            }
+            
+        }
+        self.tableView.reloadData()
+    }
+    
     // MARK: - LocationStatusDelegate
     
     func isLocationAuthorized(isAuthorized: Bool) {
@@ -293,9 +322,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
                 , lat: (self.mCurLocation?.coordinate.latitude)!
                 , lng: (self.mCurLocation?.coordinate.longitude)!
                 , locale: "zh_TW"
-                , openAt: (self.mFilterConfig != nil) ? self.mFilterConfig?.mOpenAt : nil
-                , sortBy: (self.mFilterConfig != nil) ? self.mFilterConfig?.mSortingRule : nil
-                , price: (self.mFilterConfig != nil) ? self.mFilterConfig?.mPrice : nil
+                , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
+                , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
+                , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
                 , callback: self)
             return
         }
@@ -315,10 +344,19 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             , lat: location.coordinate.latitude
             , lng: location.coordinate.longitude
             , locale: "zh_TW"
-            , openAt: (self.mFilterConfig != nil) ? self.mFilterConfig?.mOpenAt : nil
-            , sortBy: (self.mFilterConfig != nil) ? self.mFilterConfig?.mSortingRule : nil
-            , price: (self.mFilterConfig != nil) ? self.mFilterConfig?.mPrice : nil
+            , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
+            , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
+            , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
             , callback: self)
+    }
+    
+    // MARK: - TagListViewDelegate
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        print("Tag selected...")
+    }
+    
+    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        print("Tag removed...")
     }
     
     // MARK: - PlacePicker callback

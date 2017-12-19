@@ -37,9 +37,68 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <view key="tableHeaderView" contentMode="scaleToFill" id="7hc-46-vKt" userLabel="Filter rules tag list container">
+                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <subviews>
+                                <view tag="-1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7W-wl-BYc" userLabel="Filter rules tag list" customClass="TagListView" customModule="TagListView">
+                                    <rect key="frame" x="10" y="11" width="300" height="22"/>
+                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <userDefinedRuntimeAttributes>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                            <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                            <color key="value" red="0.35686274509803922" green="0.56470588235294117" blue="0.88627450980392153" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                            <real key="value" value="1"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                            <color key="value" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                            <real key="value" value="7"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="paddingX">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="marginY">
+                                            <real key="value" value="2"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="marginX">
+                                            <real key="value" value="5"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="number" keyPath="removeButtonIconSize">
+                                            <real key="value" value="0.0"/>
+                                        </userDefinedRuntimeAttribute>
+                                        <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="NO"/>
+                                    </userDefinedRuntimeAttributes>
+                                </view>
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-5D-czW" userLabel="Filter rules tag list bottom divider">
+                                    <rect key="frame" x="0.0" y="43" width="320" height="1"/>
+                                    <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="1" id="LOy-zV-6Mr"/>
+                                    </constraints>
+                                </view>
+                            </subviews>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstItem="Of4-5D-czW" firstAttribute="leading" secondItem="7hc-46-vKt" secondAttribute="leading" id="HgA-2s-rQi"/>
+                                <constraint firstItem="b7W-wl-BYc" firstAttribute="centerY" secondItem="7hc-46-vKt" secondAttribute="centerY" id="JCW-nK-X5M"/>
+                                <constraint firstItem="Of4-5D-czW" firstAttribute="top" secondItem="b7W-wl-BYc" secondAttribute="bottom" constant="10" id="ZXS-h5-bMk"/>
+                                <constraint firstItem="b7W-wl-BYc" firstAttribute="trailing" secondItem="7hc-46-vKt" secondAttribute="trailing" constant="-10" id="uSq-qA-ZXJ"/>
+                                <constraint firstItem="Of4-5D-czW" firstAttribute="trailing" secondItem="7hc-46-vKt" secondAttribute="trailing" id="wac-cR-dIL"/>
+                                <constraint firstItem="b7W-wl-BYc" firstAttribute="leading" secondItem="7hc-46-vKt" secondAttribute="leading" constant="10" id="z6p-Ez-x7T"/>
+                            </constraints>
+                        </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="menu_cell" rowHeight="150" id="Xqy-Nk-wIb" customClass="RestaurantInfoTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="28" width="320" height="150"/>
+                                <rect key="frame" x="0.0" y="72" width="320" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xqy-Nk-wIb" id="ls9-xd-mvv">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="149.5"/>
@@ -152,6 +211,8 @@
                     </tableView>
                     <navigationItem key="navigationItem" title="餐廳列表" id="WR0-3Y-3ld"/>
                     <connections>
+                        <outlet property="mTlvFilterRuleTagList" destination="b7W-wl-BYc" id="Z50-JQ-hAB"/>
+                        <outlet property="mVFilterRuleListContainerView" destination="7hc-46-vKt" id="6aR-fc-HM0"/>
                         <segue destination="DBo-70-woK" kind="show" identifier="show_restaurant_detail" id="wzb-9W-aOx"/>
                         <segue destination="zkB-R6-Zg2" kind="presentation" identifier="show_restaurant_filter" modalTransitionStyle="coverVertical" id="Jpp-8G-1uC"/>
                     </connections>
