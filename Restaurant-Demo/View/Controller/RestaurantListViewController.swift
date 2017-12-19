@@ -197,18 +197,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         performSegue(withIdentifier: "show_restaurant_detail", sender: selectedInfo)
     }
     
-    // MARK: - UIRefreshController pull-to-refresh target
-    @objc func refreshListToDefaultConfigs(_ sender: Any) {
-        // Use the taipei station as default location
-        self.mFilterConfig = nil
-        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
-            , term: "Restaurants"
-            , lat: (self.mCurLocation?.coordinate.latitude)!
-            , lng: (self.mCurLocation?.coordinate.longitude)!
-            , locale: "zh_TW"
-            , callback: self)
-    }
-    
     // MARK: - Prepare Segue
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -311,8 +299,24 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         self.tableView.reloadData()
     }
     
-    // MARK: - LocationStatusDelegate
+    // MARK: - UIRefreshController pull-to-refresh target
+    @objc func refreshListToDefaultConfigs(_ sender: Any) {
+        // Use the taipei station as default location
+        self.mFilterConfig?.mPrice = nil
+        self.mFilterConfig?.mOpenAt = nil
+        self.mFilterConfig?.mSortingRule = "best_match"
+        
+        initFilterRuleList()
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
+            , term: "Restaurants"
+            , lat: (self.mCurLocation?.coordinate.latitude)!
+            , lng: (self.mCurLocation?.coordinate.longitude)!
+            , locale: "zh_TW"
+            , sortBy:self.mFilterConfig?.mSortingRule
+            , callback: self)
+    }
     
+    // MARK: - LocationStatusDelegate
     func isLocationAuthorized(isAuthorized: Bool) {
         guard isAuthorized else {
             // Use the taipei station as default location
