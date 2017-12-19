@@ -50,15 +50,15 @@ class RestaurantFilterViewController: UITableViewController {
     func mapSortingRuleToStr(index:Int) -> String {
         switch index {
         case 0:
-            return "best_match"
+            return FilterConfigs.SortingRuleAPIConstants.best_match.rawValue
         case 1:
-            return "distance"
+            return FilterConfigs.SortingRuleAPIConstants.distance.rawValue
         case 2:
-            return "rating"
+            return FilterConfigs.SortingRuleAPIConstants.rating.rawValue
         case 3:
-            return "review_count"
+            return FilterConfigs.SortingRuleAPIConstants.review_count.rawValue
         default:
-            return "distance"
+            return FilterConfigs.SortingRuleAPIConstants.distance.rawValue
         }
     }
     

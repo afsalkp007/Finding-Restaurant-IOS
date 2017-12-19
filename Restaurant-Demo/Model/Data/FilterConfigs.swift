@@ -10,7 +10,7 @@ import Foundation
 
 class FilterConfigs {
     var mPrice:Int?
-    var mPriceStr:String? {
+    var mPriceDisplayStr:String? {
         if let price = mPrice {
             switch price {
             case 1:
@@ -27,6 +27,24 @@ class FilterConfigs {
         }
         return nil
     }
+    
     var mOpenAt:Int?
+    
     var mSortingRule:String?
+    var mSortingRuleDisplayStr:String? {
+        if let sortingRule = mSortingRule {
+            let apiConstant = FilterConfigs.SortingRuleAPIConstants(rawValue: sortingRule)!
+            switch apiConstant {
+            case .best_match:
+                return "BestMatch"
+            case .distance:
+                return "Distance"
+            case .rating:
+                return "Rating"
+            case .review_count:
+                return "ReviewCount"
+            }
+        }
+        return nil
+    }
 }

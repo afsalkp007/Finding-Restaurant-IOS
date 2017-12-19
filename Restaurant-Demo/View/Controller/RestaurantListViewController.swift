@@ -133,13 +133,13 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         
         self.mTlvFilterRuleTagList.removeAllTags()
         if let filterConfig = self.mFilterConfig {
-            if let sortRule = filterConfig.mSortingRule {
-                tags.append(sortRule)
+            if let sortRuleStr = filterConfig.mSortingRuleDisplayStr {
+                tags.append(sortRuleStr)
             }
 //          if let openAt = filterConfig.mOpenAt {
 //
 //          }
-            if let priceStr = filterConfig.mPriceStr {
+            if let priceStr = filterConfig.mPriceDisplayStr {
                 tags.append(priceStr)
             }
         }
@@ -151,7 +151,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         self.mJsonDecoder?.dateDecodingStrategy = .iso8601
         self.mCurLocation = CLLocation(latitude: 25.047908, longitude: 121.517315)
         self.mFilterConfig = FilterConfigs()
-        self.mFilterConfig?.mSortingRule = "best_match"
+        self.mFilterConfig?.mSortingRule = FilterConfigs.SortingRuleAPIConstants.best_match.rawValue
         
         initFilterRuleList()
         LocationManager.shared.setDelegate(delegate: self)
@@ -304,7 +304,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Use the taipei station as default location
         self.mFilterConfig?.mPrice = nil
         self.mFilterConfig?.mOpenAt = nil
-        self.mFilterConfig?.mSortingRule = "best_match"
+        self.mFilterConfig?.mSortingRule = FilterConfigs.SortingRuleAPIConstants.best_match.rawValue
         
         initFilterRuleList()
         YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
@@ -364,7 +364,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     // MARK: - PlacePicker callback
-    
     func placePicker(_ viewController: GMSPlacePickerViewController, didPick place: GMSPlace) {
         // To receive the results from the place picker 'self' will need to conform to
         // GMSPlacePickerViewControllerDelegate and implement this code.
