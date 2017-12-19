@@ -40,6 +40,7 @@
 		EDA28C711FD637EF00DD2902 /* PanoramaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */; };
 		EDA28C751FD6780B00DD2902 /* GoogleApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */; };
 		EDB664E81FE921D600F728C2 /* FilterConfigsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */; };
+		EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */; };
 		EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */; };
 		EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */; };
 		EDCCEE521FD202230072883A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE511FD202230072883A /* Util.swift */; };
@@ -86,6 +87,7 @@
 		EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramaViewController.swift; sourceTree = "<group>"; };
 		EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiUtil.swift; sourceTree = "<group>"; };
 		EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigsExtension.swift; sourceTree = "<group>"; };
+		EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiUtil.swift; sourceTree = "<group>"; };
 		EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiCallbackProtocol.swift; sourceTree = "<group>"; };
 		EDCCEE511FD202230072883A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -171,6 +173,7 @@
 				ED332D621FC8759C00279333 /* Main.storyboard */,
 				ED332D651FC8759C00279333 /* Assets.xcassets */,
 				ED332D671FC8759C00279333 /* LaunchScreen.storyboard */,
+				EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */,
 				ED332D6A1FC8759C00279333 /* Info.plist */,
 			);
 			path = "Restaurant-Demo";
@@ -366,6 +369,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED332D691FC8759C00279333 /* LaunchScreen.storyboard in Resources */,
+				EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */,
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
 			);
@@ -600,8 +604,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4X2Y9E7BF;
 				INFOPLIST_FILE = "Restaurant-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lesson.Restaurant-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.findrestaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -616,8 +621,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4X2Y9E7BF;
 				INFOPLIST_FILE = "Restaurant-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lesson.Restaurant-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.findrestaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
