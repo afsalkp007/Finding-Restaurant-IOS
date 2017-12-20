@@ -41,6 +41,7 @@
 		EDA28C751FD6780B00DD2902 /* GoogleApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */; };
 		EDB664E81FE921D600F728C2 /* FilterConfigsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */; };
 		EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */; };
+		EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */; };
 		EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */; };
 		EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */; };
 		EDCCEE521FD202230072883A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE511FD202230072883A /* Util.swift */; };
@@ -88,6 +89,7 @@
 		EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiUtil.swift; sourceTree = "<group>"; };
 		EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigsExtension.swift; sourceTree = "<group>"; };
 		EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
 		EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiUtil.swift; sourceTree = "<group>"; };
 		EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiCallbackProtocol.swift; sourceTree = "<group>"; };
 		EDCCEE511FD202230072883A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 				ED332D651FC8759C00279333 /* Assets.xcassets */,
 				ED332D671FC8759C00279333 /* LaunchScreen.storyboard */,
 				EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */,
+				EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */,
 				ED332D6A1FC8759C00279333 /* Info.plist */,
 			);
 			path = "Restaurant-Demo";
@@ -315,6 +318,7 @@
 				D8321EECCA270CB2C2DA8A21 /* [CP] Embed Pods Frameworks */,
 				FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */,
 				EDC55E071FE9CFEA00B23097 /* ShellScript */,
+				EDC55E0B1FEA0C7300B23097 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -373,6 +377,7 @@
 				EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */,
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
+				EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -421,6 +426,19 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9f46a54bfc4906fb913c2da3dbcab6fc91d1b079 7858508ac0fb219b7df99f6226d27930545c5e4d9642d80aa1a4df6d226dfc97";
+		};
+		EDC55E0B1FEA0C7300B23097 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:35224406241:ios:ab9ccffc1e877f97\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"Restaurant-Demo/ServiceAccount.json\"";
 		};
 		FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;

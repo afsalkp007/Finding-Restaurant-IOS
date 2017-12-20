@@ -11,6 +11,8 @@ import Kingfisher
 import GooglePlaces
 import GooglePlacePicker
 import TagListView
+import Crashlytics
+import FirebaseCrash
 
 class RestaurantListViewController: UITableViewController, UISearchResultsUpdating, ApiCallback, GMSPlacePickerViewControllerDelegate, LocationStatusDelegate, TagListViewDelegate {
     
@@ -44,20 +46,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             self.mIsFirst = false
             initConfig()
         } else if self.mIsNeedReFetch {
-            
             self.mIsNeedReFetch = false
             
-            initFilterRuleList()
-            showLoadingDialog(loadingContent: "Loading Data...")
-            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
-                , term: "Restaurants"
-                , lat: (self.mCurLocation?.coordinate.latitude)!
-                , lng: (self.mCurLocation?.coordinate.longitude)!
-                , locale: "zh_TW"
-                , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
-                , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
-                , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
-                , callback: self)
+            updateRestaruantList()
         }
     }
     
@@ -95,7 +86,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Hide the search bar when scrolling up, Default is true. if setup as false it will always display
         self.navigationItem.hidesSearchBarWhenScrolling = false
         self.mScNameSearchController?.searchBar.searchBarStyle = .prominent
-
+        
         /* Init float button */
         let floaty = Floaty()
         floaty.buttonImage =  #imageLiteral(resourceName: "menu_icon")
@@ -107,7 +98,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         floaty.itemTitleColor = UIColor.darkGray
         // Locate user's location
         floaty.addItem(icon:  #imageLiteral(resourceName: "location_icon")) { (floatItem) in
-            
             guard LocationManager.shared.isAuthorized() else {
                 self.showAlertDialog(title: "Notice!!!", content: "Location services were previously denied. Please enable location services for this app in Settings.") {
                     action in
@@ -136,9 +126,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             if let sortRuleStr = filterConfig.mSortingRuleDisplayStr {
                 tags.append(sortRuleStr)
             }
-//          if let openAt = filterConfig.mOpenAt {
-//
-//          }
+            //          if let openAt = filterConfig.mOpenAt {
+            //
+            //          }
             if let priceStr = filterConfig.mPriceDisplayStr {
                 tags.append(priceStr)
             }
@@ -248,8 +238,26 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         }
     }
     
-    // MARK: - API Callback
+    // MARK: - API function call
+    func updateRestaruantList(isNeedShowLoading:Bool = true) {
+        initFilterRuleList()
+        
+        if isNeedShowLoading {
+            showLoadingDialog(loadingContent: "Loading Data...")
+        }
+        
+        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
+            , term: "Restaurants"
+            , lat: (self.mCurLocation?.coordinate.latitude)!
+            , lng: (self.mCurLocation?.coordinate.longitude)!
+            , locale: "zh_TW"
+            , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
+            , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
+            , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
+            , callback: self)
+    }
     
+    // MARK: - API Callback
     func onError(apiTag: String, errorMsg: String) {
         self.closeLoadingDialog()
     }
@@ -277,6 +285,8 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             self.mRcRefreshControl?.endRefreshing()
         }
     }
+    
+    
     
     // MARK: - UISearchResultsUpdating
     func updateSearchResults(for searchController: UISearchController) {
@@ -306,30 +316,14 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         self.mFilterConfig?.mOpenAt = nil
         self.mFilterConfig?.mSortingRule = FilterConfigs.SortingRuleAPIConstants.best_match.rawValue
         
-        initFilterRuleList()
-        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
-            , term: "Restaurants"
-            , lat: (self.mCurLocation?.coordinate.latitude)!
-            , lng: (self.mCurLocation?.coordinate.longitude)!
-            , locale: "zh_TW"
-            , sortBy:self.mFilterConfig?.mSortingRule
-            , callback: self)
+        updateRestaruantList(isNeedShowLoading: false)
     }
     
     // MARK: - LocationStatusDelegate
     func isLocationAuthorized(isAuthorized: Bool) {
         guard isAuthorized else {
             // Use the taipei station as default location
-            showLoadingDialog(loadingContent: "Loading Data...")
-            YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
-                , term: "Restaurants"
-                , lat: (self.mCurLocation?.coordinate.latitude)!
-                , lng: (self.mCurLocation?.coordinate.longitude)!
-                , locale: "zh_TW"
-                , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
-                , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
-                , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
-                , callback: self)
+            updateRestaruantList()
             return
         }
         
@@ -337,21 +331,11 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     func didUpdateLocation(location: CLLocation) {
-        
         self.mCurLocation = location
         
         LocationManager.shared.setDelegate(delegate: nil)
         LocationManager.shared.stopLocationUpdate()
-        showLoadingDialog(loadingContent: "Loading Data...")
-        YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
-            , term: "Restaurants"
-            , lat: location.coordinate.latitude
-            , lng: location.coordinate.longitude
-            , locale: "zh_TW"
-            , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
-            , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
-            , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
-            , callback: self)
+        updateRestaruantList()
     }
     
     // MARK: - TagListViewDelegate
