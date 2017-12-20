@@ -70,7 +70,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         
         /* Init tag list view */
         self.mTlvFilterRuleTagList.textFont = UIFont.systemFont(ofSize: 16)
-        self.mTlvFilterRuleTagList.delegate = self
         
         /* Init SearchController */
         self.mScNameSearchController = UISearchController(searchResultsController: nil)
@@ -119,21 +118,54 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     func initFilterRuleList() {
-        var tags:[String] = [];
+        guard let filterConfig = self.mFilterConfig else {
+            return
+        }
         
         self.mTlvFilterRuleTagList.removeAllTags()
-        if let filterConfig = self.mFilterConfig {
-            if let sortRuleStr = filterConfig.mSortingRuleDisplayStr {
-                tags.append(sortRuleStr)
-            }
-            //          if let openAt = filterConfig.mOpenAt {
-            //
-            //          }
-            if let priceStr = filterConfig.mPriceDisplayStr {
-                tags.append(priceStr)
+        if let sortRuleStr = filterConfig.mSortingRuleDisplayStr {
+            let tagView = self.mTlvFilterRuleTagList.addTag(sortRuleStr)
+            tagView.onTap = {
+                tagView in
+                guard self.mTlvFilterRuleTagList.tagViews.count > 1 else {
+                    return
+                }
+                self.mTlvFilterRuleTagList.removeTagView(tagView)
+                filterConfig.mSortingRule = nil
+                
+                self.updateRestaruantList()
             }
         }
-        self.mTlvFilterRuleTagList.addTags(tags)
+        if let openAt = filterConfig.mOpenAt {
+            let openDate = Date(timeIntervalSince1970: Double(openAt))
+            let formatter = DateFormatter()
+            formatter.timeZone = TimeZone.current
+            formatter.dateFormat = "於yyyy-MM-dd HH:mm開放"
+            let tagView = self.mTlvFilterRuleTagList.addTag(formatter.string(from: openDate))
+            tagView.onTap = {
+                tagView in
+                guard self.mTlvFilterRuleTagList.tagViews.count > 1 else {
+                    return
+                }
+                self.mTlvFilterRuleTagList.removeTagView(tagView)
+                filterConfig.mOpenAt = nil
+                
+                self.updateRestaruantList()
+            }
+        }
+        if let priceStr = filterConfig.mPriceDisplayStr {
+            let tagView = self.mTlvFilterRuleTagList.addTag(priceStr)
+            tagView.onTap = {
+                tagView in
+                guard self.mTlvFilterRuleTagList.tagViews.count > 1 else {
+                    return
+                }
+                self.mTlvFilterRuleTagList.removeTagView(tagView)
+                filterConfig.mPrice = nil
+                
+                self.updateRestaruantList()
+            }
+        }
     }
     
     func initConfig() {
@@ -177,7 +209,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     // MARK: - Table view data delegate
-    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let restaurantInfos:[YelpRestaruantSummaryInfo]? = (self.mFilteredRetaruantInfos != nil) ? self.mFilteredRetaruantInfos : self.mAllRestaruantInfos
         let selectedInfo = restaurantInfos![indexPath.row]
@@ -188,7 +219,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     // MARK: - Prepare Segue
-    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         let identifier = segue.identifier;
         
@@ -201,7 +231,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     // MARK: - Unwind Segue
-    
     @IBAction func unwindToRestaurantList(segue: UIStoryboardSegue) {
         let segueIdentifier = segue.identifier
         
@@ -303,8 +332,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
                     (info.categoriesStr?.contains(keyword))! {
                     self.mFilteredRetaruantInfos?.append(info)
                 }
-            }
-            
+            }            
         }
         self.tableView.reloadData()
     }
@@ -336,15 +364,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         LocationManager.shared.setDelegate(delegate: nil)
         LocationManager.shared.stopLocationUpdate()
         updateRestaruantList()
-    }
-    
-    // MARK: - TagListViewDelegate
-    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        print("Tag selected...")
-    }
-    
-    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        print("Tag removed...")
     }
     
     // MARK: - PlacePicker callback
