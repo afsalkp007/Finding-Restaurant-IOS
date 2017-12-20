@@ -314,6 +314,7 @@
 				ED332D591FC8759C00279333 /* Resources */,
 				D8321EECCA270CB2C2DA8A21 /* [CP] Embed Pods Frameworks */,
 				FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */,
+				EDC55E071FE9CFEA00B23097 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -407,6 +408,19 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		EDC55E071FE9CFEA00B23097 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9f46a54bfc4906fb913c2da3dbcab6fc91d1b079 7858508ac0fb219b7df99f6226d27930545c5e4d9642d80aa1a4df6d226dfc97";
 		};
 		FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
