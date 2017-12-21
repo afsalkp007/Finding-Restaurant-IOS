@@ -39,6 +39,9 @@
 		EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */; };
 		EDA28C711FD637EF00DD2902 /* PanoramaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */; };
 		EDA28C751FD6780B00DD2902 /* GoogleApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */; };
+		EDB664E81FE921D600F728C2 /* FilterConfigsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */; };
+		EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */; };
+		EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */; };
 		EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */; };
 		EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */; };
 		EDCCEE521FD202230072883A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE511FD202230072883A /* Util.swift */; };
@@ -84,6 +87,9 @@
 		EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PanoramaViewController.swift; sourceTree = "<group>"; };
 		EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiUtil.swift; sourceTree = "<group>"; };
+		EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigsExtension.swift; sourceTree = "<group>"; };
+		EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
 		EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiUtil.swift; sourceTree = "<group>"; };
 		EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiCallbackProtocol.swift; sourceTree = "<group>"; };
 		EDCCEE511FD202230072883A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
@@ -130,6 +136,7 @@
 		ED1314471FD38C82000A6FD2 /* Data */ = {
 			isa = PBXGroup;
 			children = (
+				EDB664E61FE921B800F728C2 /* Extension */,
 				ED3559CF1FCBBF4E00935DFF /* Yelp */,
 				ED3559D81FCF0D0200935DFF /* RatingEnum.swift */,
 				ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */,
@@ -168,6 +175,8 @@
 				ED332D621FC8759C00279333 /* Main.storyboard */,
 				ED332D651FC8759C00279333 /* Assets.xcassets */,
 				ED332D671FC8759C00279333 /* LaunchScreen.storyboard */,
+				EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */,
+				EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */,
 				ED332D6A1FC8759C00279333 /* Info.plist */,
 			);
 			path = "Restaurant-Demo";
@@ -278,6 +287,14 @@
 			path = Manager;
 			sourceTree = "<group>";
 		};
+		EDB664E61FE921B800F728C2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
 		EDCCEE501FD202080072883A /* Util */ = {
 			isa = PBXGroup;
 			children = (
@@ -300,6 +317,8 @@
 				ED332D591FC8759C00279333 /* Resources */,
 				D8321EECCA270CB2C2DA8A21 /* [CP] Embed Pods Frameworks */,
 				FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */,
+				EDC55E071FE9CFEA00B23097 /* ShellScript */,
+				EDC55E0B1FEA0C7300B23097 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -355,8 +374,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED332D691FC8759C00279333 /* LaunchScreen.storyboard in Resources */,
+				EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */,
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
+				EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -392,6 +413,32 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		EDC55E071FE9CFEA00B23097 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9f46a54bfc4906fb913c2da3dbcab6fc91d1b079 7858508ac0fb219b7df99f6226d27930545c5e4d9642d80aa1a4df6d226dfc97";
+		};
+		EDC55E0B1FEA0C7300B23097 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:35224406241:ios:ab9ccffc1e877f97\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"Restaurant-Demo/ServiceAccount.json\"";
 		};
 		FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -444,6 +491,7 @@
 				EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */,
 				ED3559DB1FCF0F9000935DFF /* YelpBaseRestaurantInfo.swift in Sources */,
 				EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */,
+				EDB664E81FE921D600F728C2 /* FilterConfigsExtension.swift in Sources */,
 				ED3559CE1FCBBB9100935DFF /* YelpRestaurantCategory.swift in Sources */,
 				ED5B5FAF1FDC634F00E8B198 /* RestaurantFilterViewController.swift in Sources */,
 				ED3559D71FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift in Sources */,
@@ -505,6 +553,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_BITCODE = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -562,6 +611,7 @@
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_BITCODE = NO;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
@@ -588,8 +638,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4X2Y9E7BF;
 				INFOPLIST_FILE = "Restaurant-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lesson.Restaurant-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.findrestaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -604,8 +655,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4X2Y9E7BF;
 				INFOPLIST_FILE = "Restaurant-Demo/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = "com.lesson.Restaurant-Demo";
+				PRODUCT_BUNDLE_IDENTIFIER = com.findrestaurant;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

@@ -9,6 +9,9 @@
 import UIKit
 import GooglePlaces
 import GoogleMaps
+import Firebase
+import Fabric
+import Crashlytics
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -17,10 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        // Override point for customization after application launch.
-        UIApplication.shared.isStatusBarHidden = false
+        
+//      UIApplication.shared.isStatusBarHidden = false
+        
+        /* Init firebase configs */
+        FirebaseApp.configure()
+        
+        /* Init fabric configs */
+        Fabric.with([Crashlytics.self])
+
+        /* Init google map api configs */
         GMSPlacesClient.provideAPIKey("AIzaSyAc5wnmJJydGYodnmlc2jFPQMeAgwLeBug")
         GMSServices.provideAPIKey("AIzaSyAc5wnmJJydGYodnmlc2jFPQMeAgwLeBug")
+        
         return true
     }
 

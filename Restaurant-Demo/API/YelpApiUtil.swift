@@ -44,9 +44,13 @@ class YelpApiUtil {
         
         var parameters: Parameters = ["term":term, "latitude":lat, "longitude":lng, "locale":locale, "limit":50]
         
-        if let openAt = openAt, let sortBy = sortBy, let price = price {
+        if let openAt = openAt {
             parameters.updateValue(openAt, forKey: "open_at")
+        }
+        if let sortBy = sortBy {
             parameters.updateValue(sortBy, forKey: "sort_by")
+        }
+        if let price = price {
             parameters.updateValue(price, forKey: "price")
         }
         

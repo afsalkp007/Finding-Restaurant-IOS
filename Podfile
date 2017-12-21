@@ -11,5 +11,10 @@ target 'Restaurant-Demo' do
   pod 'GooglePlaces'
   pod 'GooglePlacePicker'
   pod 'GoogleMaps'
+  pod 'TagListView', '~> 1.0'
+  pod 'Firebase/Core'
+  pod 'Firebase/Crash'
+  pod 'Fabric'
+  pod 'Crashlytics'
 
 end
