@@ -47,6 +47,7 @@
 		EDCCEE521FD202230072883A /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE511FD202230072883A /* Util.swift */; };
 		EDCCEE541FD20C3B0072883A /* YelpRestaurantHoursInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE531FD20C3B0072883A /* YelpRestaurantHoursInfo.swift */; };
 		EDCCEE561FD20C7D0072883A /* YelpResaruantBusinessTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */; };
+		EDCF6EA21FF224C800868473 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDCF6EA41FF224C800868473 /* InfoPlist.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,6 +96,8 @@
 		EDCCEE511FD202230072883A /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		EDCCEE531FD20C3B0072883A /* YelpRestaurantHoursInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaurantHoursInfo.swift; sourceTree = "<group>"; };
 		EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpResaruantBusinessTime.swift; sourceTree = "<group>"; };
+		EDCF6EA51FF224E400868473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		EDCF6EA61FF22A0100868473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,6 +181,7 @@
 				EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */,
 				EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */,
 				ED332D6A1FC8759C00279333 /* Info.plist */,
+				EDCF6EA41FF224C800868473 /* InfoPlist.strings */,
 			);
 			path = "Restaurant-Demo";
 			sourceTree = "<group>";
@@ -357,6 +361,7 @@
 			knownRegions = (
 				en,
 				Base,
+				"zh-Hant",
 			);
 			mainGroup = ED332D521FC8759C00279333;
 			productRefGroup = ED332D5C1FC8759C00279333 /* Products */;
@@ -374,6 +379,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ED332D691FC8759C00279333 /* LaunchScreen.storyboard in Resources */,
+				EDCF6EA21FF224C800868473 /* InfoPlist.strings in Resources */,
 				EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */,
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
@@ -518,6 +524,15 @@
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
+		EDCF6EA41FF224C800868473 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDCF6EA51FF224E400868473 /* Base */,
+				EDCF6EA61FF22A0100868473 /* zh-Hant */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
@@ -525,6 +540,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
@@ -583,6 +599,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++14";
