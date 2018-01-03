@@ -30,6 +30,7 @@
 		ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */; };
 		ED5B5FAF1FDC634F00E8B198 /* RestaurantFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */; };
 		ED5B5FB11FDD5DC700E8B198 /* FilterConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */; };
+		ED6A9D9F1FFD1C11003F3E15 /* YelpUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6A9D9E1FFD1C11003F3E15 /* YelpUtil.swift */; };
 		EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C601FD5262100DD2902 /* FloatyViewController.swift */; };
 		EDA28C681FD5262100DD2902 /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C611FD5262100DD2902 /* FloatyWindow.swift */; };
 		EDA28C691FD5262100DD2902 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C621FD5262100DD2902 /* FloatyManager.swift */; };
@@ -80,6 +81,7 @@
 		ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterViewController.swift; sourceTree = "<group>"; };
 		ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigs.swift; sourceTree = "<group>"; };
 		ED6A9D9D1FFD1733003F3E15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		ED6A9D9E1FFD1C11003F3E15 /* YelpUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpUtil.swift; sourceTree = "<group>"; };
 		EDA28C601FD5262100DD2902 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		EDA28C611FD5262100DD2902 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
 		EDA28C621FD5262100DD2902 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
@@ -217,6 +219,7 @@
 				ED332D781FCA2EBA00279333 /* YelpApiConfigs.swift */,
 				EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */,
 				EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */,
+				ED6A9D9E1FFD1C11003F3E15 /* YelpUtil.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -500,6 +503,7 @@
 				ED5B5F9F1FDA377300E8B198 /* NavigationControllerExtension.swift in Sources */,
 				ED332D741FC87A4400279333 /* RestaurantListViewController.swift in Sources */,
 				EDCCEE521FD202230072883A /* Util.swift in Sources */,
+				ED6A9D9F1FFD1C11003F3E15 /* YelpUtil.swift in Sources */,
 				EDA28C681FD5262100DD2902 /* FloatyWindow.swift in Sources */,
 				ED332D7C1FCA487700279333 /* YelpSearchInfo.swift in Sources */,
 				ED332D5F1FC8759C00279333 /* AppDelegate.swift in Sources */,

@@ -66,7 +66,10 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         let id = ((self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!
         // Coz id has chinese words, so I need to do Url-Encoding before calling API
         showLoadingDialog(loadingContent: NSLocalizedString("Loading Data...", comment: ""))
-        YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS, id: id, locale: "zh_TW", callback: self)
+        YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS
+            , id: id
+            , locale: YelpUtil.getPreferedLanguage()
+            , callback: self)
     }
     
     func updateView() {

@@ -277,11 +277,12 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             showLoadingDialog(loadingContent: NSLocalizedString("Loading Data...", comment: ""))
         }
         
+        print("\(Bundle.main.preferredLocalizations)")
         YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
             , term: "Restaurants"
             , lat: (self.mCurLocation?.coordinate.latitude)!
             , lng: (self.mCurLocation?.coordinate.longitude)!
-            , locale: "zh_TW"
+            , locale: YelpUtil.getPreferedLanguage()
             , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
             , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
             , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
