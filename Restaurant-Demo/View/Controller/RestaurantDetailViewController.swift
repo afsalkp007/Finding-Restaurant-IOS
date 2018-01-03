@@ -65,7 +65,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         
         let id = ((self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!
         // Coz id has chinese words, so I need to do Url-Encoding before calling API
-        showLoadingDialog(loadingContent: "Loading Data...")
+        showLoadingDialog(loadingContent: NSLocalizedString("Loading Data...", comment: ""))
         YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS, id: id, locale: "zh_TW", callback: self)
     }
     
@@ -86,7 +86,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         self.mLbTypeLabel.text = categoriyTitles.joined(separator: ",")
         self.mIvRatingImage.image = self.mRestaurantDetailInfo?.getRatingImage(rating: self.mRestaurantDetailInfo?.rating ?? 0.0)
         self.mLbPriceLabel.text = self.mRestaurantDetailInfo?.price ?? ""
-        self.mLbReviews.text = "\(self.mRestaurantDetailInfo?.review_count ?? 0) 評論"
+        self.mLbReviews.text = "\(self.mRestaurantDetailInfo?.review_count ?? 0) " + NSLocalizedString("Reviews", comment: "");
         
         self.mLbIsOpenStatusLabel.text = "N/A"
         if let hours = self.mRestaurantDetailInfo?.hours, let isOpenNow = hours[0].is_open_now {
@@ -102,11 +102,11 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     @IBAction func onStaticMapPressed(_ sender: Any) {
         let lat = self.mRestaurantSummaryInfo?.coordinates?.latitude
         let lng = self.mRestaurantSummaryInfo?.coordinates?.longitude
-        let alertController = UIAlertController(title: "Select a action", message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .destructive) { (action) in
+        let alertController = UIAlertController(title: NSLocalizedString("Select a action", comment: ""), message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
             self.dismiss(animated: true, completion: nil)
         }
-        let navigationAction = UIAlertAction(title: "Navigation", style: .default) { (action) in
+        let navigationAction = UIAlertAction(title: NSLocalizedString("Navigation", comment: ""), style: .default) { (action) in
             let url = URL(string: String(format:"http://maps.apple.com/?daddr=%f,%f&dirflg=d", lat!, lng!))
             if #available(iOS 10.0, *) {
                 UIApplication.shared.open(url!, options: [:], completionHandler: nil)
@@ -114,7 +114,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
                 UIApplication.shared.openURL(url!)
             }
         }
-        let streetViewAction = UIAlertAction(title: "Street View", style: .default) { (action) in
+        let streetViewAction = UIAlertAction(title: NSLocalizedString("Street View", comment: ""), style: .default) { (action) in
             let panormaViewController = PanoramaViewController()
             panormaViewController.mLat = lat!
             panormaViewController.mLng = lng!

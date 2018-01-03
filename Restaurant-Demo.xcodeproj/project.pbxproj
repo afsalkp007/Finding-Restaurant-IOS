@@ -48,6 +48,7 @@
 		EDCCEE541FD20C3B0072883A /* YelpRestaurantHoursInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE531FD20C3B0072883A /* YelpRestaurantHoursInfo.swift */; };
 		EDCCEE561FD20C7D0072883A /* YelpResaruantBusinessTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */; };
 		EDCF6EA21FF224C800868473 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDCF6EA41FF224C800868473 /* InfoPlist.strings */; };
+		EDEF24961FFBD12500FC51A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDEF24981FFBD12500FC51A8 /* Localizable.strings */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -78,6 +79,7 @@
 		ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabelExtension.swift; sourceTree = "<group>"; };
 		ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterViewController.swift; sourceTree = "<group>"; };
 		ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigs.swift; sourceTree = "<group>"; };
+		ED6A9D9D1FFD1733003F3E15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		EDA28C601FD5262100DD2902 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		EDA28C611FD5262100DD2902 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
 		EDA28C621FD5262100DD2902 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
@@ -99,6 +101,8 @@
 		EDCF6EA51FF224E400868473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EDCF6EA61FF22A0100868473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EDCF6EAF1FF26A8800868473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
+		EDEF24971FFBD12500FC51A8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
+		EDEF24991FFBD13D00FC51A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +186,7 @@
 				EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */,
 				EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */,
 				ED332D6A1FC8759C00279333 /* Info.plist */,
+				EDEF24981FFBD12500FC51A8 /* Localizable.strings */,
 				EDCF6EA41FF224C800868473 /* InfoPlist.strings */,
 			);
 			path = "Restaurant-Demo";
@@ -382,6 +387,7 @@
 				ED332D691FC8759C00279333 /* LaunchScreen.storyboard in Resources */,
 				EDCF6EA21FF224C800868473 /* InfoPlist.strings in Resources */,
 				EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */,
+				EDEF24961FFBD12500FC51A8 /* Localizable.strings in Resources */,
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
 				EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */,
@@ -535,6 +541,7 @@
 			children = (
 				ED332D631FC8759C00279333 /* Base */,
 				EDCF6EAF1FF26A8800868473 /* zh-Hant */,
+				ED6A9D9D1FFD1733003F3E15 /* en */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -554,6 +561,15 @@
 				EDCF6EA61FF22A0100868473 /* zh-Hant */,
 			);
 			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		EDEF24981FFBD12500FC51A8 /* Localizable.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				EDEF24971FFBD12500FC51A8 /* zh-Hant */,
+				EDEF24991FFBD13D00FC51A8 /* Base */,
+			);
+			name = Localizable.strings;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
