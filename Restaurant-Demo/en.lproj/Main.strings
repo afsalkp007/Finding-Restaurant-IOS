@@ -1,0 +1,84 @@
+
+/* Class = "UILabel"; text = "   "; ObjectID = "0Ma-7f-RmY"; */
+"0Ma-7f-RmY.text" = "   ";
+
+/* Class = "UINavigationItem"; prompt = " "; ObjectID = "3ie-aT-1GV"; */
+"3ie-aT-1GV.prompt" = " ";
+
+/* Class = "UINavigationItem"; title = "過濾條件"; ObjectID = "3ie-aT-1GV"; */
+"3ie-aT-1GV.title" = "Filter";
+
+/* Class = "UILabel"; text = "消費程度"; ObjectID = "5gr-da-Jga"; */
+"5gr-da-Jga.text" = "Cost";
+
+/* Class = "UILabel"; text = "   "; ObjectID = "6d1-QS-6Gl"; */
+"6d1-QS-6Gl.text" = "   ";
+
+/* Class = "UISegmentedControl"; 8F2-qX-MpY.segmentTitles[0] = "$"; ObjectID = "8F2-qX-MpY"; */
+"8F2-qX-MpY.segmentTitles[0]" = "$";
+
+/* Class = "UISegmentedControl"; 8F2-qX-MpY.segmentTitles[1] = "$$"; ObjectID = "8F2-qX-MpY"; */
+"8F2-qX-MpY.segmentTitles[1]" = "$$";
+
+/* Class = "UISegmentedControl"; 8F2-qX-MpY.segmentTitles[2] = "$$$"; ObjectID = "8F2-qX-MpY"; */
+"8F2-qX-MpY.segmentTitles[2]" = "$$$";
+
+/* Class = "UISegmentedControl"; 8F2-qX-MpY.segmentTitles[3] = "$$$$"; ObjectID = "8F2-qX-MpY"; */
+"8F2-qX-MpY.segmentTitles[3]" = "$$$$";
+
+/* Class = "UILabel"; text = "   "; ObjectID = "BKd-Dz-8kz"; */
+"BKd-Dz-8kz.text" = "   ";
+
+/* Class = "UILabel"; text = "營業時間"; ObjectID = "BaZ-7d-85x"; */
+"BaZ-7d-85x.text" = "Business Time";
+
+/* Class = "UILabel"; text = "0.07m"; ObjectID = "Caf-GM-1UV"; */
+"Caf-GM-1UV.text" = "0.07m";
+
+/* Class = "UILabel"; text = "排序依據"; ObjectID = "QsU-7H-Tdu"; */
+"QsU-7H-Tdu.text" = "Sort Rule";
+
+/* Class = "UILabel"; text = "Thai, Seafood, Salad"; ObjectID = "SCN-jo-u01"; */
+"SCN-jo-u01.text" = "Thai, Seafood, Salad";
+
+/* Class = "UIBarButtonItem"; title = "套用"; ObjectID = "TQL-H9-3Oo"; */
+"TQL-H9-3Oo.title" = "Apply";
+
+/* Class = "UILabel"; text = "10reviews"; ObjectID = "TeN-Rz-clL"; */
+"TeN-Rz-clL.text" = "10reviews";
+
+/* Class = "UIBarButtonItem"; title = "取消"; ObjectID = "V8x-Gl-NMH"; */
+"V8x-Gl-NMH.title" = "Cancel";
+
+/* Class = "UINavigationItem"; title = "餐廳列表"; ObjectID = "WR0-3Y-3ld"; */
+"WR0-3Y-3ld.title" = "Restaurant List";
+
+/* Class = "UISegmentedControl"; b3m-W0-kJl.segmentTitles[0] = "最佳配對"; ObjectID = "b3m-W0-kJl"; */
+"b3m-W0-kJl.segmentTitles[0]" = "Best Match";
+
+/* Class = "UISegmentedControl"; b3m-W0-kJl.segmentTitles[1] = "距離"; ObjectID = "b3m-W0-kJl"; */
+"b3m-W0-kJl.segmentTitles[1]" = "Distance";
+
+/* Class = "UISegmentedControl"; b3m-W0-kJl.segmentTitles[2] = "評分"; ObjectID = "b3m-W0-kJl"; */
+"b3m-W0-kJl.segmentTitles[2]" = "Star Count";
+
+/* Class = "UISegmentedControl"; b3m-W0-kJl.segmentTitles[3] = "最多評論"; ObjectID = "b3m-W0-kJl"; */
+"b3m-W0-kJl.segmentTitles[3]" = "Review Count";
+
+/* Class = "UILabel"; text = "$$"; ObjectID = "bD7-kj-C1N"; */
+"bD7-kj-C1N.text" = "$$";
+
+/* Class = "UILabel"; text = "   "; ObjectID = "nHQ-A2-UhM"; */
+"nHQ-A2-UhM.text" = "   ";
+
+/* Class = "UILabel"; text = "1. Grand Pu Bah"; ObjectID = "pbn-mp-wv6"; */
+"pbn-mp-wv6.text" = "1. Grand Pu Bah";
+
+/* Class = "UILabel"; text = "88 Division St, Mission Bay"; ObjectID = "rBL-ax-7fs"; */
+"rBL-ax-7fs.text" = "88 Division St, Mission Bay";
+
+/* Class = "UILabel"; text = "  "; ObjectID = "rhz-uC-g0b"; */
+"rhz-uC-g0b.text" = "  ";
+
+/* Class = "UILabel"; text = "Phone: "; ObjectID = "vNW-j0-KO5"; */
+"vNW-j0-KO5.text" = "Phone: ";

@@ -66,7 +66,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             self.tableView.addSubview(self.mRcRefreshControl!)
         }
         self.mRcRefreshControl?.addTarget(self, action: #selector(refreshListToDefaultConfigs), for:.valueChanged)
-        self.mRcRefreshControl?.attributedTitle = NSAttributedString(string: "Loading Data...")
+        self.mRcRefreshControl?.attributedTitle = NSAttributedString(string: NSLocalizedString("Loading Data...", comment: ""))
         
         /* Init tag list view */
         self.mTlvFilterRuleTagList.textFont = UIFont.systemFont(ofSize: 16)
@@ -98,7 +98,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         // Locate user's location
         floaty.addItem(icon:  #imageLiteral(resourceName: "location_icon")) { (floatItem) in
             guard LocationManager.shared.isAuthorized() else {
-                self.showAlertDialog(title: "Notice!!!", content: "Location services were previously denied. Please enable location services for this app in Settings.") {
+                let title = NSLocalizedString("Notice!!!", comment: "")
+                let content = NSLocalizedString("Location services were previously denied. Please enable location services for this app in Settings.", comment: "")
+                self.showAlertDialog(title: title, content: content) {
                     action in
                     self.dismiss(animated: true, completion: nil)
                 }
@@ -140,8 +142,8 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             let openDate = Date(timeIntervalSince1970: Double(openAt))
             let formatter = DateFormatter()
             formatter.timeZone = TimeZone.current
-            formatter.dateFormat = "於yyyy-MM-dd HH:mm開放"
-            let tagView = self.mTlvFilterRuleTagList.addTag(formatter.string(from: openDate))
+            formatter.dateFormat = "yyyy-MM-dd HH:mm"
+            let tagView = self.mTlvFilterRuleTagList.addTag(NSLocalizedString("OPEN AT ", comment: "") + formatter.string(from: openDate))
             tagView.onTap = {
                 tagView in
                 guard self.mTlvFilterRuleTagList.tagViews.count > 1 else {
@@ -199,7 +201,7 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         cell.mLbNameLabel.text = restaurantInfo.name
         cell.mLbDistanceLabel.text = String(format: "%.2fm", arguments: [restaurantInfo.distance!])
         cell.mLbPriceLabel.text = restaurantInfo.price ?? ""
-        cell.mLbReviewsLabel.text = (restaurantInfo.review_count != nil) ? "\(restaurantInfo.review_count ?? 0) 評論" : ""
+        cell.mLbReviewsLabel.text = (restaurantInfo.review_count != nil) ? "\(restaurantInfo.review_count ?? 0) " + NSLocalizedString("Reviews", comment: "") : ""
         cell.mLbAddressLabel.text = restaurantInfo.location?.display_address?.joined()
         cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder:  #imageLiteral(resourceName: "no_image"))
         cell.mIvRatingImage.image = restaurantInfo.getRatingImage(rating: restaurantInfo.rating ?? 0.0)
@@ -272,14 +274,15 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         initFilterRuleList()
         
         if isNeedShowLoading {
-            showLoadingDialog(loadingContent: "Loading Data...")
+            showLoadingDialog(loadingContent: NSLocalizedString("Loading Data...", comment: ""))
         }
         
+        print("\(Bundle.main.preferredLocalizations)")
         YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
             , term: "Restaurants"
             , lat: (self.mCurLocation?.coordinate.latitude)!
             , lng: (self.mCurLocation?.coordinate.longitude)!
-            , locale: "zh_TW"
+            , locale: YelpUtil.getPreferedLanguage()
             , openAt: (self.mFilterConfig != nil && self.mFilterConfig?.mOpenAt != nil) ? self.mFilterConfig?.mOpenAt : nil
             , sortBy: (self.mFilterConfig != nil && self.mFilterConfig?.mSortingRule != nil) ? self.mFilterConfig?.mSortingRule : nil
             , price: (self.mFilterConfig != nil && self.mFilterConfig?.mPrice != nil) ? self.mFilterConfig?.mPrice : nil
