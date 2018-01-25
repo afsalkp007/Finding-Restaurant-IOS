@@ -10,10 +10,10 @@ import Foundation
 
 class YelpUtil {
    static func getPreferedLanguage() -> String {
-        let firstPreferedLang = Locale.preferredLanguages.first ?? ""
+        let firstPreferedLang = Bundle.main.preferredLocalizations.first ?? ""
         
         switch firstPreferedLang {
-        case "zh-Hant-TW":
+        case "zh-Hant-TW", "zh-Hant", "zh-Hant-US":
             return "zh_TW"
         default:
             return "en_US"

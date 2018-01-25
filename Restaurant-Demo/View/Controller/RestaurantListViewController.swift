@@ -277,7 +277,6 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
             showLoadingDialog(loadingContent: NSLocalizedString("Loading Data...", comment: ""))
         }
         
-        print("\(Bundle.main.preferredLocalizations)")
         YelpApiUtil.businessSearch(apiTag: RestaurantListViewController.API_TAG_BUSINESS_SEARCH
             , term: "Restaurants"
             , lat: (self.mCurLocation?.coordinate.latitude)!

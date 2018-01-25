@@ -82,6 +82,7 @@
 		ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigs.swift; sourceTree = "<group>"; };
 		ED6A9D9D1FFD1733003F3E15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		ED6A9D9E1FFD1C11003F3E15 /* YelpUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpUtil.swift; sourceTree = "<group>"; };
+		ED6A9DA02005CBAD003F3E15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EDA28C601FD5262100DD2902 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		EDA28C611FD5262100DD2902 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
 		EDA28C621FD5262100DD2902 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
@@ -563,6 +564,7 @@
 			children = (
 				EDCF6EA51FF224E400868473 /* Base */,
 				EDCF6EA61FF22A0100868473 /* zh-Hant */,
+				ED6A9DA02005CBAD003F3E15 /* en */,
 			);
 			name = InfoPlist.strings;
 			sourceTree = "<group>";

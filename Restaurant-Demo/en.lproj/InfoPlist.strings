@@ -5,3 +5,4 @@
   Created by yomi on 2017/12/26.
   Copyright © 2017年 yomi. All rights reserved.
 */
+"NSLocationWhenInUseUsageDescription" = "Request a location information for some functionalities, e.g: Nearby restaurant information, Pick user location and so on";
