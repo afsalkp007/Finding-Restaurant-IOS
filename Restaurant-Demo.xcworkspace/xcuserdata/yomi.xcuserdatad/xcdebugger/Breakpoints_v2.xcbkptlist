@@ -33,13 +33,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Restaurant-Demo/API/YelpUtil.swift"
-            timestampString = "538586134.754896"
+            filePath = "Restaurant-Demo/View/Controller/RestaurantDetailViewController.swift"
+            timestampString = "539019102.524418"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "18"
-            endingLineNumber = "18"
-            landmarkName = "getPreferedLanguage()"
+            startingLineNumber = "180"
+            endingLineNumber = "180"
+            landmarkName = "onSuccess(apiTag:jsonData:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -49,13 +49,13 @@
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "Restaurant-Demo/API/YelpUtil.swift"
-            timestampString = "538586134.755186"
+            filePath = "Restaurant-Demo/View/Controller/RestaurantDetailViewController.swift"
+            timestampString = "539019102.525098"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "getPreferedLanguage()"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
+            landmarkName = "fetchData()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -13,6 +13,7 @@ import Alamofire
 class RestaurantDetailViewController: UITableViewController, ApiCallback {
     
     private static let API_TAG_BUSINESS = "API_TAG_BUSINESS"
+    private static let API_TAG_REVIEWS = "API_TAG_REVIEWStrGFD"
     
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
     @IBOutlet weak var mIvStaticMapImageView: UIImageView!
@@ -70,6 +71,8 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
             , id: id
             , locale: YelpUtil.getPreferedLanguage()
             , callback: self)
+        
+        YelpApiUtil.reviews(apiTag: RestaurantDetailViewController.API_TAG_REVIEWS, id: id, locale: YelpUtil.getPreferedLanguage(), callback: self)
     }
     
     func updateView() {
@@ -80,7 +83,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.image_url)!), placeholder: #imageLiteral(resourceName: "no_image"))
         //mIvStreetImageView: UIImageView!
         self.mLbAddressLabel.text = self.mRestaurantDetailInfo?.location?.display_address?.joined()
-    self.mBtnPhoneButton.setTitle(self.mRestaurantDetailInfo?.phone, for: .normal)
+        self.mBtnPhoneButton.setTitle(self.mRestaurantDetailInfo?.phone, for: .normal)
         
         var categoriyTitles:[String] = [String]()
         for categoryInfo in (self.mRestaurantSummaryInfo?.categories)! {
@@ -171,6 +174,10 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
             if let detailInfo = try?self.mJsonDecoder?.decode(YelpRestaruantDetailInfo.self, from: jsonData!) {
                 self.mRestaurantDetailInfo = detailInfo
                 self.updateView()
+            }
+        } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS {
+            if let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
+                print("\(#function)")
             }
         }
         closeLoadingDialog()
