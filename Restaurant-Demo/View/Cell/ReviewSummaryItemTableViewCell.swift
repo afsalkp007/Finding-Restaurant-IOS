@@ -8,9 +8,7 @@
 
 import UIKit
 
-class ReviewDetailItemTableViewCell: UITableViewCell {
-
-    
+class ReviewSummaryItemTableViewCell: UITableViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()

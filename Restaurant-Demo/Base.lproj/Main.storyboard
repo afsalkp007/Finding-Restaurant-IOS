@@ -546,7 +546,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="KTT-Z1-2kr" customClass="ReviewDetailItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="KTT-Z1-2kr" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="629" width="414" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KTT-Z1-2kr" id="hZe-SW-WpA">
@@ -596,7 +596,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="WmF-bn-yAC" customClass="ReviewDetailItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="WmF-bn-yAC" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="790" width="414" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WmF-bn-yAC" id="7e1-hA-nDV">
@@ -646,7 +646,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="mZe-s1-pkt" customClass="ReviewDetailItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="mZe-s1-pkt" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="951" width="414" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mZe-s1-pkt" id="6MM-cQ-5vE">
