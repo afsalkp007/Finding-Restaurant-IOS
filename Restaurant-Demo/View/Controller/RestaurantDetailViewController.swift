@@ -1,16 +1,16 @@
-//
-//  RestaurantDetailViewController.swift
-//  Restaurant-Demo
-//
-//  Created by yomi on 2017/11/27.
-//  Copyright © 2017年 yomi. All rights reserved.
-//
-
-import UIKit
-import Kingfisher
-import Alamofire
-
-class RestaurantDetailViewController: UITableViewController, ApiCallback {
+ //
+ //  RestaurantDetailViewController.swift
+ //  Restaurant-Demo
+ //
+ //  Created by yomi on 2017/11/27.
+ //  Copyright © 2017年 yomi. All rights reserved.
+ //
+ 
+ import UIKit
+ import Kingfisher
+ import Alamofire
+ 
+ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     
     private static let API_TAG_BUSINESS = "API_TAG_BUSINESS"
     private static let API_TAG_REVIEWS = "API_TAG_REVIEWStrGFD"
@@ -25,6 +25,9 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     @IBOutlet weak var mLbIsOpenStatusLabel: UILabel!
     @IBOutlet var mIvSubPhotos: [UIImageView]!
     @IBOutlet weak var mIvRatingImage: UIImageView!
+    @IBOutlet var mTcReviewCellItems: [UITableViewCell]!
+    
+    
     
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
@@ -64,15 +67,12 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
             return
         }
         
-        let id = ((self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!
         // Coz id has chinese words, so I need to do Url-Encoding before calling API
         showLoadingDialog(loadingContent: NSLocalizedString("Loading Data...", comment: ""))
         YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS
-            , id: id
+            , id: (self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             , locale: YelpUtil.getPreferedLanguage()
             , callback: self)
-        
-        YelpApiUtil.reviews(apiTag: RestaurantDetailViewController.API_TAG_REVIEWS, id: id, locale: YelpUtil.getPreferedLanguage(), callback: self)
     }
     
     func updateView() {
@@ -175,11 +175,29 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
                 self.mRestaurantDetailInfo = detailInfo
                 self.updateView()
             }
-        } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS {
-            if let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
-                print("\(#function)")
+            YelpApiUtil.reviews(apiTag: RestaurantDetailViewController.API_TAG_REVIEWS
+                , id: (self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                , locale: YelpUtil.getPreferedLanguage()
+                , callback: self)
+        } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS, let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
+            let reviewsCount = reviewsInfo?.reviews?.count ?? 0
+            
+            for i in 0..<reviewsCount {
+                if let review = reviewsInfo?.reviews![i], let user = review.user {
+                    let reviewCellItem = self.mTcReviewCellItems[i]
+                    (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
+                    (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
+                    (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
+                    (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
+                }                
             }
+            
+            // Hide the remain TableViewCellItems without data
+            for i in reviewsCount..<self.mTcReviewCellItems.count {
+                self.mTcReviewCellItems[i].isHidden = true
+                self.tableView.contentSize.height -= self.mTcReviewCellItems[i].frame.size.height
+            }
+            self.closeLoadingDialog()
         }
-        closeLoadingDialog()
-    }    
-}
+    }
+ }
