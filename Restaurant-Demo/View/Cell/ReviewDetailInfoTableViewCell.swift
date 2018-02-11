@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class ReviewContentInfoTableViewCell: UITableViewCell {
+class ReviewDetailInfoTableViewCell: UITableViewCell {
     @IBOutlet weak var mIvReviewerHeadIconImageView: UIImageView!
     @IBOutlet weak var mLbReviewerNameLabel: UILabel!
     @IBOutlet weak var mIvReviewerRatingImageView: UIImageView!
