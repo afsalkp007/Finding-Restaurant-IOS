@@ -9,7 +9,7 @@
 import Foundation
 import UIKit
 
-class YelpBaseRestaurantInfo {
+class YelpBaseInfo {
     
     private var mRatingImgMap:NSMutableDictionary?;
     

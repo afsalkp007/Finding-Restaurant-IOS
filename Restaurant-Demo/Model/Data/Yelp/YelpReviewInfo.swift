@@ -8,9 +8,9 @@
 
 import Foundation
 
-struct YelpReviewInfo: Codable {
+class YelpReviewInfo: YelpBaseInfo, Codable {
     var total:Int?
     var possible_languages:[String]?
-    var reviews:[YelpReviewCommentInfo]?
+    var reviews:[YelpReviewDetailInfo]?
     
 }

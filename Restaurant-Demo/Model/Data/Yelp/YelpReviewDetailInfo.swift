@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpReviewCommentInfo:Codable {
+class YelpReviewDetailInfo:YelpBaseInfo ,Codable {
     var id:String?
     var rating:Int?
     var user:YelpReviewerInfo?
