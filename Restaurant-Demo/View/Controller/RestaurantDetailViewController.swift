@@ -28,7 +28,6 @@
     @IBOutlet var mTcReviewCellItems: [UITableViewCell]!
     
     
-    
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
@@ -189,7 +188,7 @@
                     (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
                     (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
                     (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
-                }                
+                }
             }
             
             // Hide the remain TableViewCellItems without data
@@ -199,5 +198,14 @@
             }
             self.closeLoadingDialog()
         }
+    }
+    
+    // MARK:- TableView Delegate
+    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        guard let sectionHeader = view as? UITableViewHeaderFooterView else {
+            return;
+        }
+        // Change the font size and style of section
+        sectionHeader.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
     }
  }
