@@ -84,13 +84,14 @@
 		ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabelExtension.swift; sourceTree = "<group>"; };
 		ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterViewController.swift; sourceTree = "<group>"; };
 		ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigs.swift; sourceTree = "<group>"; };
-		ED6A9D9D1FFD1733003F3E15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
 		ED6A9D9E1FFD1C11003F3E15 /* YelpUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpUtil.swift; sourceTree = "<group>"; };
 		ED6A9DA02005CBAD003F3E15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		ED6A9DA32020C181003F3E15 /* YelpReviewInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpReviewInfo.swift; sourceTree = "<group>"; };
 		ED6A9DA52020C29C003F3E15 /* YelpReviewDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpReviewDetailInfo.swift; sourceTree = "<group>"; };
 		ED6A9DA72020C380003F3E15 /* YelpReviewerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpReviewerInfo.swift; sourceTree = "<group>"; };
 		ED6A9DC6202DF88F003F3E15 /* ReviewSummaryItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSummaryItemTableViewCell.swift; sourceTree = "<group>"; };
+		ED6A9DCD20332F9F003F3E15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
+		ED6A9DCF20332FA2003F3E15 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		EDA28C601FD5262100DD2902 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		EDA28C611FD5262100DD2902 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
 		EDA28C621FD5262100DD2902 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
@@ -111,7 +112,6 @@
 		EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpResaruantBusinessTime.swift; sourceTree = "<group>"; };
 		EDCF6EA51FF224E400868473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EDCF6EA61FF22A0100868473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
-		EDCF6EAF1FF26A8800868473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		EDEF24971FFBD12500FC51A8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EDEF24991FFBD13D00FC51A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -569,8 +569,8 @@
 			isa = PBXVariantGroup;
 			children = (
 				ED332D631FC8759C00279333 /* Base */,
-				EDCF6EAF1FF26A8800868473 /* zh-Hant */,
-				ED6A9D9D1FFD1733003F3E15 /* en */,
+				ED6A9DCD20332F9F003F3E15 /* en */,
+				ED6A9DCF20332FA2003F3E15 /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
