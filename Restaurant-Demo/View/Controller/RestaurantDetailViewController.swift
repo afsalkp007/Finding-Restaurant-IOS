@@ -30,9 +30,10 @@
     
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
+    private var mIsFirst = true
+    private var mReviewInfo:YelpReviewInfo? = nil
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
     var mRestaurantDetailInfo:YelpRestaruantDetailInfo?
-    private var mIsFirst = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -180,10 +181,15 @@
                 , callback: self)
         } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS, let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
             let reviewsCount = reviewsInfo?.reviews?.count ?? 0
+            self.mReviewInfo = reviewsInfo
             
             for i in 0..<reviewsCount {
                 if let review = reviewsInfo?.reviews![i], let user = review.user {
                     let reviewCellItem = self.mTcReviewCellItems[i]
+                    if i == 0 {
+                        //assign a title for Reviews Section
+                        (reviewCellItem.viewWithTag(5) as? UILabel)?.text = NSLocalizedString("Review", comment: "")
+                    }
                     (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
                     (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
                     (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
@@ -196,16 +202,9 @@
                 self.mTcReviewCellItems[i].isHidden = true
                 self.tableView.contentSize.height -= self.mTcReviewCellItems[i].frame.size.height
             }
+            self.tableView.contentSize.height += 30
+            
             self.closeLoadingDialog()
         }
-    }
-    
-    // MARK:- TableView Delegate
-    override func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        guard let sectionHeader = view as? UITableViewHeaderFooterView else {
-            return;
-        }
-        // Change the font size and style of section
-        sectionHeader.textLabel?.font = UIFont.boldSystemFont(ofSize: 20)
     }
  }
