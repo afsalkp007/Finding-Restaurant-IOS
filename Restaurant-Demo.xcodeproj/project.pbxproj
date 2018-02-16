@@ -35,6 +35,8 @@
 		ED6A9DA62020C29C003F3E15 /* YelpReviewDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6A9DA52020C29C003F3E15 /* YelpReviewDetailInfo.swift */; };
 		ED6A9DA82020C380003F3E15 /* YelpReviewerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6A9DA72020C380003F3E15 /* YelpReviewerInfo.swift */; };
 		ED6A9DC7202DF88F003F3E15 /* ReviewSummaryItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6A9DC6202DF88F003F3E15 /* ReviewSummaryItemTableViewCell.swift */; };
+		ED7607AB2036C0CC00BF12DB /* OpenHourRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7607AA2036C0CC00BF12DB /* OpenHourRowView.swift */; };
+		ED7607AD2036C32600BF12DB /* OpenHourRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED7607AC2036C32600BF12DB /* OpenHourRowView.xib */; };
 		EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C601FD5262100DD2902 /* FloatyViewController.swift */; };
 		EDA28C681FD5262100DD2902 /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C611FD5262100DD2902 /* FloatyWindow.swift */; };
 		EDA28C691FD5262100DD2902 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C621FD5262100DD2902 /* FloatyManager.swift */; };
@@ -90,6 +92,8 @@
 		ED6A9DA52020C29C003F3E15 /* YelpReviewDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpReviewDetailInfo.swift; sourceTree = "<group>"; };
 		ED6A9DA72020C380003F3E15 /* YelpReviewerInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpReviewerInfo.swift; sourceTree = "<group>"; };
 		ED6A9DC6202DF88F003F3E15 /* ReviewSummaryItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReviewSummaryItemTableViewCell.swift; sourceTree = "<group>"; };
+		ED7607AA2036C0CC00BF12DB /* OpenHourRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenHourRowView.swift; sourceTree = "<group>"; };
+		ED7607AC2036C32600BF12DB /* OpenHourRowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenHourRowView.xib; sourceTree = "<group>"; };
 		EDA28C601FD5262100DD2902 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		EDA28C611FD5262100DD2902 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
 		EDA28C621FD5262100DD2902 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
@@ -279,6 +283,8 @@
 			children = (
 				EDA28C5F1FD525AE00DD2902 /* Floaty */,
 				ED3559D41FCC50A200935DFF /* EdgeInsetLabel.swift */,
+				ED7607AA2036C0CC00BF12DB /* OpenHourRowView.swift */,
+				ED7607AC2036C32600BF12DB /* OpenHourRowView.xib */,
 			);
 			path = Component;
 			sourceTree = "<group>";
@@ -415,6 +421,7 @@
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
 				EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */,
+				ED7607AD2036C32600BF12DB /* OpenHourRowView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -539,6 +546,7 @@
 				ED6A9DA82020C380003F3E15 /* YelpReviewerInfo.swift in Sources */,
 				ED332D821FCA52F100279333 /* YelpRestaurantLocation.swift in Sources */,
 				ED332D841FCA530500279333 /* YelpRestaurantCoordinates.swift in Sources */,
+				ED7607AB2036C0CC00BF12DB /* OpenHourRowView.swift in Sources */,
 				EDA28C751FD6780B00DD2902 /* GoogleApiUtil.swift in Sources */,
 				ED3559D11FCC2A8000935DFF /* RestaurantDetailViewController.swift in Sources */,
 				ED6A9DA42020C181003F3E15 /* YelpReviewInfo.swift in Sources */,

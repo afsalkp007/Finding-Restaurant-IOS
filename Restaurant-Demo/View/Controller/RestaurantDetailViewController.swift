@@ -27,6 +27,9 @@
     @IBOutlet var mIvSubPhotos: [UIImageView]!
     @IBOutlet weak var mIvRatingImage: UIImageView!
     @IBOutlet var mTcReviewCellItems: [UITableViewCell]!
+    @IBOutlet weak var mLbOpenHoursTitleLabel: UILabel!
+    @IBOutlet weak var mTcOpenHoursCell: UITableViewCell!
+    @IBOutlet weak var mVOpenHoursContentView: UIView!
     
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
@@ -101,6 +104,44 @@
         
         for i in stride(from: 0, to: (self.mRestaurantDetailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
             self.mIvSubPhotos[i].kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
+        }
+        
+        // Add open hour informations
+        var prevView:OpenHourRowView? = nil
+        let hoursInfo:YelpRestaurantHoursInfo? = self.mRestaurantDetailInfo?.hours![0]
+        
+        for i in 0..<7 {
+            var businessTime:YelpResaruantBusinessTime? = (i < (hoursInfo?.open?.count)!) ? hoursInfo?.open![i] : nil
+            let openHourRowView = OpenHourRowView()
+            
+            for hourInfo in (hoursInfo?.open)! {
+                if hourInfo.day == i {
+                    businessTime = hourInfo
+                    break;
+                }
+            }
+            
+            let isNowWeekDayMatch = YelpUtil.isNowWeekDayFromYelpIndex(index: Util.getNowWeekDay(), yelpIndex: businessTime?.day ?? -1)
+            if isNowWeekDayMatch {
+                openHourRowView.mLbDayLabel.font = UIFont.boldSystemFont(ofSize: 17)
+                openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            }
+            
+            openHourRowView.mLbDayLabel.text = YelpUtil.getWeekDayStrByIndex(index: i)
+            openHourRowView.mLbOpenTiemRangeLabel.text = (businessTime == nil || i != businessTime?.day) ? "未營業" : String.init(format: "%@ - %@", businessTime?.start ?? "N/A", businessTime?.end ?? "N/A")
+            
+            openHourRowView.translatesAutoresizingMaskIntoConstraints = false
+            self.mVOpenHoursContentView.addSubview(openHourRowView)
+            openHourRowView.leftAnchor.constraint(equalTo: self.mVOpenHoursContentView.leftAnchor, constant: 0).isActive = true
+            openHourRowView.rightAnchor.constraint(equalTo: self.mVOpenHoursContentView.rightAnchor, constant: 0).isActive = true
+            openHourRowView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            openHourRowView.widthAnchor.constraint(equalToConstant: self.mVOpenHoursContentView.frame.width)
+            if prevView == nil {
+                openHourRowView.topAnchor.constraint(equalTo: self.mLbOpenHoursTitleLabel.bottomAnchor, constant: 0).isActive = true
+            } else {
+                openHourRowView.topAnchor.constraint(equalTo: (prevView?.bottomAnchor)!, constant: 0).isActive = true
+            }
+            prevView = openHourRowView
         }
     }
     
