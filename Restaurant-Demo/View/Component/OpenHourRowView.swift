@@ -9,13 +9,27 @@
 import UIKit
 
 class OpenHourRowView: UIView {
-
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+    
+    @IBOutlet var mVContentView: UIView!
+    
+    @IBOutlet weak var mLbDayLabel: UILabel!
+    
+    @IBOutlet weak var mLbOpenTiemRangeLabel: UILabel!
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        commonInit()
     }
-    */
-
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        commonInit()
+    }
+    
+    private func commonInit() {
+        Bundle.main.loadNibNamed("OpenHourRowView", owner: self, options: nil)
+        addSubview(mVContentView)
+        self.mVContentView.bounds = self.bounds
+        self.mVContentView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
+    }
 }
