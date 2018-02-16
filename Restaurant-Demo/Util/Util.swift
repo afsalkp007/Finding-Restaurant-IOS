@@ -23,4 +23,8 @@ class Util {
             UIApplication.shared.openURL(url)
         }
     }
+    
+    static func getNowWeekDay() -> Int {
+        return Calendar.current.component(.weekday, from: Date())
+    }
 }
