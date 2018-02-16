@@ -26,9 +26,6 @@
 /* Class = "UISegmentedControl"; 8F2-qX-MpY.segmentTitles[3] = "$$$$"; ObjectID = "8F2-qX-MpY"; */
 "8F2-qX-MpY.segmentTitles[3]" = "$$$$";
 
-/* Class = "UILabel"; text = "   "; ObjectID = "BKd-Dz-8kz"; */
-"BKd-Dz-8kz.text" = "   ";
-
 /* Class = "UILabel"; text = "營業時間"; ObjectID = "BaZ-7d-85x"; */
 "BaZ-7d-85x.text" = "Business Time";
 
@@ -52,6 +49,12 @@
 
 /* Class = "UINavigationItem"; title = "餐廳列表"; ObjectID = "WR0-3Y-3ld"; */
 "WR0-3Y-3ld.title" = "Restaurant List";
+
+/* Class = "UILabel"; text = "Review"; ObjectID = "XcO-gZ-d7N"; */
+"XcO-gZ-d7N.text" = "Review";
+
+/* Class = "UILabel"; text = "Open Hours"; ObjectID = "aEY-Cu-eJf"; */
+"aEY-Cu-eJf.text" = "Open Hours";
 
 /* Class = "UISegmentedControl"; b3m-W0-kJl.segmentTitles[0] = "最佳配對"; ObjectID = "b3m-W0-kJl"; */
 "b3m-W0-kJl.segmentTitles[0]" = "Best Match";

@@ -83,3 +83,7 @@
 /* Class = "UILabel"; text = "Phone: "; ObjectID = "vNW-j0-KO5"; */
 "vNW-j0-KO5.text" = "電話: ";
 
+"aEY-Cu-eJf.text" = "營業時間";
+
+/* Class = "UILabel"; text = "Review"; ObjectID = "XcO-gZ-d7N"; */
+"XcO-gZ-d7N.text" = "評論";

@@ -371,15 +371,15 @@
         <scene sceneID="uSb-Sz-bDa">
             <objects>
                 <tableViewController id="DBo-70-woK" customClass="RestaurantDetailViewController" customModule="Restaurant_Demo" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" allowsSelection="NO" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pCv-J9-gCh">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="plain" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="pCv-J9-gCh">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <inset key="separatorInset" minX="15" minY="0.0" maxX="15" maxY="0.0"/>
                         <sections>
-                            <tableViewSection id="ekR-Te-cW5">
+                            <tableViewSection id="ekR-Te-cW5" userLabel="Basic Information Section">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="196" id="8yX-dO-iSs">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="196" id="8yX-dO-iSs">
                                         <rect key="frame" x="0.0" y="0.0" width="414" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="8yX-dO-iSs" id="nhw-lh-MpI">
@@ -398,7 +398,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="196" id="Ltt-7y-bn0">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="196" id="Ltt-7y-bn0">
                                         <rect key="frame" x="0.0" y="196" width="414" height="196"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Ltt-7y-bn0" id="0b1-Wh-6Vl">
@@ -508,7 +508,7 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="237" id="07e-cc-UhL">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="237" id="07e-cc-UhL">
                                         <rect key="frame" x="0.0" y="392" width="414" height="237"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="07e-cc-UhL" id="ZSH-wt-VuG">
@@ -549,10 +549,76 @@
                                     </tableViewCell>
                                 </cells>
                             </tableViewSection>
-                            <tableViewSection id="YI4-lD-ohK" colorLabel="IBBuiltInLabel-Blue">
+                            <tableViewSection id="6hH-b3-daV" userLabel="Open Hours" colorLabel="IBBuiltInLabel-Blue">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="191" id="KTT-Z1-2kr" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="191" id="BDG-Ty-Dqc" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="629" width="414" height="191"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BDG-Ty-Dqc" id="aka-zS-Wi3">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="190.66666666666666"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zCc-5k-DvB" userLabel="user head icon">
+                                                    <rect key="frame" x="10" y="39" width="83" height="81"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" secondItem="zCc-5k-DvB" secondAttribute="height" multiplier="83:81" id="7Bh-3N-08G"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="2" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="751" text="" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gQC-62-UeG" userLabel="reviewer name">
+                                                    <rect key="frame" x="111" y="49" width="293" height="0.0"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" tag="3" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="WPJ-Ob-NLI" userLabel="rating">
+                                                    <rect key="frame" x="111" y="59" width="120" height="20"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="120" id="WZz-Bf-OV4"/>
+                                                        <constraint firstAttribute="height" constant="20" id="uvd-yq-5w4"/>
+                                                    </constraints>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aJT-eh-Hjg" userLabel="review content">
+                                                    <rect key="frame" x="10" y="130" width="394" height="51"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEY-Cu-eJf" userLabel="open hours section">
+                                                    <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
+                                                    <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="30" id="6Z6-Lx-s2Q"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="zCc-5k-DvB" firstAttribute="width" secondItem="aka-zS-Wi3" secondAttribute="width" multiplier="0.2" id="1en-C1-L6g"/>
+                                                <constraint firstItem="WPJ-Ob-NLI" firstAttribute="top" secondItem="gQC-62-UeG" secondAttribute="bottom" constant="10" id="28h-LW-dIg"/>
+                                                <constraint firstItem="aJT-eh-Hjg" firstAttribute="top" secondItem="zCc-5k-DvB" secondAttribute="bottom" constant="10" id="59i-Sw-DNN"/>
+                                                <constraint firstItem="aEY-Cu-eJf" firstAttribute="centerX" secondItem="aJT-eh-Hjg" secondAttribute="centerX" id="7Q7-HZ-eT3"/>
+                                                <constraint firstAttribute="trailing" secondItem="aEY-Cu-eJf" secondAttribute="trailing" id="8sb-e9-tnd"/>
+                                                <constraint firstItem="aEY-Cu-eJf" firstAttribute="top" secondItem="aka-zS-Wi3" secondAttribute="top" id="HHO-th-ted"/>
+                                                <constraint firstItem="gQC-62-UeG" firstAttribute="leading" secondItem="WPJ-Ob-NLI" secondAttribute="leading" id="Ki1-tO-8E3"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="aJT-eh-Hjg" secondAttribute="bottom" constant="-1" id="Mod-nc-sC9"/>
+                                                <constraint firstItem="zCc-5k-DvB" firstAttribute="top" secondItem="aEY-Cu-eJf" secondAttribute="bottom" constant="9" id="Pll-Rs-cRM"/>
+                                                <constraint firstItem="aEY-Cu-eJf" firstAttribute="leading" secondItem="aka-zS-Wi3" secondAttribute="leading" id="SuX-ln-AP1"/>
+                                                <constraint firstItem="gQC-62-UeG" firstAttribute="leading" secondItem="zCc-5k-DvB" secondAttribute="trailing" constant="18" id="bJm-LV-qeo"/>
+                                                <constraint firstItem="zCc-5k-DvB" firstAttribute="leading" secondItem="aJT-eh-Hjg" secondAttribute="leading" id="fBM-ji-QkC"/>
+                                                <constraint firstItem="gQC-62-UeG" firstAttribute="trailing" secondItem="aJT-eh-Hjg" secondAttribute="trailing" id="ioZ-O4-ywf"/>
+                                                <constraint firstItem="zCc-5k-DvB" firstAttribute="leading" secondItem="aka-zS-Wi3" secondAttribute="leading" constant="10" id="kAa-TU-VAh"/>
+                                                <constraint firstItem="gQC-62-UeG" firstAttribute="top" secondItem="zCc-5k-DvB" secondAttribute="top" constant="10" id="rXu-Zp-nSY"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                    </tableViewCell>
+                                </cells>
+                            </tableViewSection>
+                            <tableViewSection id="YI4-lD-ohK" userLabel="Reviews Section" colorLabel="IBBuiltInLabel-Blue">
+                                <cells>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="191" id="KTT-Z1-2kr" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="820" width="414" height="191"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KTT-Z1-2kr" id="hZe-SW-WpA">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="190.66666666666666"/>
@@ -583,7 +649,7 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcO-gZ-d7N" userLabel="Section">
+                                                <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Review" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XcO-gZ-d7N" userLabel="reviews section">
                                                     <rect key="frame" x="0.0" y="0.0" width="414" height="30"/>
                                                     <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     <constraints>
@@ -613,8 +679,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="WmF-bn-yAC" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="820" width="414" height="161"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="161" id="WmF-bn-yAC" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1011" width="414" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WmF-bn-yAC" id="7e1-hA-nDV">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="160.66666666666666"/>
@@ -663,8 +729,8 @@
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="161" id="mZe-s1-pkt" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="981" width="414" height="161"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="161" id="mZe-s1-pkt" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="1172" width="414" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mZe-s1-pkt" id="6MM-cQ-5vE">
                                             <rect key="frame" x="0.0" y="0.0" width="414" height="160.66666666666666"/>
