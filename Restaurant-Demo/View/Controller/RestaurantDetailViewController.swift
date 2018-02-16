@@ -186,10 +186,6 @@
             for i in 0..<reviewsCount {
                 if let review = reviewsInfo?.reviews![i], let user = review.user {
                     let reviewCellItem = self.mTcReviewCellItems[i]
-                    if i == 0 {
-                        //assign a title for Reviews Section
-                        (reviewCellItem.viewWithTag(5) as? UILabel)?.text = NSLocalizedString("Review", comment: "")
-                    }
                     (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
                     (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
                     (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
@@ -198,13 +194,21 @@
             }
             
             // Hide the remain TableViewCellItems without data
-            for i in reviewsCount..<self.mTcReviewCellItems.count {
+            for i in stride(from: self.mTcReviewCellItems.count - 1, through: reviewsCount, by: -1) {
                 self.mTcReviewCellItems[i].isHidden = true
                 self.tableView.contentSize.height -= self.mTcReviewCellItems[i].frame.size.height
             }
-            self.tableView.contentSize.height += 30
             
             self.closeLoadingDialog()
+        }
+    }
+    
+    // MARK:- TableView Delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Review section
+        print("didSelectRowAt")
+        if indexPath.section == 2 {
+            
         }
     }
  }
