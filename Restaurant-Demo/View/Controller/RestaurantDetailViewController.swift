@@ -9,6 +9,7 @@
  import UIKit
  import Kingfisher
  import Alamofire
+ import SafariServices
  
  class RestaurantDetailViewController: UITableViewController, ApiCallback {
     
@@ -27,11 +28,10 @@
     @IBOutlet weak var mIvRatingImage: UIImageView!
     @IBOutlet var mTcReviewCellItems: [UITableViewCell]!
     
-    
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
     private var mIsFirst = true
-    private var mReviewInfo:YelpReviewInfo? = nil
+    private var mReviews:[YelpReviewDetailInfo]? = nil
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
     var mRestaurantDetailInfo:YelpRestaruantDetailInfo?
     
@@ -114,11 +114,8 @@
         }
         let navigationAction = UIAlertAction(title: NSLocalizedString("Navigation", comment: ""), style: .default) { (action) in
             let url = URL(string: String(format:"http://maps.apple.com/?daddr=%f,%f&dirflg=d", lat!, lng!))
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url!)
-            }
+            
+            Util.openUrl(url: url!)
         }
         let streetViewAction = UIAlertAction(title: NSLocalizedString("Street View", comment: ""), style: .default) { (action) in
             let panormaViewController = PanoramaViewController()
@@ -180,8 +177,8 @@
                 , locale: YelpUtil.getPreferedLanguage()
                 , callback: self)
         } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS, let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
-            let reviewsCount = reviewsInfo?.reviews?.count ?? 0
-            self.mReviewInfo = reviewsInfo
+            self.mReviews = reviewsInfo?.reviews
+            let reviewsCount = self.mReviews?.count ?? 0
             
             for i in 0..<reviewsCount {
                 if let review = reviewsInfo?.reviews![i], let user = review.user {
@@ -204,11 +201,13 @@
     }
     
     // MARK:- TableView Delegate
+    
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // Review section
         print("didSelectRowAt")
         if indexPath.section == 2 {
-            
+            let safariController = SFSafariViewController(url: URL(string: (self.mReviews![indexPath.row].url ?? ""))!)
+            present(safariController, animated: true, completion: nil)
         }
     }
  }
