@@ -29,7 +29,7 @@ class OpenHourRowView: UIView {
     private func commonInit() {
         Bundle.main.loadNibNamed("OpenHourRowView", owner: self, options: nil)
         addSubview(mVContentView)
-        self.mVContentView.bounds = self.bounds
-        self.mVContentView.autoresizingMask = [.flexibleHeight, .flexibleHeight]
+        self.mVContentView.frame = self.bounds
+        self.mVContentView.autoresizingMask = [.flexibleHeight, .flexibleWidth]
     }
 }
