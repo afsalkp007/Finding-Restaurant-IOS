@@ -468,7 +468,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhz-uC-g0b" customClass="EdgeInsetLabel" customModule="Restaurant_Demo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="165.5" width="5" height="0.0"/>
+                                                            <rect key="frame" x="0.0" y="165.5" width="9" height="0.0"/>
                                                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="9"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -551,11 +551,11 @@
                             </tableViewSection>
                             <tableViewSection id="6hH-b3-daV" userLabel="Open Hours" colorLabel="IBBuiltInLabel-Blue">
                                 <cells>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="270" id="BDG-Ty-Dqc" userLabel="Open Hours Cell">
-                                        <rect key="frame" x="0.0" y="615" width="320" height="270"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="300" id="BDG-Ty-Dqc" userLabel="Open Hours Cell">
+                                        <rect key="frame" x="0.0" y="615" width="320" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="BDG-Ty-Dqc" id="aka-zS-Wi3">
-                                            <rect key="frame" x="0.0" y="0.0" width="320" height="269.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="299.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="5" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Open Hours" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aEY-Cu-eJf" userLabel="open hours section">
@@ -581,7 +581,7 @@
                             <tableViewSection id="YI4-lD-ohK" userLabel="Reviews Section" colorLabel="IBBuiltInLabel-Blue">
                                 <cells>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="191" id="KTT-Z1-2kr" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="885" width="320" height="191"/>
+                                        <rect key="frame" x="0.0" y="915" width="320" height="191"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="KTT-Z1-2kr" id="hZe-SW-WpA">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="190.5"/>
@@ -643,7 +643,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="161" id="WmF-bn-yAC" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1076" width="320" height="161"/>
+                                        <rect key="frame" x="0.0" y="1106" width="320" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="WmF-bn-yAC" id="7e1-hA-nDV">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="160.5"/>
@@ -693,7 +693,7 @@
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="none" indentationWidth="10" rowHeight="161" id="mZe-s1-pkt" customClass="ReviewSummaryItemTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="1237" width="320" height="161"/>
+                                        <rect key="frame" x="0.0" y="1267" width="320" height="161"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="mZe-s1-pkt" id="6MM-cQ-5vE">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="160.5"/>

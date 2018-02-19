@@ -58,6 +58,8 @@
         let lat = self.mRestaurantSummaryInfo?.coordinates?.latitude
         let lng = self.mRestaurantSummaryInfo?.coordinates?.longitude
         
+        self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.mIvStaticMapImageView.kf.setImage(with: URL(string: GoogleApiUtil.createStaticMapUrl(lat: lat!, lng: lng!, w: 200, h: 200)), placeholder:  #imageLiteral(resourceName: "no_image"))
     }
     
@@ -78,7 +80,7 @@
             , callback: self)
     }
     
-    func updateView() {
+    func updateBasicInfo() {
         if self.mRestaurantDetailInfo == nil {
             return;
         }
@@ -135,15 +137,42 @@
             openHourRowView.leftAnchor.constraint(equalTo: self.mVOpenHoursContentView.leftAnchor, constant: 0).isActive = true
             openHourRowView.rightAnchor.constraint(equalTo: self.mVOpenHoursContentView.rightAnchor, constant: 0).isActive = true
             openHourRowView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            openHourRowView.widthAnchor.constraint(equalToConstant: self.mVOpenHoursContentView.frame.width)
             if prevView == nil {
-                openHourRowView.topAnchor.constraint(equalTo: self.mLbOpenHoursTitleLabel.bottomAnchor, constant: 0).isActive = true
+                openHourRowView.topAnchor.constraint(equalTo: self.mLbOpenHoursTitleLabel.bottomAnchor, constant: 10).isActive = true
             } else {
-                openHourRowView.topAnchor.constraint(equalTo: (prevView?.bottomAnchor)!, constant: 0).isActive = true
+                if i == 6 {
+                    openHourRowView.bottomAnchor.constraint(equalTo: self.mVOpenHoursContentView.bottomAnchor, constant: -10).isActive = true
+                }
+                openHourRowView.topAnchor.constraint(equalTo: (prevView?.bottomAnchor)!, constant: 5).isActive = true
             }
             prevView = openHourRowView
         }
     }
+    
+    func updateReviewInfo() {
+        guard let reviews = self.mReviews else {
+            return
+        }
+        
+        let reviewsCount = reviews.count
+        for i in 0..<reviewsCount {
+            let review = reviews[i]
+            if let user = review.user {
+                let reviewCellItem = self.mTcReviewCellItems[i]
+                (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
+                (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
+                (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
+                (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
+            }
+        }
+        
+        // Hide the remain TableViewCellItems without data
+        for i in stride(from: self.mTcReviewCellItems.count - 1, through: reviewsCount, by: -1) {
+            self.mTcReviewCellItems[i].isHidden = true
+            self.tableView.contentSize.height -= self.mTcReviewCellItems[i].frame.size.height
+        }
+    }
+    
     
     // MARK: - onStaticMapPressed
     @IBAction func onStaticMapPressed(_ sender: Any) {
@@ -186,7 +215,6 @@
         self.mLoadingAlertController = UIAlertController(title: nil, message: loadingContent, preferredStyle: .alert)
         self.mLoadingAlertController?.view.tintColor = UIColor.black
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x:10,y:5, width:50, height:50))
-        
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         loadingIndicator.startAnimating();
@@ -211,7 +239,7 @@
         if apiTag == RestaurantDetailViewController.API_TAG_BUSINESS {
             if let detailInfo = try?self.mJsonDecoder?.decode(YelpRestaruantDetailInfo.self, from: jsonData!) {
                 self.mRestaurantDetailInfo = detailInfo
-                self.updateView()
+                self.updateBasicInfo()
             }
             YelpApiUtil.reviews(apiTag: RestaurantDetailViewController.API_TAG_REVIEWS
                 , id: (self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -219,24 +247,7 @@
                 , callback: self)
         } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS, let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
             self.mReviews = reviewsInfo?.reviews
-            let reviewsCount = self.mReviews?.count ?? 0
-            
-            for i in 0..<reviewsCount {
-                if let review = reviewsInfo?.reviews![i], let user = review.user {
-                    let reviewCellItem = self.mTcReviewCellItems[i]
-                    (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
-                    (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
-                    (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
-                    (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
-                }
-            }
-            
-            // Hide the remain TableViewCellItems without data
-            for i in stride(from: self.mTcReviewCellItems.count - 1, through: reviewsCount, by: -1) {
-                self.mTcReviewCellItems[i].isHidden = true
-                self.tableView.contentSize.height -= self.mTcReviewCellItems[i].frame.size.height
-            }
-            
+            self.updateReviewInfo()
             self.closeLoadingDialog()
         }
     }
