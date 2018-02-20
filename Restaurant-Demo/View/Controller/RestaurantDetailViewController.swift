@@ -161,7 +161,7 @@
                 let reviewCellItem = self.mTcReviewCellItems[i]
                 (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
                 (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
-                (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
+                (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url ?? "")), placeholder:  #imageLiteral(resourceName: "user-header"))
                 (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
             }
         }
