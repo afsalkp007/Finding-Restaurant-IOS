@@ -113,9 +113,7 @@
         let hoursInfo:YelpRestaurantHoursInfo? = self.mRestaurantDetailInfo?.hours![0]
         
         for i in 0..<7 {
-            var businessTime:YelpResaruantBusinessTime? = (i < (hoursInfo?.open?.count)!) ? hoursInfo?.open![i] : nil
-            let openHourRowView = OpenHourRowView()
-            
+            var businessTime:YelpResaruantBusinessTime? = nil
             for hourInfo in (hoursInfo?.open)! {
                 if hourInfo.day == i {
                     businessTime = hourInfo
@@ -123,14 +121,18 @@
                 }
             }
             
+            let openHourRowView = OpenHourRowView()
             let isNowWeekDayMatch = YelpUtil.isNowWeekDayFromYelpIndex(index: Util.getNowWeekDay(), yelpIndex: businessTime?.day ?? -1)
             if isNowWeekDayMatch {
                 openHourRowView.mLbDayLabel.font = UIFont.boldSystemFont(ofSize: 17)
                 openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            } else {
+                openHourRowView.mLbDayLabel.font = UIFont.systemFont(ofSize: 17)
+                openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.systemFont(ofSize: 17)
             }
             
             openHourRowView.mLbDayLabel.text = YelpUtil.getWeekDayStrByIndex(index: i)
-            openHourRowView.mLbOpenTiemRangeLabel.text = (businessTime == nil || i != businessTime?.day) ? "未營業" : String.init(format: "%@ - %@", businessTime?.start ?? "N/A", businessTime?.end ?? "N/A")
+            openHourRowView.mLbOpenTiemRangeLabel.text = (businessTime == nil || i != businessTime?.day) ? NSLocalizedString("NOT OPEN", comment: "") : String.init(format: "%@ - %@", businessTime?.start ?? "N/A", businessTime?.end ?? "N/A")
             
             openHourRowView.translatesAutoresizingMaskIntoConstraints = false
             self.mVOpenHoursContentView.addSubview(openHourRowView)
