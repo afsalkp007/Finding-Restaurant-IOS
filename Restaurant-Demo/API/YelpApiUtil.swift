@@ -57,6 +57,11 @@ class YelpApiUtil {
         apiRequest(apiTag: apiTag, url: YelpApiConfigs.BUSINESS_SEARCH_API_URL, callback: callback, headers: sHeaders, method: .get, parameters:parameters)
     }
     
+    static func reviews(apiTag:String, id:String, locale:String, callback:ApiCallback) {
+        let parameters = ["locale":locale]
+        apiRequest(apiTag: apiTag, url: String.init(format: YelpApiConfigs.REVIEWS, id), callback:callback, headers: sHeaders, method: .get, parameters: parameters)
+    }
+    
     // MARK: - business
     static func business(apiTag:String, id:String, locale:String, callback:ApiCallback) {
         let parameters: Parameters = ["locale":locale]
@@ -65,7 +70,7 @@ class YelpApiUtil {
     }
     
     // MARK: - Common
-    private static func apiRequest(apiTag:String, url:String, callback:ApiCallback? = nil, headers: HTTPHeaders? = nil, method: HTTPMethod, parameters:Parameters? = nil, completionHandler:((DataResponse<Any>) -> Void)? = nil) {
+    private static func apiRequest(apiTag:String, url:String, callback:ApiCallback? = nil, headers: HTTPHeaders? = nil, method: HTTPMethod, parameters:Parameters? = nil,  completionHandler:((DataResponse<Any>) -> Void)? = nil) {
         
         if completionHandler == nil {
             Alamofire.request(url, method: method, parameters: parameters, headers: headers).responseJSON {

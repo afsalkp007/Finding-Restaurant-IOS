@@ -1,18 +1,20 @@
-//
-//  RestaurantDetailViewController.swift
-//  Restaurant-Demo
-//
-//  Created by yomi on 2017/11/27.
-//  Copyright © 2017年 yomi. All rights reserved.
-//
-
-import UIKit
-import Kingfisher
-import Alamofire
-
-class RestaurantDetailViewController: UITableViewController, ApiCallback {
+ //
+ //  RestaurantDetailViewController.swift
+ //  Restaurant-Demo
+ //
+ //  Created by yomi on 2017/11/27.
+ //  Copyright © 2017年 yomi. All rights reserved.
+ //
+ 
+ import UIKit
+ import Kingfisher
+ import Alamofire
+ import SafariServices
+ 
+ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     
     private static let API_TAG_BUSINESS = "API_TAG_BUSINESS"
+    private static let API_TAG_REVIEWS = "API_TAG_REVIEWStrGFD"
     
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
     @IBOutlet weak var mIvStaticMapImageView: UIImageView!
@@ -24,12 +26,14 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
     @IBOutlet weak var mLbIsOpenStatusLabel: UILabel!
     @IBOutlet var mIvSubPhotos: [UIImageView]!
     @IBOutlet weak var mIvRatingImage: UIImageView!
+    @IBOutlet var mTcReviewCellItems: [UITableViewCell]!
     
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
+    private var mIsFirst = true
+    private var mReviews:[YelpReviewDetailInfo]? = nil
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
     var mRestaurantDetailInfo:YelpRestaruantDetailInfo?
-    private var mIsFirst = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -63,11 +67,10 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
             return
         }
         
-        let id = ((self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed))!
         // Coz id has chinese words, so I need to do Url-Encoding before calling API
         showLoadingDialog(loadingContent: NSLocalizedString("Loading Data...", comment: ""))
         YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS
-            , id: id
+            , id: (self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
             , locale: YelpUtil.getPreferedLanguage()
             , callback: self)
     }
@@ -80,7 +83,7 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.image_url)!), placeholder: #imageLiteral(resourceName: "no_image"))
         //mIvStreetImageView: UIImageView!
         self.mLbAddressLabel.text = self.mRestaurantDetailInfo?.location?.display_address?.joined()
-    self.mBtnPhoneButton.setTitle(self.mRestaurantDetailInfo?.phone, for: .normal)
+        self.mBtnPhoneButton.setTitle(self.mRestaurantDetailInfo?.phone, for: .normal)
         
         var categoriyTitles:[String] = [String]()
         for categoryInfo in (self.mRestaurantSummaryInfo?.categories)! {
@@ -111,11 +114,8 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
         }
         let navigationAction = UIAlertAction(title: NSLocalizedString("Navigation", comment: ""), style: .default) { (action) in
             let url = URL(string: String(format:"http://maps.apple.com/?daddr=%f,%f&dirflg=d", lat!, lng!))
-            if #available(iOS 10.0, *) {
-                UIApplication.shared.open(url!, options: [:], completionHandler: nil)
-            } else {
-                UIApplication.shared.openURL(url!)
-            }
+            
+            Util.openUrl(url: url!)
         }
         let streetViewAction = UIAlertAction(title: NSLocalizedString("Street View", comment: ""), style: .default) { (action) in
             let panormaViewController = PanoramaViewController()
@@ -172,7 +172,42 @@ class RestaurantDetailViewController: UITableViewController, ApiCallback {
                 self.mRestaurantDetailInfo = detailInfo
                 self.updateView()
             }
+            YelpApiUtil.reviews(apiTag: RestaurantDetailViewController.API_TAG_REVIEWS
+                , id: (self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
+                , locale: YelpUtil.getPreferedLanguage()
+                , callback: self)
+        } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS, let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
+            self.mReviews = reviewsInfo?.reviews
+            let reviewsCount = self.mReviews?.count ?? 0
+            
+            for i in 0..<reviewsCount {
+                if let review = reviewsInfo?.reviews![i], let user = review.user {
+                    let reviewCellItem = self.mTcReviewCellItems[i]
+                    (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
+                    (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
+                    (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
+                    (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
+                }
+            }
+            
+            // Hide the remain TableViewCellItems without data
+            for i in stride(from: self.mTcReviewCellItems.count - 1, through: reviewsCount, by: -1) {
+                self.mTcReviewCellItems[i].isHidden = true
+                self.tableView.contentSize.height -= self.mTcReviewCellItems[i].frame.size.height
+            }
+            
+            self.closeLoadingDialog()
         }
-        closeLoadingDialog()
-    }    
-}
+    }
+    
+    // MARK:- TableView Delegate
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Review section
+        print("didSelectRowAt")
+        if indexPath.section == 2 {
+            let safariController = SFSafariViewController(url: URL(string: (self.mReviews![indexPath.row].url ?? ""))!)
+            present(safariController, animated: true, completion: nil)
+        }
+    }
+ }
