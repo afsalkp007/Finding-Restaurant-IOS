@@ -27,6 +27,9 @@
     @IBOutlet var mIvSubPhotos: [UIImageView]!
     @IBOutlet weak var mIvRatingImage: UIImageView!
     @IBOutlet var mTcReviewCellItems: [UITableViewCell]!
+    @IBOutlet weak var mLbOpenHoursTitleLabel: UILabel!
+    @IBOutlet weak var mTcOpenHoursCell: UITableViewCell!
+    @IBOutlet weak var mVOpenHoursContentView: UIView!
     
     private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
@@ -55,6 +58,8 @@
         let lat = self.mRestaurantSummaryInfo?.coordinates?.latitude
         let lng = self.mRestaurantSummaryInfo?.coordinates?.longitude
         
+        self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
+        self.tableView.rowHeight = UITableViewAutomaticDimension
         self.mIvStaticMapImageView.kf.setImage(with: URL(string: GoogleApiUtil.createStaticMapUrl(lat: lat!, lng: lng!, w: 200, h: 200)), placeholder:  #imageLiteral(resourceName: "no_image"))
     }
     
@@ -75,7 +80,7 @@
             , callback: self)
     }
     
-    func updateView() {
+    func updateBasicInfo() {
         if self.mRestaurantDetailInfo == nil {
             return;
         }
@@ -102,7 +107,74 @@
         for i in stride(from: 0, to: (self.mRestaurantDetailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
             self.mIvSubPhotos[i].kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
         }
+        
+        // Add open hour informations
+        var prevView:OpenHourRowView? = nil
+        let hoursInfo:YelpRestaurantHoursInfo? = self.mRestaurantDetailInfo?.hours![0]
+        
+        for i in 0..<7 {
+            var businessTime:YelpResaruantBusinessTime? = nil
+            for hourInfo in (hoursInfo?.open)! {
+                if hourInfo.day == i {
+                    businessTime = hourInfo
+                    break;
+                }
+            }
+            
+            let openHourRowView = OpenHourRowView()
+            let isNowWeekDayMatch = YelpUtil.isNowWeekDayFromYelpIndex(index: Util.getNowWeekDay(), yelpIndex: businessTime?.day ?? -1)
+            if isNowWeekDayMatch {
+                openHourRowView.mLbDayLabel.font = UIFont.boldSystemFont(ofSize: 17)
+                openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.boldSystemFont(ofSize: 17)
+            } else {
+                openHourRowView.mLbDayLabel.font = UIFont.systemFont(ofSize: 17)
+                openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.systemFont(ofSize: 17)
+            }
+            
+            openHourRowView.mLbDayLabel.text = YelpUtil.getWeekDayStrByIndex(index: i)
+            openHourRowView.mLbOpenTiemRangeLabel.text = (businessTime == nil || i != businessTime?.day) ? NSLocalizedString("NOT OPEN", comment: "") : String.init(format: "%@ - %@", businessTime?.start ?? "N/A", businessTime?.end ?? "N/A")
+            
+            openHourRowView.translatesAutoresizingMaskIntoConstraints = false
+            self.mVOpenHoursContentView.addSubview(openHourRowView)
+            openHourRowView.leftAnchor.constraint(equalTo: self.mVOpenHoursContentView.leftAnchor, constant: 0).isActive = true
+            openHourRowView.rightAnchor.constraint(equalTo: self.mVOpenHoursContentView.rightAnchor, constant: 0).isActive = true
+            openHourRowView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+            if prevView == nil {
+                openHourRowView.topAnchor.constraint(equalTo: self.mLbOpenHoursTitleLabel.bottomAnchor, constant: 10).isActive = true
+            } else {
+                if i == 6 {
+                    openHourRowView.bottomAnchor.constraint(equalTo: self.mVOpenHoursContentView.bottomAnchor, constant: -10).isActive = true
+                }
+                openHourRowView.topAnchor.constraint(equalTo: (prevView?.bottomAnchor)!, constant: 5).isActive = true
+            }
+            prevView = openHourRowView
+        }
     }
+    
+    func updateReviewInfo() {
+        guard let reviews = self.mReviews else {
+            return
+        }
+        
+        let reviewsCount = reviews.count
+        for i in 0..<reviewsCount {
+            let review = reviews[i]
+            if let user = review.user {
+                let reviewCellItem = self.mTcReviewCellItems[i]
+                (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
+                (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
+                (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url ?? "")), placeholder:  #imageLiteral(resourceName: "user-header"))
+                (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
+            }
+        }
+        
+        // Hide the remain TableViewCellItems without data
+        for i in stride(from: self.mTcReviewCellItems.count - 1, through: reviewsCount, by: -1) {
+            self.mTcReviewCellItems[i].isHidden = true
+            self.tableView.contentSize.height -= self.mTcReviewCellItems[i].frame.size.height
+        }
+    }
+    
     
     // MARK: - onStaticMapPressed
     @IBAction func onStaticMapPressed(_ sender: Any) {
@@ -145,7 +217,6 @@
         self.mLoadingAlertController = UIAlertController(title: nil, message: loadingContent, preferredStyle: .alert)
         self.mLoadingAlertController?.view.tintColor = UIColor.black
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x:10,y:5, width:50, height:50))
-        
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         loadingIndicator.startAnimating();
@@ -170,7 +241,7 @@
         if apiTag == RestaurantDetailViewController.API_TAG_BUSINESS {
             if let detailInfo = try?self.mJsonDecoder?.decode(YelpRestaruantDetailInfo.self, from: jsonData!) {
                 self.mRestaurantDetailInfo = detailInfo
-                self.updateView()
+                self.updateBasicInfo()
             }
             YelpApiUtil.reviews(apiTag: RestaurantDetailViewController.API_TAG_REVIEWS
                 , id: (self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
@@ -178,24 +249,7 @@
                 , callback: self)
         } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS, let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
             self.mReviews = reviewsInfo?.reviews
-            let reviewsCount = self.mReviews?.count ?? 0
-            
-            for i in 0..<reviewsCount {
-                if let review = reviewsInfo?.reviews![i], let user = review.user {
-                    let reviewCellItem = self.mTcReviewCellItems[i]
-                    (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
-                    (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
-                    (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url)!))
-                    (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
-                }
-            }
-            
-            // Hide the remain TableViewCellItems without data
-            for i in stride(from: self.mTcReviewCellItems.count - 1, through: reviewsCount, by: -1) {
-                self.mTcReviewCellItems[i].isHidden = true
-                self.tableView.contentSize.height -= self.mTcReviewCellItems[i].frame.size.height
-            }
-            
+            self.updateReviewInfo()
             self.closeLoadingDialog()
         }
     }
