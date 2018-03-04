@@ -179,8 +179,9 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
         
         initFilterRuleList()
         LocationManager.shared.setDelegate(delegate: self)
-        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN
-            , callback: self)
+        LocationManager.shared.requestLocationUpdate()
+//        YelpApiUtil.requestToken(apiTag: RestaurantListViewController.API_TAG_REQUEST_TOKEN
+//            , callback: self)
     }
     
     // MARK: - Table view data source
@@ -294,9 +295,10 @@ class RestaurantListViewController: UITableViewController, UISearchResultsUpdati
     }
     
     func onSuccess(apiTag: String, jsonData: Data?) {
-        if apiTag == RestaurantListViewController.API_TAG_REQUEST_TOKEN {
-            LocationManager.shared.requestLocationUpdate()
-        } else if apiTag == RestaurantListViewController.API_TAG_BUSINESS_SEARCH {
+        //        if apiTag == RestaurantListViewController.API_TAG_REQUEST_TOKEN {
+        //            LocationManager.shared.requestLocationUpdate()
+        //        } else
+        if apiTag == RestaurantListViewController.API_TAG_BUSINESS_SEARCH {
             if let searchInfo = try?self.mJsonDecoder?.decode(YelpSearchInfo.self, from: jsonData!) {
                 self.mSearchInfo = searchInfo
                 self.mAllRestaruantInfos = self.mSearchInfo?.businesses ?? [YelpRestaruantSummaryInfo]()
