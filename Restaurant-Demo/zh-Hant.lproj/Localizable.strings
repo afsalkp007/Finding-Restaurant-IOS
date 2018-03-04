@@ -6,7 +6,7 @@
   Copyright © 2018年 yomi. All rights reserved.
 */
 
-"OPEN AT " = "開放於";
+"OPEN AT " = "營業從";
 "Loading Data..." = "資料載入中...";
 "Notice!!!" = "注意!!!";
 "Location services were previously denied. Please enable location services for this app in Settings." = "位置服務尚未被開啟，請至[設定]頁面針對本應用開啟位置使用權限";
