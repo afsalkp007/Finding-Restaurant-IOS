@@ -32,7 +32,7 @@
         <!--RestaurantList-->
         <scene sceneID="09X-6c-xWK">
             <objects>
-                <tableViewController id="QI0-2P-SA7" userLabel="RestaurantList" customClass="RestaurantListViewController" customModule="Restaurant_Demo" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="QI0-2P-SA7" userLabel="RestaurantList" customClass="RestaurantListViewController" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="b1d-mR-WaM">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="480"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -41,7 +41,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             <subviews>
-                                <view tag="-1" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="b7W-wl-BYc" userLabel="Filter rules tag list" customClass="TagListView" customModule="TagListView">
+                                <view tag="-1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7W-wl-BYc" userLabel="Filter rules tag list" customClass="TagListView" customModule="TagListView">
                                     <rect key="frame" x="10" y="11" width="300" height="22"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <userDefinedRuntimeAttributes>
@@ -78,7 +78,7 @@
                                         <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="NO"/>
                                     </userDefinedRuntimeAttributes>
                                 </view>
-                                <view contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-5D-czW" userLabel="Filter rules tag list bottom divider">
+                                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-5D-czW" userLabel="Filter rules tag list bottom divider">
                                     <rect key="frame" x="0.0" y="43" width="320" height="1"/>
                                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
@@ -206,14 +206,14 @@
                             </tableViewCell>
                         </prototypes>
                         <connections>
-                            <outlet property="dataSource" destination="QI0-2P-SA7" id="yOv-wp-NNj"/>
-                            <outlet property="delegate" destination="QI0-2P-SA7" id="R6y-u8-5y4"/>
+                            <outlet property="dataSource" destination="QI0-2P-SA7" id="zGt-Cf-kGG"/>
+                            <outlet property="delegate" destination="QI0-2P-SA7" id="hPs-8F-OYW"/>
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="餐廳列表" id="WR0-3Y-3ld"/>
                     <connections>
-                        <outlet property="mTlvFilterRuleTagList" destination="b7W-wl-BYc" id="Z50-JQ-hAB"/>
-                        <outlet property="mVFilterRuleListContainerView" destination="7hc-46-vKt" id="6aR-fc-HM0"/>
+                        <outlet property="mTlvFilterRuleTagList" destination="b7W-wl-BYc" id="fRr-Uc-i4C"/>
+                        <outlet property="mVFilterRuleListContainerView" destination="7hc-46-vKt" id="Kjj-Do-LSd"/>
                         <segue destination="DBo-70-woK" kind="show" identifier="show_restaurant_detail" id="wzb-9W-aOx"/>
                         <segue destination="zkB-R6-Zg2" kind="presentation" identifier="show_restaurant_filter" modalTransitionStyle="coverVertical" id="Jpp-8G-1uC"/>
                     </connections>
@@ -468,7 +468,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhz-uC-g0b" customClass="EdgeInsetLabel" customModule="Restaurant_Demo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="165.5" width="5" height="0.0"/>
+                                                            <rect key="frame" x="0.0" y="165.5" width="9" height="0.0"/>
                                                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="9"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>

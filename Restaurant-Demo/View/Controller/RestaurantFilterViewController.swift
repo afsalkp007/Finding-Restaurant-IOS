@@ -31,7 +31,7 @@ class RestaurantFilterViewController: UITableViewController {
     
     // MARK: - prepare
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let target = segue.destination as? RestaurantListViewController else {
+        guard let target = segue.destination as? RestaurantListViewController2 else {
             return
         }
         
