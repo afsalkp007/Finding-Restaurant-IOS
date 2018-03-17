@@ -10,12 +10,13 @@ import UIKit
 import TagListView
 import GooglePlaces
 import GooglePlacePicker
+import Kingfisher
 
-class RestaurantListViewController2: UITableViewController, RestaurantListViewProtocol, UISearchResultsUpdating, TagListViewDelegate {
+class RestaurantListViewController: UITableViewController, RestaurantListViewProtocol, UISearchResultsUpdating, TagListViewDelegate {
     
     private static let CELL_ID = "menu_cell"
     
-    @IBOutlet weak var mTlvFilterRuleTagList: TagListView!
+        @IBOutlet weak var mTlvFilterRuleTagList: TagListView!
     @IBOutlet weak var mVFilterRuleListContainerView: UIView!
     
     private var mScNameSearchController:UISearchController?
@@ -140,7 +141,7 @@ class RestaurantListViewController2: UITableViewController, RestaurantListViewPr
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurantListViewController2.CELL_ID, for: indexPath) as? RestaurantInfoTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurantListViewController.CELL_ID, for: indexPath) as? RestaurantInfoTableViewCell else {
             fatalError("Cell is not of kind RestaurantInfoTableViewCell")
         }
         let restaurantInfo = self.mRestaurantSummaryInfos![indexPath.row]

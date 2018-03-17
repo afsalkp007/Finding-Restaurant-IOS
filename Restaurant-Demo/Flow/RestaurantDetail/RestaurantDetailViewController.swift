@@ -1,20 +1,14 @@
- //
- //  RestaurantDetailViewController.swift
- //  Restaurant-Demo
- //
- //  Created by yomi on 2017/11/27.
- //  Copyright © 2017年 yomi. All rights reserved.
- //
- 
- import UIKit
- import Kingfisher
- import Alamofire
- import SafariServices
- 
- class RestaurantDetailViewController: UITableViewController, ApiCallback {
-    
-    private static let API_TAG_BUSINESS = "API_TAG_BUSINESS"
-    private static let API_TAG_REVIEWS = "API_TAG_REVIEWStrGFD"
+//
+//  RestaurantDetailViewController2.swift
+//  Restaurant-Demo
+//
+//  Created by yomi on 2018/3/17.
+//  Copyright © 2018年 yomi. All rights reserved.
+//
+
+import UIKit
+
+class RestaurantDetailViewController: UITableViewController, RestaurantDetailViewProtocol {
     
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
     @IBOutlet weak var mIvStaticMapImageView: UIImageView!
@@ -31,25 +25,30 @@
     @IBOutlet weak var mTcOpenHoursCell: UITableViewCell!
     @IBOutlet weak var mVOpenHoursContentView: UIView!
     
-    private var mJsonDecoder:JSONDecoder?
     private var mLoadingAlertController:UIAlertController?
-    private var mIsFirst = true
-    private var mReviews:[YelpReviewDetailInfo]? = nil
+    private var mPresenter:RestaurantDetailPresenterProtocol?
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
     var mRestaurantDetailInfo:YelpRestaruantDetailInfo?
-    
+    private var mReviewDetailInfos:[YelpReviewDetailInfo]?
+
+    // MARK:- Lif cycle & initialization
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initView()
-        initConfig()
+        
+        self.mPresenter = RestaurantDetailPresenter()
+        self.mPresenter?.attachView(view: self)
+        self.mPresenter?.onInitParameters(summaryInfo: self.mRestaurantSummaryInfo)
+        self.mPresenter?.onViewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        if self.mIsFirst {
-            self.mIsFirst = false
-            fetchData()
-        }
+        self.mPresenter?.onViewDidAppear()
+    }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
     }
     
     func initView() {
@@ -63,54 +62,87 @@
         self.mIvStaticMapImageView.kf.setImage(with: URL(string: GoogleApiUtil.createStaticMapUrl(lat: lat!, lng: lng!, w: 200, h: 200)), placeholder:  #imageLiteral(resourceName: "no_image"))
     }
     
-    func initConfig() {
-        self.mJsonDecoder = Util.getJsonDecoder()
-    }
+    // MARK: - Prepare Segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {}
     
-    func fetchData() {
-        if mRestaurantSummaryInfo == nil {
-            return
-        }
+    // MARK:- TableView Delegate
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // Review section
         
-        // Coz id has chinese words, so I need to do Url-Encoding before calling API
-        showLoadingDialog(loadingContent: NSLocalizedString("Loading Data...", comment: ""))
-        YelpApiUtil.business(apiTag: RestaurantDetailViewController.API_TAG_BUSINESS
-            , id: (self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-            , locale: YelpUtil.getPreferedLanguage()
-            , callback: self)
+        if indexPath.section == 2 {
+            self.mPresenter?.onReviewItemSelect(reviewDetail: self.mReviewDetailInfos![indexPath.row])
+        }
     }
     
-    func updateBasicInfo() {
-        if self.mRestaurantDetailInfo == nil {
+    // MARK: - onStaticMapPressed
+    @IBAction func onStaticMapPressed(_ sender: Any) {
+        let lat = self.mRestaurantSummaryInfo?.coordinates?.latitude
+        let lng = self.mRestaurantSummaryInfo?.coordinates?.longitude
+        let alertController = UIAlertController(title: NSLocalizedString("Select a action", comment: ""), message: nil, preferredStyle: .actionSheet)
+        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
+            self.dismiss(animated: true, completion: nil)
+        }
+        let navigationAction = UIAlertAction(title: NSLocalizedString("Navigation", comment: ""), style: .default) { (action) in
+            let url = URL(string: String(format:"http://maps.apple.com/?daddr=%f,%f&dirflg=d", lat!, lng!))
+            
+            Util.openUrl(url: url!)
+        }
+        let streetViewAction = UIAlertAction(title: NSLocalizedString("Street View", comment: ""), style: .default) { (action) in
+            let panormaViewController = PanoramaViewController()
+            panormaViewController.mLat = lat!
+            panormaViewController.mLng = lng!
+            self.navigationController?.pushViewController(panormaViewController, animated: true)
+        }
+        alertController.addAction(navigationAction)
+        alertController.addAction(streetViewAction)
+        alertController.addAction(cancelAction)
+        present(alertController, animated: true, completion: nil)
+    }
+    
+    // MARK: - onPhoneButtonPressed
+    @IBAction func onPhoneButtonPressed(_ sender: Any) {
+        let rawPhoneNum = self.mBtnPhoneButton.titleLabel?.text ?? ""
+        let phoneNum = rawPhoneNum.replacingOccurrences(of: "+", with: "")
+        let url = URL(string: "tel://\(phoneNum)")
+        if #available(iOS 10.0, *) {
+            UIApplication.shared.open(url!)
+        } else {
+            UIApplication.shared.openURL(url!)
+        }
+    }
+    
+    // MARK:- RestaurantDetailViewProtocol
+    func refreshBasicInfo(summaryInfo:YelpRestaruantSummaryInfo?, detailInfo: YelpRestaruantDetailInfo?) {
+        if detailInfo == nil || summaryInfo == nil {
             return;
         }
         
-        self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.image_url)!), placeholder: #imageLiteral(resourceName: "no_image"))
+        self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (detailInfo?.image_url)!), placeholder: #imageLiteral(resourceName: "no_image"))
         //mIvStreetImageView: UIImageView!
-        self.mLbAddressLabel.text = self.mRestaurantDetailInfo?.location?.display_address?.joined()
-        self.mBtnPhoneButton.setTitle(self.mRestaurantDetailInfo?.phone, for: .normal)
+        self.mLbAddressLabel.text = detailInfo?.location?.display_address?.joined()
+        self.mBtnPhoneButton.setTitle(detailInfo?.phone, for: .normal)
         
         var categoriyTitles:[String] = [String]()
-        for categoryInfo in (self.mRestaurantSummaryInfo?.categories)! {
+        for categoryInfo in (summaryInfo?.categories)! {
             categoriyTitles.append(categoryInfo.title ?? "")
         }
         self.mLbTypeLabel.text = categoriyTitles.joined(separator: ",")
-        self.mIvRatingImage.image = self.mRestaurantDetailInfo?.getRatingImage(rating: self.mRestaurantDetailInfo?.rating ?? 0.0)
-        self.mLbPriceLabel.text = self.mRestaurantDetailInfo?.price ?? ""
-        self.mLbReviews.text = "\(self.mRestaurantDetailInfo?.review_count ?? 0) " + NSLocalizedString("Reviews", comment: "");
+        self.mIvRatingImage.image = detailInfo?.getRatingImage(rating: detailInfo?.rating ?? 0.0)
+        self.mLbPriceLabel.text = detailInfo?.price ?? ""
+        self.mLbReviews.text = "\(detailInfo?.review_count ?? 0) " + NSLocalizedString("Reviews", comment: "");
         
         self.mLbIsOpenStatusLabel.text = "N/A"
-        if let hours = self.mRestaurantDetailInfo?.hours, let isOpenNow = hours[0].is_open_now {
+        if let hours = detailInfo?.hours, let isOpenNow = hours[0].is_open_now {
             self.mLbIsOpenStatusLabel.text = (isOpenNow) ? "OPEN" : "CLOSE"
         }
         
-        for i in stride(from: 0, to: (self.mRestaurantDetailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
-            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (self.mRestaurantDetailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
+        for i in stride(from: 0, to: (detailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
+            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (detailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
         }
         
         // Add open hour informations
         var prevView:OpenHourRowView? = nil
-        let hoursInfo:YelpRestaurantHoursInfo? = self.mRestaurantDetailInfo?.hours![0]
+        let hoursInfo:YelpRestaurantHoursInfo? = detailInfo?.hours![0]
         
         for i in 0..<7 {
             var businessTime:YelpResaruantBusinessTime? = nil
@@ -151,14 +183,14 @@
         }
     }
     
-    func updateReviewInfo() {
-        guard let reviews = self.mReviews else {
+    func refreshReviewInfo(reviews: [YelpReviewDetailInfo]?) {
+        if reviews == nil {
             return
         }
-        
-        let reviewsCount = reviews.count
+        self.mReviewDetailInfos = reviews
+        let reviewsCount = reviews?.count ?? 0
         for i in 0..<reviewsCount {
-            let review = reviews[i]
+            let review = reviews![i]
             if let user = review.user {
                 let reviewCellItem = self.mTcReviewCellItems[i]
                 (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
@@ -175,48 +207,23 @@
         }
     }
     
-    
-    // MARK: - onStaticMapPressed
-    @IBAction func onStaticMapPressed(_ sender: Any) {
-        let lat = self.mRestaurantSummaryInfo?.coordinates?.latitude
-        let lng = self.mRestaurantSummaryInfo?.coordinates?.longitude
-        let alertController = UIAlertController(title: NSLocalizedString("Select a action", comment: ""), message: nil, preferredStyle: .actionSheet)
-        let cancelAction = UIAlertAction(title: NSLocalizedString("Cancel", comment: ""), style: .destructive) { (action) in
-            self.dismiss(animated: true, completion: nil)
-        }
-        let navigationAction = UIAlertAction(title: NSLocalizedString("Navigation", comment: ""), style: .default) { (action) in
-            let url = URL(string: String(format:"http://maps.apple.com/?daddr=%f,%f&dirflg=d", lat!, lng!))
-            
-            Util.openUrl(url: url!)
-        }
-        let streetViewAction = UIAlertAction(title: NSLocalizedString("Street View", comment: ""), style: .default) { (action) in
-            let panormaViewController = PanoramaViewController()
-            panormaViewController.mLat = lat!
-            panormaViewController.mLng = lng!
-            self.navigationController?.pushViewController(panormaViewController, animated: true)
-        }
-        alertController.addAction(navigationAction)
-        alertController.addAction(streetViewAction)
-        alertController.addAction(cancelAction)
-        present(alertController, animated: true, completion: nil)
+    func doPresent(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        self.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     
-    // MARK: - onPhoneButtonPressed
-    @IBAction func onPhoneButtonPressed(_ sender: Any) {
-        let rawPhoneNum = self.mBtnPhoneButton.titleLabel?.text ?? ""
-        let phoneNum = rawPhoneNum.replacingOccurrences(of: "+", with: "")
-        let url = URL(string: "tel://\(phoneNum)")
-        if #available(iOS 10.0, *) {
-            UIApplication.shared.open(url!)
-        } else {
-            UIApplication.shared.openURL(url!)
-        }
+    func doDismiss(animated flag: Bool, completion: (() -> Void)?) {
+        self.dismiss(animated: flag, completion: completion)
     }
     
-    func showLoadingDialog(loadingContent:String) {
+    func doPerformSegue(withIdentifier identifier: String, sender: Any?) {
+        self.performSegue(withIdentifier: identifier, sender: sender)
+    }
+    
+    func showLoading(loadingContent: String) {
         self.mLoadingAlertController = UIAlertController(title: nil, message: loadingContent, preferredStyle: .alert)
         self.mLoadingAlertController?.view.tintColor = UIColor.black
         let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x:10,y:5, width:50, height:50))
+        
         loadingIndicator.hidesWhenStopped = true
         loadingIndicator.activityIndicatorViewStyle = UIActivityIndicatorViewStyle.gray
         loadingIndicator.startAnimating();
@@ -224,44 +231,10 @@
         self.present(self.mLoadingAlertController!, animated: true, completion: nil)
     }
     
-    func closeLoadingDialog() {
+    func closeLoading() {
         if self.mLoadingAlertController != nil {
             self.dismiss(animated: true, completion: nil)
             self.mLoadingAlertController = nil
         }
     }
-    
-    // MARK: - API Callback
-    
-    func onError(apiTag: String, errorMsg: String) {
-        closeLoadingDialog()
-    }
-    
-    func onSuccess(apiTag: String, jsonData: Data?) {
-        if apiTag == RestaurantDetailViewController.API_TAG_BUSINESS {
-            if let detailInfo = try?self.mJsonDecoder?.decode(YelpRestaruantDetailInfo.self, from: jsonData!) {
-                self.mRestaurantDetailInfo = detailInfo
-                self.updateBasicInfo()
-            }
-            YelpApiUtil.reviews(apiTag: RestaurantDetailViewController.API_TAG_REVIEWS
-                , id: (self.mRestaurantSummaryInfo?.id)!.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed) ?? ""
-                , locale: YelpUtil.getPreferedLanguage()
-                , callback: self)
-        } else if apiTag == RestaurantDetailViewController.API_TAG_REVIEWS, let reviewsInfo = try?self.mJsonDecoder?.decode(YelpReviewInfo.self, from: jsonData!) {
-            self.mReviews = reviewsInfo?.reviews
-            self.updateReviewInfo()
-            self.closeLoadingDialog()
-        }
-    }
-    
-    // MARK:- TableView Delegate
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        // Review section
-        print("didSelectRowAt")
-        if indexPath.section == 2 {
-            let safariController = SFSafariViewController(url: URL(string: (self.mReviews![indexPath.row].url ?? ""))!)
-            present(safariController, animated: true, completion: nil)
-        }
-    }
- }
+}
