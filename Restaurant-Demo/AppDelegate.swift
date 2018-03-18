@@ -21,8 +21,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
-//      UIApplication.shared.isStatusBarHidden = false
-        
         /* Init firebase configs */
         FirebaseApp.configure()
         
@@ -32,6 +30,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /* Init google map api configs */
         GMSPlacesClient.provideAPIKey("AIzaSyAc5wnmJJydGYodnmlc2jFPQMeAgwLeBug")
         GMSServices.provideAPIKey("AIzaSyAc5wnmJJydGYodnmlc2jFPQMeAgwLeBug")
+        
+        /* Init YelpApiUtil*/
+        YelpApiUtil.initizlize()
         
         return true
     }
