@@ -32,7 +32,6 @@
 		ED4FE7592047122F00435A2C /* RestaurantListContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FE7582047122F00435A2C /* RestaurantListContract.swift */; };
 		ED5B5F9F1FDA377300E8B198 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */; };
 		ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */; };
-		ED5B5FAF1FDC634F00E8B198 /* RestaurantFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */; };
 		ED5B5FB11FDD5DC700E8B198 /* FilterConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */; };
 		ED6A9D9F1FFD1C11003F3E15 /* YelpUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6A9D9E1FFD1C11003F3E15 /* YelpUtil.swift */; };
 		ED6A9DA42020C181003F3E15 /* YelpReviewInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED6A9DA32020C181003F3E15 /* YelpReviewInfo.swift */; };
@@ -63,6 +62,10 @@
 		EDCCEE561FD20C7D0072883A /* YelpResaruantBusinessTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDCCEE551FD20C7D0072883A /* YelpResaruantBusinessTime.swift */; };
 		EDCF6EA21FF224C800868473 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDCF6EA41FF224C800868473 /* InfoPlist.strings */; };
 		EDEF24961FFBD12500FC51A8 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = EDEF24981FFBD12500FC51A8 /* Localizable.strings */; };
+		EDF31EA4205E3AFE00245D81 /* RestaurantFilterContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF31EA3205E3AFE00245D81 /* RestaurantFilterContract.swift */; };
+		EDF31EA6205E3B7200245D81 /* RestaurantFilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF31EA5205E3B7200245D81 /* RestaurantFilterViewController.swift */; };
+		EDF31EA8205E3CCD00245D81 /* RestaurantFilterPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF31EA7205E3CCD00245D81 /* RestaurantFilterPresenter.swift */; };
+		EDF31EAA205E3D2900245D81 /* RestaurantFilterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDF31EA9205E3D2900245D81 /* RestaurantFilterModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -95,7 +98,6 @@
 		ED4FE7582047122F00435A2C /* RestaurantListContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListContract.swift; sourceTree = "<group>"; };
 		ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabelExtension.swift; sourceTree = "<group>"; };
-		ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterViewController.swift; sourceTree = "<group>"; };
 		ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigs.swift; sourceTree = "<group>"; };
 		ED6A9D9E1FFD1C11003F3E15 /* YelpUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpUtil.swift; sourceTree = "<group>"; };
 		ED6A9DA02005CBAD003F3E15 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
@@ -132,6 +134,10 @@
 		EDEA24C22034A7AE004F0485 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		EDEF24971FFBD12500FC51A8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EDEF24991FFBD13D00FC51A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
+		EDF31EA3205E3AFE00245D81 /* RestaurantFilterContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterContract.swift; sourceTree = "<group>"; };
+		EDF31EA5205E3B7200245D81 /* RestaurantFilterViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterViewController.swift; sourceTree = "<group>"; };
+		EDF31EA7205E3CCD00245D81 /* RestaurantFilterPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterPresenter.swift; sourceTree = "<group>"; };
+		EDF31EA9205E3D2900245D81 /* RestaurantFilterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,8 +184,9 @@
 			isa = PBXGroup;
 			children = (
 				ED7337CC2048566700356AE6 /* BaseUIViewController.swift */,
-				ED45024720597C06001D4A38 /* RestaurantDetail */,
 				ED2DB1F9204703AD000AC22C /* RestaurantList */,
+				ED45024720597C06001D4A38 /* RestaurantDetail */,
+				EDF31EA2205E3AC000245D81 /* RestaurantFilter */,
 			);
 			path = Flow;
 			sourceTree = "<group>";
@@ -270,7 +277,6 @@
 			isa = PBXGroup;
 			children = (
 				EDA28C701FD637EE00DD2902 /* PanoramaViewController.swift */,
-				ED5B5FAE1FDC634F00E8B198 /* RestaurantFilterViewController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -379,6 +385,17 @@
 				EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */,
 			);
 			path = Util;
+			sourceTree = "<group>";
+		};
+		EDF31EA2205E3AC000245D81 /* RestaurantFilter */ = {
+			isa = PBXGroup;
+			children = (
+				EDF31EA5205E3B7200245D81 /* RestaurantFilterViewController.swift */,
+				EDF31EA3205E3AFE00245D81 /* RestaurantFilterContract.swift */,
+				EDF31EA7205E3CCD00245D81 /* RestaurantFilterPresenter.swift */,
+				EDF31EA9205E3D2900245D81 /* RestaurantFilterModel.swift */,
+			);
+			path = RestaurantFilter;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -513,27 +530,27 @@
 		};
 		EDC55E071FE9CFEA00B23097 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9f46a54bfc4906fb913c2da3dbcab6fc91d1b079 7858508ac0fb219b7df99f6226d27930545c5e4d9642d80aa1a4df6d226dfc97";
 		};
 		EDC55E0B1FEA0C7300B23097 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 12;
+			buildActionMask = 8;
 			files = (
 			);
 			inputPaths = (
 			);
 			outputPaths = (
 			);
-			runOnlyForDeploymentPostprocessing = 0;
+			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
 			shellScript = "# Replace this with the GOOGLE_APP_ID from your GoogleService-Info.plist file\nGOOGLE_APP_ID=1:35224406241:ios:ab9ccffc1e877f97\n\n# Replace the /Path/To/ServiceAccount.json with the path to the key you just downloaded\n\"${PODS_ROOT}\"/FirebaseCrash/upload-sym \"Restaurant-Demo/ServiceAccount.json\"";
 		};
@@ -581,11 +598,13 @@
 				ED5B5FB11FDD5DC700E8B198 /* FilterConfigs.swift in Sources */,
 				EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */,
 				EDA28C6A1FD5262100DD2902 /* Floaty.swift in Sources */,
+				EDF31EA8205E3CCD00245D81 /* RestaurantFilterPresenter.swift in Sources */,
 				ED7337D1204ADF1400356AE6 /* RestaurantListViewController.swift in Sources */,
 				ED6A9DA82020C380003F3E15 /* YelpReviewerInfo.swift in Sources */,
 				ED332D821FCA52F100279333 /* YelpRestaurantLocation.swift in Sources */,
 				ED332D841FCA530500279333 /* YelpRestaurantCoordinates.swift in Sources */,
 				ED7607AB2036C0CC00BF12DB /* OpenHourRowView.swift in Sources */,
+				EDF31EA4205E3AFE00245D81 /* RestaurantFilterContract.swift in Sources */,
 				ED4FE7572047111100435A2C /* RestaurantListPresenter.swift in Sources */,
 				ED450250205C3485001D4A38 /* RestaurantDetailViewController.swift in Sources */,
 				ED450252205C349B001D4A38 /* RestaurantDetailModel.swift in Sources */,
@@ -598,6 +617,7 @@
 				EDA28C6B1FD5262100DD2902 /* FloatyDelegate.swift in Sources */,
 				ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */,
 				ED3559CB1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift in Sources */,
+				EDF31EA6205E3B7200245D81 /* RestaurantFilterViewController.swift in Sources */,
 				EDCCEE541FD20C3B0072883A /* YelpRestaurantHoursInfo.swift in Sources */,
 				ED332D791FCA2EBA00279333 /* YelpApiConfigs.swift in Sources */,
 				EDCCEE491FD1E8910072883A /* YelpApiUtil.swift in Sources */,
@@ -605,9 +625,9 @@
 				ED3559DB1FCF0F9000935DFF /* YelpBaseInfo.swift in Sources */,
 				EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */,
 				EDB664E81FE921D600F728C2 /* FilterConfigsExtension.swift in Sources */,
+				EDF31EAA205E3D2900245D81 /* RestaurantFilterModel.swift in Sources */,
 				ED7337CF204857E400356AE6 /* RestaurantListModel.swift in Sources */,
 				ED3559CE1FCBBB9100935DFF /* YelpRestaurantCategory.swift in Sources */,
-				ED5B5FAF1FDC634F00E8B198 /* RestaurantFilterViewController.swift in Sources */,
 				ED3559D71FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift in Sources */,
 				EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */,
 				ED7337CD2048566700356AE6 /* BaseUIViewController.swift in Sources */,
