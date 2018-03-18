@@ -15,6 +15,12 @@ class YelpApiUtil {
     private static var sHeaders: HTTPHeaders?
     
     // MARK: - requestToken
+    static func initizlize() {
+        sHeaders = [
+            "Authorization": "Bearer \(YelpApiConfigs.AUTH_TOKEN)",
+            "Accept": "application/json"
+        ]
+    }
     static func requestToken(apiTag:String, callback:ApiCallback?) {
         
         let parameters: Parameters = ["grant_type": YelpApiConfigs.OAUTH_GRANT_TYPYE
