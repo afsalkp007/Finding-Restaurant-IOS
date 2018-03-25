@@ -24,6 +24,7 @@
 		ED3559D71FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559D61FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift */; };
 		ED3559D91FCF0D0200935DFF /* RatingEnum.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559D81FCF0D0200935DFF /* RatingEnum.swift */; };
 		ED3559DB1FCF0F9000935DFF /* YelpBaseInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3559DA1FCF0F9000935DFF /* YelpBaseInfo.swift */; };
+		ED3C2E2B2068106600AF3493 /* CommonConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED3C2E2A2068106600AF3493 /* CommonConstants.swift */; };
 		ED45024E205C30DE001D4A38 /* RestaurantDetailContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45024D205C30DE001D4A38 /* RestaurantDetailContract.swift */; };
 		ED450250205C3485001D4A38 /* RestaurantDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED45024F205C3485001D4A38 /* RestaurantDetailViewController.swift */; };
 		ED450252205C349B001D4A38 /* RestaurantDetailModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED450251205C349B001D4A38 /* RestaurantDetailModel.swift */; };
@@ -93,6 +94,7 @@
 		ED3559D61FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpRestaurantDetailInfo.swift; sourceTree = "<group>"; };
 		ED3559D81FCF0D0200935DFF /* RatingEnum.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RatingEnum.swift; sourceTree = "<group>"; };
 		ED3559DA1FCF0F9000935DFF /* YelpBaseInfo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpBaseInfo.swift; sourceTree = "<group>"; };
+		ED3C2E2A2068106600AF3493 /* CommonConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonConstants.swift; sourceTree = "<group>"; };
 		ED45024D205C30DE001D4A38 /* RestaurantDetailContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailContract.swift; sourceTree = "<group>"; };
 		ED45024F205C3485001D4A38 /* RestaurantDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailViewController.swift; sourceTree = "<group>"; };
 		ED450251205C349B001D4A38 /* RestaurantDetailModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailModel.swift; sourceTree = "<group>"; };
@@ -265,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				ED1314471FD38C82000A6FD2 /* Data */,
+				ED3C2E2A2068106600AF3493 /* CommonConstants.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -616,6 +619,7 @@
 				ED5B5F9F1FDA377300E8B198 /* NavigationControllerExtension.swift in Sources */,
 				EDCCEE521FD202230072883A /* Util.swift in Sources */,
 				ED6A9DA62020C29C003F3E15 /* YelpReviewDetailInfo.swift in Sources */,
+				ED3C2E2B2068106600AF3493 /* CommonConstants.swift in Sources */,
 				ED6A9D9F1FFD1C11003F3E15 /* YelpUtil.swift in Sources */,
 				EDA28C681FD5262100DD2902 /* FloatyWindow.swift in Sources */,
 				ED332D7C1FCA487700279333 /* YelpSearchInfo.swift in Sources */,
