@@ -12,11 +12,11 @@ import GooglePlaces
 import GooglePlacePicker
 import Kingfisher
 
-class RestaurantListViewController: UITableViewController, RestaurantListViewProtocol, UISearchResultsUpdating, TagListViewDelegate {
+class RestaurantListViewController: UITableViewController, RestaurantListViewProtocol, UISearchResultsUpdating, TagListViewDelegate, UIViewControllerPreviewingDelegate {
     
     private static let CELL_ID = "menu_cell"
     
-        @IBOutlet weak var mTlvFilterRuleTagList: TagListView!
+    @IBOutlet weak var mTlvFilterRuleTagList: TagListView!
     @IBOutlet weak var mVFilterRuleListContainerView: UIView!
     
     private var mScNameSearchController:UISearchController?
@@ -30,6 +30,11 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     override func viewDidLoad() {
         super.viewDidLoad()
         initView()
+        
+        // 3D touch preview for restaurant detail
+        if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
+            registerForPreviewing(with: self as UIViewControllerPreviewingDelegate, sourceView: self.view)
+        }
         
         self.mRestaurantSummaryInfos = Array<YelpRestaruantSummaryInfo>()
         self.mPresenter = RestaurantListPresenter()
@@ -104,9 +109,9 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
         
         if identifier == "show_restaurant_detail" {
             let destViewController = segue.destination as! RestaurantDetailViewController
-            let restaurantInfo = sender as! YelpRestaruantSummaryInfo
+            let summaryInfo = sender as! YelpRestaruantSummaryInfo
             
-            destViewController.mRestaurantSummaryInfo = restaurantInfo
+            destViewController.mRestaurantSummaryInfo = summaryInfo
         }
     }
     
@@ -164,6 +169,30 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
         self.mScNameSearchController?.isActive = false
                 
         self.mPresenter?.onRestaurantListItemSelect(summaryInfo: self.mRestaurantSummaryInfos?[indexPath.row])
+    }
+    
+    // MARK: - UIViewControllerPreviewingDelegate
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, viewControllerForLocation location: CGPoint) -> UIViewController? {
+        
+        // get the cell row and cell according to the touch position
+        guard let indxPath = self.tableView.indexPathForRow(at: location), let cell = tableView.cellForRow(at: indxPath) else {
+            return nil
+        }
+        
+        guard let restaurantDetailViewController = storyboard?.instantiateViewController(withIdentifier: "restaurant_detail_view_controller") as? RestaurantDetailViewController else {
+            return nil
+        }
+        
+        let summaryInfo = self.mRestaurantSummaryInfos?[indxPath.row]
+        restaurantDetailViewController.mRestaurantSummaryInfo = summaryInfo
+        restaurantDetailViewController.preferredContentSize = CGSize(width: 0.0, height: self.view.frame.size.height * 0.66)
+        previewingContext.sourceRect = cell.frame
+        
+        return restaurantDetailViewController
+    }
+    
+    func previewingContext(_ previewingContext: UIViewControllerPreviewing, commit viewControllerToCommit: UIViewController) {
+        show(viewControllerToCommit, sender: self)
     }
     
     // MARK:- RestaurantListViewProtocol
