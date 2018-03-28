@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		2E2B89AE12CE8DF43B0DC2CD /* Pods_Restaurant_Demo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 56FA223AC361E25967D09776 /* Pods_Restaurant_Demo.framework */; };
+		ED0759C0206A8325008A02D7 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = ED0759BF206A8325008A02D7 /* GoogleMaps.framework */; };
+		ED0759C2206A8368008A02D7 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = ED0759C1206A8368008A02D7 /* GoogleMaps.bundle */; };
 		ED332D5F1FC8759C00279333 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED332D5E1FC8759C00279333 /* AppDelegate.swift */; };
 		ED332D641FC8759C00279333 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ED332D621FC8759C00279333 /* Main.storyboard */; };
 		ED332D661FC8759C00279333 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ED332D651FC8759C00279333 /* Assets.xcassets */; };
@@ -76,6 +78,8 @@
 		2435F04E3F6CA4002227B204 /* Pods-Restaurant-Demo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant-Demo.release.xcconfig"; path = "Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo.release.xcconfig"; sourceTree = "<group>"; };
 		56FA223AC361E25967D09776 /* Pods_Restaurant_Demo.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Restaurant_Demo.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		C98A83A8860B1730E915B2DF /* Pods-Restaurant-Demo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Restaurant-Demo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo.debug.xcconfig"; sourceTree = "<group>"; };
+		ED0759BF206A8325008A02D7 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
+		ED0759C1206A8368008A02D7 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
 		ED332D5B1FC8759C00279333 /* Restaurant-Demo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Restaurant-Demo.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ED332D5E1FC8759C00279333 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ED332D631FC8759C00279333 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -153,6 +157,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED0759C0206A8325008A02D7 /* GoogleMaps.framework in Frameworks */,
 				2E2B89AE12CE8DF43B0DC2CD /* Pods_Restaurant_Demo.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,6 +180,15 @@
 				56FA223AC361E25967D09776 /* Pods_Restaurant_Demo.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		ED0759BE206A8307008A02D7 /* Framework */ = {
+			isa = PBXGroup;
+			children = (
+				ED0759C1206A8368008A02D7 /* GoogleMaps.bundle */,
+				ED0759BF206A8325008A02D7 /* GoogleMaps.framework */,
+			);
+			path = Framework;
 			sourceTree = "<group>";
 		};
 		ED1314471FD38C82000A6FD2 /* Data */ = {
@@ -232,6 +246,7 @@
 		ED332D5D1FC8759C00279333 /* Restaurant-Demo */ = {
 			isa = PBXGroup;
 			children = (
+				ED0759BE206A8307008A02D7 /* Framework */,
 				EDA28C6D1FD57C3A00DD2902 /* Manager */,
 				EDCCEE501FD202080072883A /* Util */,
 				ED332D7A1FCA481900279333 /* API */,
@@ -489,6 +504,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				ED0759C2206A8368008A02D7 /* GoogleMaps.bundle in Resources */,
 				ED332D691FC8759C00279333 /* LaunchScreen.storyboard in Resources */,
 				EDCF6EA21FF224C800868473 /* InfoPlist.strings in Resources */,
 				EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */,
@@ -768,6 +784,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -820,6 +837,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "-ObjC";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
@@ -834,6 +852,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4X2Y9E7BF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Restaurant-Demo/Framework",
+				);
 				INFOPLIST_FILE = "Restaurant-Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -853,6 +875,10 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4X2Y9E7BF;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Restaurant-Demo/Framework",
+				);
 				INFOPLIST_FILE = "Restaurant-Demo/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
