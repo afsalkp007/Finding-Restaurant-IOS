@@ -36,7 +36,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         YelpApiUtil.initizlize()
         
         /* Init image cache memory/disk size*/
-        ImageCache.default.maxMemoryCost = 800 * 1024
+        ImageCache.default.maxMemoryCost = 500 * 1024
         ImageCache.default.maxDiskCacheSize = 20 * 1024 * 1024
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 1
         
