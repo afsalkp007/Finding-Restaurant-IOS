@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpRestaurantCategory:Codable {
+class YelpRestaurantCategory:Codable {
     var alias:String?
     var title:String?
 }
