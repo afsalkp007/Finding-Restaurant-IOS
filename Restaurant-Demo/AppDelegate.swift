@@ -12,6 +12,7 @@ import GoogleMaps
 import Firebase
 import Fabric
 import Crashlytics
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -33,6 +34,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /* Init YelpApiUtil*/
         YelpApiUtil.initizlize()
+        
+        /* Init image cache memory/disk size*/
+        ImageCache.default.maxMemoryCost = 800 * 1024
+        ImageCache.default.maxDiskCacheSize = 20 * 1024 * 1024
+        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 1
         
         return true
     }
