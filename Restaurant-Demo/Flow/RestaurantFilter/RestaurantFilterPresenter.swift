@@ -18,6 +18,8 @@ class RestaurantFilterPresenter: RestaurantFilterPresenterProtocol {
     
     func onViewDidAppear() {}
     
+    func onViewDidDisappear() {}
+    
     func attachView(view: RestaurantFilterViewProtocol) {
         self.mView = view
     }

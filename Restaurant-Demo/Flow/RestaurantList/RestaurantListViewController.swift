@@ -46,6 +46,11 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
         self.mPresenter?.onViewDidAppear()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        self.mPresenter?.onViewDidDisappear()
+    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -146,7 +151,7 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurantListViewController.CELL_ID, for: indexPath) as? RestaurantInfoTableViewCell else {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: RestaurantListViewController.CELL_ID) as? RestaurantInfoTableViewCell else {
             fatalError("Cell is not of kind RestaurantInfoTableViewCell")
         }
         let restaurantInfo = self.mRestaurantSummaryInfos![indexPath.row]
@@ -157,7 +162,7 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
         cell.mLbReviewsLabel.text = (restaurantInfo.review_count != nil) ? "\(restaurantInfo.review_count ?? 0) " + NSLocalizedString("Reviews", comment: "") : ""
         cell.mLbAddressLabel.text = restaurantInfo.location?.display_address?.joined()
         cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder:  #imageLiteral(resourceName: "no_image"))
-        cell.mIvRatingImage.image = restaurantInfo.getRatingImage(rating: restaurantInfo.rating ?? 0.0)
+        cell.mIvRatingImage.image = YelpBaseInfo.getRatingImage(rating: restaurantInfo.rating ?? 0.0)
         cell.mLbTypeLabel.text = restaurantInfo.categoriesStr
         
         return cell
@@ -270,6 +275,9 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     }
     
     func doPresent(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?) {
+        KingfisherManager.shared.cache.clearMemoryCache()
+        KingfisherManager.shared.cache.clearDiskCache()
+        KingfisherManager.shared.cache.cleanExpiredDiskCache()
         self.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     func doDismiss(animated flag: Bool, completion: (() -> Swift.Void)?) {
@@ -277,6 +285,9 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     }
     
     func doPerformSegue(withIdentifier identifier: String, sender: Any?) {
+        KingfisherManager.shared.cache.clearMemoryCache()
+        KingfisherManager.shared.cache.clearDiskCache()
+        KingfisherManager.shared.cache.cleanExpiredDiskCache()
         self.performSegue(withIdentifier: identifier, sender: sender)
     }
 }

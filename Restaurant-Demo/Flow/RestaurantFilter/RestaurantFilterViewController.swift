@@ -28,6 +28,10 @@ class RestaurantFilterViewController: UITableViewController, RestaurantFilterVie
     override func viewDidAppear(_ animated: Bool) {
         self.mPresenter?.onViewDidAppear()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.mPresenter?.onViewDidDisappear()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

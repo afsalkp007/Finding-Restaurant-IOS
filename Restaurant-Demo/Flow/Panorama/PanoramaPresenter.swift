@@ -30,5 +30,7 @@ class PanoramaPresenter: PanoramaPresenterProtocol {
     
     func onViewDidAppear() {}
     
+    func onViewDidDisappear() {}
+    
     func onLoadViewFinish() {}
 }

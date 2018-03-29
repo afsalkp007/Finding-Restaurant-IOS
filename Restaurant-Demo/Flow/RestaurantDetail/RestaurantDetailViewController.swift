@@ -46,6 +46,10 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
     override func viewDidAppear(_ animated: Bool) {
         self.mPresenter?.onViewDidAppear()
     }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        self.mPresenter?.onViewDidDisappear()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -127,7 +131,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
             categoriyTitles.append(categoryInfo.title ?? "")
         }
         self.mLbTypeLabel.text = categoriyTitles.joined(separator: ",")
-        self.mIvRatingImage.image = detailInfo?.getRatingImage(rating: detailInfo?.rating ?? 0.0)
+        self.mIvRatingImage.image = YelpBaseInfo.getRatingImage(rating: detailInfo?.rating ?? 0.0)
         self.mLbPriceLabel.text = detailInfo?.price ?? ""
         self.mLbReviews.text = "\(detailInfo?.review_count ?? 0) " + NSLocalizedString("Reviews", comment: "");
         
@@ -196,7 +200,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
                 (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
                 (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
                 (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url ?? "")), placeholder:  #imageLiteral(resourceName: "user-header"))
-                (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = review.getRatingImage(rating: Double.init(review.rating!))
+                (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = YelpBaseInfo.getRatingImage(rating: Double.init(review.rating!))
             }
         }
         
