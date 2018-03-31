@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpReviewerInfo:Codable {
+class YelpReviewerInfo:Codable {
     var name:String?
     var image_url:String?
 }

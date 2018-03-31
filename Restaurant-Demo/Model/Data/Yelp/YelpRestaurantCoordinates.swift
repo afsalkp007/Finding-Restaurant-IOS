@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpRestaurantCoordinates:Codable {
+class YelpRestaurantCoordinates:Codable {
     var latitude:Double?
     var longitude:Double?
 }

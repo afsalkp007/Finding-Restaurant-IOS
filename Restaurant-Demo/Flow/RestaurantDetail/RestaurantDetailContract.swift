@@ -14,6 +14,7 @@ protocol RestaurantDetailPresenterProtocol{
     
     func onViewDidLoad()
     func onViewDidAppear()
+    func onViewDidDisappear()
     func attachView(view:RestaurantDetailViewProtocol)
     
     func onInitParameters(summaryInfo:YelpRestaruantSummaryInfo?)

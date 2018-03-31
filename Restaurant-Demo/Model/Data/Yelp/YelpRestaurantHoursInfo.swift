@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpRestaurantHoursInfo:Codable {
+class YelpRestaurantHoursInfo:Codable {
     var is_open_now:Bool?
     var hours_type:String?
     var open:[YelpResaruantBusinessTime]?

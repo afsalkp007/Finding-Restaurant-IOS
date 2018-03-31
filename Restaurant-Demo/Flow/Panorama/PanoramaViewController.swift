@@ -34,6 +34,10 @@ class PanoramaViewController: UIViewController, GMSMapViewDelegate, PanoramaView
         self.mPresenter?.onViewDidAppear()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        self.mPresenter?.onViewDidDisappear()
+    }
+    
     override func viewWillDisappear(_ animated: Bool) {
         self.navigationController?.hideTransparentNavigationBar()
     }

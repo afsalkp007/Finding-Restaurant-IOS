@@ -25,6 +25,7 @@ protocol RestaurantListPresenterProtocol {
     
     func onViewDidLoad()
     func onViewDidAppear()
+    func onViewDidDisappear()
     func attachView(view:RestaurantListViewProtocol)
 
 }

@@ -15,6 +15,7 @@ protocol PanoramaPresenterProtocol {
     func onInitParameters(lat:Double, lng:Double)
     func onViewDidLoad()
     func onViewDidAppear()
+    func onViewDidDisappear()
     
     func onLoadViewFinish()
 }
