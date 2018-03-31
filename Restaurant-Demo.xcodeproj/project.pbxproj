@@ -33,6 +33,7 @@
 		ED450254205C34B9001D4A38 /* RestaurantDetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED450253205C34B9001D4A38 /* RestaurantDetailPresenter.swift */; };
 		ED4FE7572047111100435A2C /* RestaurantListPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FE7562047111100435A2C /* RestaurantListPresenter.swift */; };
 		ED4FE7592047122F00435A2C /* RestaurantListContract.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED4FE7582047122F00435A2C /* RestaurantListContract.swift */; };
+		ED56EB98206D384D00DBA3F2 /* AlamofireExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED56EB97206D384D00DBA3F2 /* AlamofireExtension.swift */; };
 		ED5B5F9F1FDA377300E8B198 /* NavigationControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */; };
 		ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */; };
 		ED5B5FB11FDD5DC700E8B198 /* FilterConfigs.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */; };
@@ -105,6 +106,7 @@
 		ED450253205C34B9001D4A38 /* RestaurantDetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailPresenter.swift; sourceTree = "<group>"; };
 		ED4FE7562047111100435A2C /* RestaurantListPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListPresenter.swift; sourceTree = "<group>"; };
 		ED4FE7582047122F00435A2C /* RestaurantListContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListContract.swift; sourceTree = "<group>"; };
+		ED56EB97206D384D00DBA3F2 /* AlamofireExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlamofireExtension.swift; sourceTree = "<group>"; };
 		ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerExtension.swift; sourceTree = "<group>"; };
 		ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EdgeInsetLabelExtension.swift; sourceTree = "<group>"; };
 		ED5B5FB01FDD5DC700E8B198 /* FilterConfigs.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigs.swift; sourceTree = "<group>"; };
@@ -217,8 +219,8 @@
 		ED2DB1F9204703AD000AC22C /* RestaurantList */ = {
 			isa = PBXGroup;
 			children = (
-				ED7337D0204ADF1400356AE6 /* RestaurantListViewController.swift */,
 				ED4FE7582047122F00435A2C /* RestaurantListContract.swift */,
+				ED7337D0204ADF1400356AE6 /* RestaurantListViewController.swift */,
 				ED4FE7562047111100435A2C /* RestaurantListPresenter.swift */,
 				ED7337CE204857E400356AE6 /* RestaurantListModel.swift */,
 			);
@@ -290,6 +292,7 @@
 		ED332D7A1FCA481900279333 /* API */ = {
 			isa = PBXGroup;
 			children = (
+				ED56EB96206D382D00DBA3F2 /* Extension */,
 				ED332D781FCA2EBA00279333 /* YelpApiConfigs.swift */,
 				EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */,
 				EDCCEE4A1FD1ED200072883A /* YelpApiCallbackProtocol.swift */,
@@ -348,12 +351,20 @@
 		ED45024720597C06001D4A38 /* RestaurantDetail */ = {
 			isa = PBXGroup;
 			children = (
-				ED45024F205C3485001D4A38 /* RestaurantDetailViewController.swift */,
 				ED45024D205C30DE001D4A38 /* RestaurantDetailContract.swift */,
+				ED45024F205C3485001D4A38 /* RestaurantDetailViewController.swift */,
 				ED450253205C34B9001D4A38 /* RestaurantDetailPresenter.swift */,
 				ED450251205C349B001D4A38 /* RestaurantDetailModel.swift */,
 			);
 			path = RestaurantDetail;
+			sourceTree = "<group>";
+		};
+		ED56EB96206D382D00DBA3F2 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				ED56EB97206D384D00DBA3F2 /* AlamofireExtension.swift */,
+			);
+			path = Extension;
 			sourceTree = "<group>";
 		};
 		ED5B5F9D1FDA373600E8B198 /* Extension */ = {
@@ -368,8 +379,8 @@
 		ED5CBB6B205EA4E8009D5DF2 /* Panorama */ = {
 			isa = PBXGroup;
 			children = (
-				ED5CBB6C205EA5B5009D5DF2 /* PanoramaViewController.swift */,
 				ED5CBB70205EA657009D5DF2 /* PanoramaContract.swift */,
+				ED5CBB6C205EA5B5009D5DF2 /* PanoramaViewController.swift */,
 				ED5CBB6E205EA645009D5DF2 /* PanoramaPresenter.swift */,
 				ED5CBB72205EA6DB009D5DF2 /* PanoramaModel.swift */,
 			);
@@ -425,8 +436,8 @@
 		EDF31EA2205E3AC000245D81 /* RestaurantFilter */ = {
 			isa = PBXGroup;
 			children = (
-				EDF31EA5205E3B7200245D81 /* RestaurantFilterViewController.swift */,
 				EDF31EA3205E3AFE00245D81 /* RestaurantFilterContract.swift */,
+				EDF31EA5205E3B7200245D81 /* RestaurantFilterViewController.swift */,
 				EDF31EA7205E3CCD00245D81 /* RestaurantFilterPresenter.swift */,
 				EDF31EA9205E3D2900245D81 /* RestaurantFilterModel.swift */,
 			);
@@ -647,6 +658,7 @@
 				ED332D7E1FCA4C4B00279333 /* YelpAuthenticationInfo.swift in Sources */,
 				ED45024E205C30DE001D4A38 /* RestaurantDetailContract.swift in Sources */,
 				ED5B5FB11FDD5DC700E8B198 /* FilterConfigs.swift in Sources */,
+				ED56EB98206D384D00DBA3F2 /* AlamofireExtension.swift in Sources */,
 				EDCCEE4B1FD1ED200072883A /* YelpApiCallbackProtocol.swift in Sources */,
 				EDA28C6A1FD5262100DD2902 /* Floaty.swift in Sources */,
 				EDF31EA8205E3CCD00245D81 /* RestaurantFilterPresenter.swift in Sources */,

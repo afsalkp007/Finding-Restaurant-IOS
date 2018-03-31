@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class RestaurantDetailViewController: UITableViewController, RestaurantDetailViewProtocol {
     
@@ -63,6 +64,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
         
         self.tableView.estimatedRowHeight = UITableViewAutomaticDimension
         self.tableView.rowHeight = UITableViewAutomaticDimension
+        self.mIvStaticMapImageView.kf.cancelDownloadTask()
         self.mIvStaticMapImageView.kf.setImage(with: URL(string: GoogleApiUtil.createStaticMapUrl(lat: lat!, lng: lng!, w: 200, h: 200)), placeholder:  #imageLiteral(resourceName: "no_image"))
     }
     
@@ -120,7 +122,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
         if detailInfo == nil || summaryInfo == nil {
             return;
         }
-        
+        self.mIvMainPhotoImageView.kf.cancelDownloadTask()
         self.mIvMainPhotoImageView.kf.setImage(with: URL(string: (detailInfo?.image_url)!), placeholder: #imageLiteral(resourceName: "no_image"))
         //mIvStreetImageView: UIImageView!
         self.mLbAddressLabel.text = detailInfo?.location?.display_address?.joined()
@@ -141,6 +143,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
         }
         
         for i in stride(from: 0, to: (detailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
+            self.mIvSubPhotos[i].kf.cancelDownloadTask()
             self.mIvSubPhotos[i].kf.setImage(with: URL(string: (detailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
         }
         
@@ -199,6 +202,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
                 let reviewCellItem = self.mTcReviewCellItems[i]
                 (reviewCellItem.viewWithTag(2) as? UILabel)?.text = user.name
                 (reviewCellItem.viewWithTag(4) as? UILabel)?.text = review.text
+                (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.cancelDownloadTask()
                 (reviewCellItem.viewWithTag(1) as? UIImageView)?.kf.setImage(with: URL(string: (user.image_url ?? "")), placeholder:  #imageLiteral(resourceName: "user-header"))
                 (reviewCellItem.viewWithTag(3) as? UIImageView)?.image = YelpBaseInfo.getRatingImage(rating: Double.init(review.rating!))
             }
@@ -212,6 +216,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
     }
     
     func doPresent(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Void)?) {
+        ImageCache.default.clearMemoryCache()
         self.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     
@@ -220,6 +225,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
     }
     
     func doPerformSegue(withIdentifier identifier: String, sender: Any?) {
+        ImageCache.default.clearMemoryCache()
         self.performSegue(withIdentifier: identifier, sender: sender)
     }
     

@@ -161,6 +161,7 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
         cell.mLbPriceLabel.text = restaurantInfo.price ?? ""
         cell.mLbReviewsLabel.text = (restaurantInfo.review_count != nil) ? "\(restaurantInfo.review_count ?? 0) " + NSLocalizedString("Reviews", comment: "") : ""
         cell.mLbAddressLabel.text = restaurantInfo.location?.display_address?.joined()
+        cell.mIvPhotoImageView.kf.cancelDownloadTask()
         cell.mIvPhotoImageView.kf.setImage(with: URL(string: restaurantInfo.image_url ?? ""), placeholder:  #imageLiteral(resourceName: "no_image"))
         cell.mIvRatingImage.image = YelpBaseInfo.getRatingImage(rating: restaurantInfo.rating ?? 0.0)
         cell.mLbTypeLabel.text = restaurantInfo.categoriesStr
@@ -275,9 +276,7 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     }
     
     func doPresent(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?) {
-        KingfisherManager.shared.cache.clearMemoryCache()
-        KingfisherManager.shared.cache.clearDiskCache()
-        KingfisherManager.shared.cache.cleanExpiredDiskCache()
+        ImageCache.default.clearMemoryCache()
         self.present(viewControllerToPresent, animated: flag, completion: completion)
     }
     func doDismiss(animated flag: Bool, completion: (() -> Swift.Void)?) {
@@ -285,9 +284,7 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     }
     
     func doPerformSegue(withIdentifier identifier: String, sender: Any?) {
-        KingfisherManager.shared.cache.clearMemoryCache()
-        KingfisherManager.shared.cache.clearDiskCache()
-        KingfisherManager.shared.cache.cleanExpiredDiskCache()
+        ImageCache.default.clearMemoryCache()
         self.performSegue(withIdentifier: identifier, sender: sender)
     }
 }
