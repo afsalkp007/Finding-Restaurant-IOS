@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpAuthenticationInfo: Codable {
+class YelpAuthenticationInfo: Codable {
     var access_token:String?
     var expires_in:UInt64?
     var token_type:String?

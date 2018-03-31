@@ -15,7 +15,7 @@ class RestaurantListModel: NSObject {
     
     override init() {
         self.mFilterConfig = FilterConfigs()
-        self.mFilterConfig?.mSortingRule = FilterConfigs.SortingRuleAPIConstants.best_match.rawValue
+        self.mFilterConfig?.mSortingRule = FilterConfigs.SortingRuleAPIConstants.distance.rawValue
     }
     
     func setRestaurantSummaryInfos(summaryInfos:[YelpRestaruantSummaryInfo]?) {
@@ -45,7 +45,7 @@ class RestaurantListModel: NSObject {
     }
     
     func resetFilterConfigToDefault() {
-        self.mFilterConfig?.mSortingRule = FilterConfigs.SortingRuleAPIConstants.best_match.rawValue
+        self.mFilterConfig?.mSortingRule = FilterConfigs.SortingRuleAPIConstants.distance.rawValue
         self.mFilterConfig?.mOpenAt = nil
         self.mFilterConfig?.mPrice = nil
     }

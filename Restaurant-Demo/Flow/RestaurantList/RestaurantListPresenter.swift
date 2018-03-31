@@ -119,6 +119,8 @@ class RestaurantListPresenter: NSObject, RestaurantListPresenterProtocol, Locati
         }
     }
     
+    func onViewDidDisappear() {}
+    
     func initConfig() {
         self.mJsonDecoder = Util.getJsonDecoder()
         self.mJsonDecoder?.dateDecodingStrategy = .iso8601

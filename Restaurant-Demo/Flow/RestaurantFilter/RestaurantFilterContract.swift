@@ -5,6 +5,7 @@ protocol RestaurantFilterPresenterProtocol{
     
     func onViewDidLoad()
     func onViewDidAppear()
+    func onViewDidDisappear()
     func attachView(view:RestaurantFilterViewProtocol)
     
     func onApplyPressed(price:Int, openAt:Int, sortingRuleIndex:Int)    

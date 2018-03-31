@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpResaruantBusinessTime:Codable  {
+class YelpResaruantBusinessTime:Codable  {
     var is_overnight:Bool?
     var start:String?
     var end:String?

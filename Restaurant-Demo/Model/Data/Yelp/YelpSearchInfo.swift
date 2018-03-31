@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct YelpSearchInfo: Codable {
+class YelpSearchInfo: Codable {
     var businesses:[YelpRestaruantSummaryInfo]?
     var total:Int?
 }

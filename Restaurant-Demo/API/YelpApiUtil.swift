@@ -79,6 +79,15 @@ class YelpApiUtil {
     private static func apiRequest(apiTag:String, url:String, callback:ApiCallback? = nil, headers: HTTPHeaders? = nil, method: HTTPMethod, parameters:Parameters? = nil,  completionHandler:((DataResponse<Any>) -> Void)? = nil) {
         
         if completionHandler == nil {
+//            Alamofire.SessionManager.default
+//                .requestWithoutCache(url, method: method, parameters: parameters, headers: headers).responseJSON {
+//                    (response) in
+//                    if response.error == nil, callback != nil {
+//                        callback?.onSuccess(apiTag: apiTag, jsonData: response.data)
+//                    } else if callback != nil  {
+//                        callback?.onError(apiTag: apiTag, errorMsg: response.error.debugDescription)
+//                    }
+//            }
             Alamofire.request(url, method: method, parameters: parameters, headers: headers).responseJSON {
                 (response) in
                 if response.error == nil, callback != nil {
@@ -89,6 +98,8 @@ class YelpApiUtil {
             }
         } else {
             Alamofire.request(url, method: method, parameters: parameters, headers: headers).responseJSON(completionHandler: completionHandler!)
+//            Alamofire.SessionManager.default
+//                .requestWithoutCache(url, method: method, parameters: parameters, headers: headers).responseJSON(completionHandler:completionHandler!)
         }
     }
 }

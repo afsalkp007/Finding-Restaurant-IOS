@@ -12,6 +12,7 @@ import GoogleMaps
 import Firebase
 import Fabric
 import Crashlytics
+import Kingfisher
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -34,7 +35,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         /* Init YelpApiUtil*/
         YelpApiUtil.initizlize()
         
+        /* Init image cache memory/disk size*/
+        ImageCache.default.maxMemoryCost = 500 * 1024
+        ImageCache.default.maxDiskCacheSize = 20 * 1024 * 1024
+        ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 1
+        
         return true
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        // TODO: Route the quick action to main page and under searching status
+        guard let actionStr = shortcutItem.type.components(separatedBy: ".").last, let action = QuickAction(rawValue:actionStr) else {
+            return
+        }
+        
+        print("\(#function) and action is \(action.rawValue)")
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
