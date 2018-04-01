@@ -9,7 +9,9 @@
 import UIKit
 import Kingfisher
 
-class RestaurantDetailViewController: UITableViewController, RestaurantDetailViewProtocol {
+class RestaurantDetailViewController: UITableViewController, RestaurantDetailViewProtocol, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    private static let CELL_ID = "restaurant_detail_photo_cell"
     
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
     @IBOutlet weak var mIvStaticMapImageView: UIImageView!
@@ -19,7 +21,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
     @IBOutlet weak var mLbPriceLabel: UILabel!
     @IBOutlet weak var mLbReviews: UILabel!
     @IBOutlet weak var mLbIsOpenStatusLabel: UILabel!
-    @IBOutlet var mIvSubPhotos: [UIImageView]!
+    @IBOutlet weak var mCvRestaurantPhotoCollectionView: UICollectionView!
     @IBOutlet weak var mIvRatingImage: UIImageView!
     @IBOutlet var mTcReviewCellItems: [UITableViewCell]!
     @IBOutlet weak var mLbOpenHoursTitleLabel: UILabel!
@@ -30,8 +32,9 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
     private var mPresenter:RestaurantDetailPresenterProtocol?
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
     var mRestaurantDetailInfo:YelpRestaruantDetailInfo?
+    private var mRestaurantDetailPhotos:[String]?
     private var mReviewDetailInfos:[YelpReviewDetailInfo]?
-
+    
     // MARK:- Lif cycle & initialization
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +54,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
     override func viewDidDisappear(_ animated: Bool) {
         self.mPresenter?.onViewDidDisappear()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -79,6 +82,22 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
             self.mPresenter?.onReviewItemSelect(reviewDetail: self.mReviewDetailInfos![indexPath.row])
         }
     }
+    
+    // MARK:- CollectionView DataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.mRestaurantDetailPhotos?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RestaurantDetailViewController.CELL_ID, for: indexPath) as? RestaurantDetailPhotoCollectionViewCell else {
+            fatalError("Cell is not of kind UICollectionViewCell")
+        }
+        
+        cell.setPhotoUrl(url: self.mRestaurantDetailPhotos?[indexPath.row])
+        
+        return cell
+    }
+    
     
     // MARK: - onStaticMapPressed
     @IBAction func onStaticMapPressed(_ sender: Any) {
@@ -142,10 +161,14 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
             self.mLbIsOpenStatusLabel.text = (isOpenNow) ? "OPEN" : "CLOSE"
         }
         
-        for i in stride(from: 0, to: (detailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
-            self.mIvSubPhotos[i].kf.cancelDownloadTask()
-            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (detailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
-        }
+        self.mRestaurantDetailPhotos = detailInfo?.photos
+        self.mCvRestaurantPhotoCollectionView.register(UINib(nibName:"RestaurantDetailPhotoCollectionViewCell", bundle:nil), forCellWithReuseIdentifier: RestaurantDetailViewController.CELL_ID)
+        self.mCvRestaurantPhotoCollectionView.reloadData()
+        // TODO: Use the collection to display
+        //        for i in stride(from: 0, to: (detailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
+        //            self.mIvSubPhotos[i].kf.cancelDownloadTask()
+        //            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (detailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
+        //        }
         
         // Add open hour informations
         var prevView:OpenHourRowView? = nil

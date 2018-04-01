@@ -59,6 +59,8 @@
 		EDA28C6C1FD5262100DD2902 /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C651FD5262100DD2902 /* FloatyItem.swift */; };
 		EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */; };
 		EDA28C751FD6780B00DD2902 /* GoogleApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */; };
+		EDAA225C2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAA225A2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift */; };
+		EDAA225D2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDAA225B2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib */; };
 		EDB664E81FE921D600F728C2 /* FilterConfigsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */; };
 		EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */; };
 		EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */; };
@@ -134,6 +136,8 @@
 		EDA28C661FD5262100DD2902 /* Floaty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Floaty.h; sourceTree = "<group>"; };
 		EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiUtil.swift; sourceTree = "<group>"; };
+		EDAA225A2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		EDAA225B2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantDetailPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigsExtension.swift; sourceTree = "<group>"; };
 		EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 			children = (
 				ED3559CA1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift */,
 				ED6A9DC6202DF88F003F3E15 /* ReviewSummaryItemTableViewCell.swift */,
+				EDAA225A2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift */,
+				EDAA225B2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -522,6 +528,7 @@
 				EDEF24961FFBD12500FC51A8 /* Localizable.strings in Resources */,
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
+				EDAA225D2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib in Resources */,
 				EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */,
 				ED7607AD2036C32600BF12DB /* OpenHourRowView.xib in Resources */,
 			);
@@ -679,6 +686,7 @@
 				ED450254205C34B9001D4A38 /* RestaurantDetailPresenter.swift in Sources */,
 				ED3559D91FCF0D0200935DFF /* RatingEnum.swift in Sources */,
 				EDA28C6B1FD5262100DD2902 /* FloatyDelegate.swift in Sources */,
+				EDAA225C2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift in Sources */,
 				ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */,
 				ED3559CB1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift in Sources */,
 				EDF31EA6205E3B7200245D81 /* RestaurantFilterViewController.swift in Sources */,
