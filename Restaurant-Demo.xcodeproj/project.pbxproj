@@ -139,6 +139,7 @@
 		EDAA225A2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
 		EDAA225B2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantDetailPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigsExtension.swift; sourceTree = "<group>"; };
+		EDBE827120766E1E00E0026D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
 		EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiUtil.swift; sourceTree = "<group>"; };
@@ -149,7 +150,6 @@
 		EDCF6EA51FF224E400868473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EDCF6EA61FF22A0100868473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EDEA24C02034A7AD004F0485 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		EDEA24C22034A7AE004F0485 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		EDEF24971FFBD12500FC51A8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EDEF24991FFBD13D00FC51A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDF31EA3205E3AFE00245D81 /* RestaurantFilterContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterContract.swift; sourceTree = "<group>"; };
@@ -716,7 +716,7 @@
 			children = (
 				ED332D631FC8759C00279333 /* Base */,
 				EDEA24C02034A7AD004F0485 /* en */,
-				EDEA24C22034A7AE004F0485 /* zh-Hant */,
+				EDBE827120766E1E00E0026D /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
