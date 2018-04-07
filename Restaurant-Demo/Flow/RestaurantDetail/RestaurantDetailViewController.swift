@@ -99,6 +99,14 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
         return cell
     }
     
+    // Mark:- CollectionView Delegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let photoUrlStrs = self.mRestaurantDetailPhotos else {
+            return
+        }
+        show(Util.createPhotoGallery(sourceViewController:self, currentImgIndex: indexPath.row, urlStrs: photoUrlStrs), sender: nil)
+    }
+    
     
     // MARK: - onStaticMapPressed
     @IBAction func onStaticMapPressed(_ sender: Any) {

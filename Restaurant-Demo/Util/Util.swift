@@ -8,6 +8,8 @@
 
 import Foundation
 import UIKit
+import RIGImageGallery
+import Kingfisher
 
 class Util {
     private static let sJsonDecoder:JSONDecoder = JSONDecoder()
@@ -26,5 +28,30 @@ class Util {
     
     static func getNowWeekDay() -> Int {
         return Calendar.current.component(.weekday, from: Date())
+    }
+    
+    static func createPhotoGallery(sourceViewController:UIViewController, currentImgIndex:Int, urlStrs:[String]) -> RIGImageGalleryViewController {
+        let urls: [URL?] = urlStrs.map {URL(string:$0)}
+        let rigItems: [RIGImageGalleryItem] = urls.map { _ in
+            RIGImageGalleryItem(placeholderImage: UIImage(named: "placeholder") ?? UIImage(),
+                                isLoading: true)
+        }        
+        let rigController = RIGImageGalleryViewController(images: rigItems)
+        
+        for (index, url) in urls.enumerated() {
+            ImageDownloader.default.downloadImage(with: url! , options: [.fromMemoryCacheOrRefresh, .backgroundDecode], progressBlock: nil) {
+                [weak rigController] (image, error, url, data) in
+                rigController?.images[index].image = image
+                rigController?.images[index].isLoading = false
+            }
+        }
+        rigController.dismissHandler = {
+           [weak sourceViewController] (rigController:RIGImageGalleryViewController) -> Void in
+            sourceViewController?.navigationController?.popViewController(animated: true)
+        }
+        
+        rigController.setCurrentImage(currentImgIndex, animated: false)
+        
+        return rigController
     }
 }
