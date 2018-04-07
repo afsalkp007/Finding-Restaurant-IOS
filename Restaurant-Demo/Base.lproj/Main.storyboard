@@ -38,12 +38,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <view key="tableHeaderView" contentMode="scaleToFill" id="7hc-46-vKt" userLabel="Filter rules tag list container">
-                            <rect key="frame" x="0.0" y="0.0" width="375" height="74"/>
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="41"/>
                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxX="YES" heightSizable="YES" flexibleMaxY="YES"/>
                             <subviews>
                                 <view tag="-1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="b7W-wl-BYc" userLabel="Filter rules tag list" customClass="TagListView" customModule="TagListView">
-                                    <rect key="frame" x="10" y="26" width="355" height="22"/>
+                                    <rect key="frame" x="10" y="9.6666666666666643" width="355" height="22"/>
                                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="height" constant="22" id="J2n-wd-QSJ"/>
+                                    </constraints>
                                     <userDefinedRuntimeAttributes>
                                         <userDefinedRuntimeAttribute type="color" keyPath="textColor">
                                             <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -79,7 +82,7 @@
                                     </userDefinedRuntimeAttributes>
                                 </view>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Of4-5D-czW" userLabel="Filter rules tag list bottom divider">
-                                    <rect key="frame" x="0.0" y="58" width="375" height="1"/>
+                                    <rect key="frame" x="0.0" y="41.666666666666664" width="375" height="1"/>
                                     <color key="backgroundColor" red="0.66666666666666663" green="0.66666666666666663" blue="0.66666666666666663" alpha="1" colorSpace="calibratedRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="height" constant="1" id="LOy-zV-6Mr"/>
@@ -99,7 +102,7 @@
                         </view>
                         <prototypes>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="menu_cell" rowHeight="150" id="Xqy-Nk-wIb" customClass="RestaurantInfoTableViewCell" customModule="Restaurant_Demo" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="102" width="375" height="150"/>
+                                <rect key="frame" x="0.0" y="69" width="375" height="150"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Xqy-Nk-wIb" id="ls9-xd-mvv">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="149.66666666666666"/>
@@ -220,7 +223,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eke-BA-HOp" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="780" y="-52.5"/>
+            <point key="canvasLocation" x="780" y="-53.201970443349758"/>
         </scene>
         <!--Restaurant Filter View Controller-->
         <scene sceneID="Xrp-nb-cBL">
@@ -468,7 +471,7 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="  " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rhz-uC-g0b" customClass="EdgeInsetLabel" customModule="Restaurant_Demo" customModuleProvider="target">
-                                                            <rect key="frame" x="0.0" y="165.66666666666666" width="9" height="0.0"/>
+                                                            <rect key="frame" x="0.0" y="165.66666666666666" width="5" height="0.0"/>
                                                             <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="9"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -515,35 +518,27 @@
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="222.66666666666666"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" alignment="center" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="XyK-Iz-otO" userLabel="SubPhotos">
-                                                    <rect key="frame" x="20" y="20" width="335" height="182.66666666666666"/>
-                                                    <subviews>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image" translatesAutoresizingMaskIntoConstraints="NO" id="5fb-5k-PbX">
-                                                            <rect key="frame" x="0.0" y="39" width="105" height="105"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="5fb-5k-PbX" secondAttribute="height" multiplier="1:1" id="t6f-I4-85t"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image" translatesAutoresizingMaskIntoConstraints="NO" id="Eiq-UR-nbh">
-                                                            <rect key="frame" x="115" y="39.000000000000007" width="105" height="104.66666666666669"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="Eiq-UR-nbh" secondAttribute="height" multiplier="1:1" id="gzD-mc-SP8"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                        <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="no_image" translatesAutoresizingMaskIntoConstraints="NO" id="VRP-gd-cuL">
-                                                            <rect key="frame" x="230" y="39" width="105" height="105"/>
-                                                            <constraints>
-                                                                <constraint firstAttribute="width" secondItem="VRP-gd-cuL" secondAttribute="height" multiplier="1:1" id="2hP-QK-pbg"/>
-                                                            </constraints>
-                                                        </imageView>
-                                                    </subviews>
-                                                </stackView>
+                                                <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="V4x-J8-Bx5">
+                                                    <rect key="frame" x="5" y="20" width="365" height="182.66666666666666"/>
+                                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                                    <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="ja7-fz-S1M">
+                                                        <size key="itemSize" width="130" height="130"/>
+                                                        <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                        <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                        <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                                    </collectionViewFlowLayout>
+                                                    <cells/>
+                                                    <connections>
+                                                        <outlet property="dataSource" destination="DBo-70-woK" id="E2x-fZ-3qX"/>
+                                                        <outlet property="delegate" destination="DBo-70-woK" id="di8-Ev-L3o"/>
+                                                    </connections>
+                                                </collectionView>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="XyK-Iz-otO" firstAttribute="bottom" secondItem="ZSH-wt-VuG" secondAttribute="bottom" constant="-20" id="FZr-nY-vus"/>
-                                                <constraint firstItem="XyK-Iz-otO" firstAttribute="leading" secondItem="ZSH-wt-VuG" secondAttribute="leading" constant="20" id="XMQ-09-s0O"/>
-                                                <constraint firstItem="XyK-Iz-otO" firstAttribute="trailing" secondItem="ZSH-wt-VuG" secondAttribute="trailing" constant="-20" id="chM-eZ-ytA"/>
-                                                <constraint firstItem="XyK-Iz-otO" firstAttribute="top" secondItem="ZSH-wt-VuG" secondAttribute="top" constant="20" id="ctA-h3-cLE"/>
+                                                <constraint firstItem="V4x-J8-Bx5" firstAttribute="leading" secondItem="ZSH-wt-VuG" secondAttribute="leading" constant="5" id="86a-eZ-ydN"/>
+                                                <constraint firstItem="V4x-J8-Bx5" firstAttribute="top" secondItem="ZSH-wt-VuG" secondAttribute="top" constant="20" id="JQr-s4-YjS"/>
+                                                <constraint firstAttribute="trailing" secondItem="V4x-J8-Bx5" secondAttribute="trailing" constant="5" id="gwU-Mx-pHN"/>
+                                                <constraint firstAttribute="bottom" secondItem="V4x-J8-Bx5" secondAttribute="bottom" constant="20" id="qYf-gg-FLq"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -568,11 +563,21 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="No Open Hour Data !" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hYu-ub-f0e" userLabel="no open hours hint">
+                                                    <rect key="frame" x="10" y="137.66666666666666" width="355" height="24"/>
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstAttribute="trailing" secondItem="aEY-Cu-eJf" secondAttribute="trailing" id="8sb-e9-tnd"/>
+                                                <constraint firstItem="hYu-ub-f0e" firstAttribute="centerY" secondItem="aka-zS-Wi3" secondAttribute="centerY" id="FeV-Q6-iKW"/>
                                                 <constraint firstItem="aEY-Cu-eJf" firstAttribute="top" secondItem="aka-zS-Wi3" secondAttribute="top" id="HHO-th-ted"/>
                                                 <constraint firstItem="aEY-Cu-eJf" firstAttribute="leading" secondItem="aka-zS-Wi3" secondAttribute="leading" id="SuX-ln-AP1"/>
+                                                <constraint firstItem="hYu-ub-f0e" firstAttribute="leading" secondItem="aka-zS-Wi3" secondAttribute="leading" constant="10" id="WZy-Ns-ivd"/>
+                                                <constraint firstAttribute="trailing" secondItem="hYu-ub-f0e" secondAttribute="trailing" constant="10" id="Y5x-T2-ufO"/>
+                                                <constraint firstItem="hYu-ub-f0e" firstAttribute="centerX" secondItem="aka-zS-Wi3" secondAttribute="centerX" id="mf4-zj-c3n"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                     </tableViewCell>
@@ -588,7 +593,7 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" tag="1" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1C5-2a-T3r" userLabel="user head icon">
-                                                    <rect key="frame" x="10" y="38.999999999999993" width="75" height="73.333333333333314"/>
+                                                    <rect key="frame" x="10" y="39.000000000000007" width="75" height="73.666666666666686"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="1C5-2a-T3r" secondAttribute="height" multiplier="83:81" id="iH0-sc-EgX"/>
                                                     </constraints>
@@ -607,7 +612,7 @@
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="4" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsLetterSpacingToFitWidth="YES" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9z7-BS-yAt" userLabel="review content">
-                                                    <rect key="frame" x="10" y="122.33333333333333" width="355" height="58.666666666666671"/>
+                                                    <rect key="frame" x="10" y="122.66666666666667" width="355" height="58.333333333333329"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -752,20 +757,19 @@
                     </tableView>
                     <connections>
                         <outlet property="mBtnPhoneButton" destination="V3y-wq-mob" id="I68-2p-om4"/>
+                        <outlet property="mCvRestaurantPhotoCollectionView" destination="V4x-J8-Bx5" id="qxL-d1-jeb"/>
                         <outlet property="mIvMainPhotoImageView" destination="Mwz-ws-9Tp" id="wzP-nT-D6v"/>
                         <outlet property="mIvRatingImage" destination="1ud-65-LWB" id="gkC-e9-yfy"/>
                         <outlet property="mIvStaticMapImageView" destination="mbO-uj-bCK" id="rsg-zN-Cbo"/>
                         <outlet property="mLbAddressLabel" destination="0Ma-7f-RmY" id="yeD-ld-hpa"/>
                         <outlet property="mLbIsOpenStatusLabel" destination="rhz-uC-g0b" id="oGY-B8-OMw"/>
+                        <outlet property="mLbNoOpenHoursHintLabel" destination="hYu-ub-f0e" id="pEK-6M-czb"/>
                         <outlet property="mLbOpenHoursTitleLabel" destination="aEY-Cu-eJf" id="3Hx-W5-LQ0"/>
                         <outlet property="mLbPriceLabel" destination="BKd-Dz-8kz" id="wfZ-cY-bU3"/>
                         <outlet property="mLbReviews" destination="6d1-QS-6Gl" id="vyw-MP-bb8"/>
                         <outlet property="mLbTypeLabel" destination="nHQ-A2-UhM" id="Spm-5U-mow"/>
                         <outlet property="mTcOpenHoursCell" destination="BDG-Ty-Dqc" id="Qr4-L3-4rD"/>
                         <outlet property="mVOpenHoursContentView" destination="aka-zS-Wi3" id="wAA-Gq-Pn5"/>
-                        <outletCollection property="mIvSubPhotos" destination="5fb-5k-PbX" collectionClass="NSMutableArray" id="i7Q-wG-SHx"/>
-                        <outletCollection property="mIvSubPhotos" destination="Eiq-UR-nbh" collectionClass="NSMutableArray" id="beu-1M-7xW"/>
-                        <outletCollection property="mIvSubPhotos" destination="VRP-gd-cuL" collectionClass="NSMutableArray" id="CaJ-fO-v12"/>
                         <outletCollection property="mTcReviewCellItems" destination="KTT-Z1-2kr" collectionClass="NSMutableArray" id="gc5-po-a41"/>
                         <outletCollection property="mTcReviewCellItems" destination="WmF-bn-yAC" collectionClass="NSMutableArray" id="Cyo-bf-5HH"/>
                         <outletCollection property="mTcReviewCellItems" destination="mZe-s1-pkt" collectionClass="NSMutableArray" id="Vhu-28-Rbk"/>

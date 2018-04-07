@@ -59,6 +59,8 @@
 		EDA28C6C1FD5262100DD2902 /* FloatyItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C651FD5262100DD2902 /* FloatyItem.swift */; };
 		EDA28C6F1FD57D0000DD2902 /* LocationManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */; };
 		EDA28C751FD6780B00DD2902 /* GoogleApiUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */; };
+		EDAA225C2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDAA225A2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift */; };
+		EDAA225D2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = EDAA225B2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib */; };
 		EDB664E81FE921D600F728C2 /* FilterConfigsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */; };
 		EDC55E061FE92BE100B23097 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */; };
 		EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */ = {isa = PBXBuildFile; fileRef = EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */; };
@@ -134,7 +136,10 @@
 		EDA28C661FD5262100DD2902 /* Floaty.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Floaty.h; sourceTree = "<group>"; };
 		EDA28C6E1FD57D0000DD2902 /* LocationManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationManager.swift; sourceTree = "<group>"; };
 		EDA28C741FD6780B00DD2902 /* GoogleApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleApiUtil.swift; sourceTree = "<group>"; };
+		EDAA225A2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantDetailPhotoCollectionViewCell.swift; sourceTree = "<group>"; };
+		EDAA225B2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RestaurantDetailPhotoCollectionViewCell.xib; sourceTree = "<group>"; };
 		EDB664E71FE921D600F728C2 /* FilterConfigsExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FilterConfigsExtension.swift; sourceTree = "<group>"; };
+		EDBE827120766E1E00E0026D /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		EDC55E051FE92BE100B23097 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		EDC55E0C1FEA3E2200B23097 /* ServiceAccount.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = ServiceAccount.json; sourceTree = "<group>"; };
 		EDCCEE481FD1E8910072883A /* YelpApiUtil.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YelpApiUtil.swift; sourceTree = "<group>"; };
@@ -145,7 +150,6 @@
 		EDCF6EA51FF224E400868473 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		EDCF6EA61FF22A0100868473 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/InfoPlist.strings"; sourceTree = "<group>"; };
 		EDEA24C02034A7AD004F0485 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/Main.strings; sourceTree = "<group>"; };
-		EDEA24C22034A7AE004F0485 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Main.strings"; sourceTree = "<group>"; };
 		EDEF24971FFBD12500FC51A8 /* zh-Hant */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hant"; path = "zh-Hant.lproj/Localizable.strings"; sourceTree = "<group>"; };
 		EDEF24991FFBD13D00FC51A8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = Base; path = Base.lproj/Localizable.strings; sourceTree = "<group>"; };
 		EDF31EA3205E3AFE00245D81 /* RestaurantFilterContract.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantFilterContract.swift; sourceTree = "<group>"; };
@@ -333,6 +337,8 @@
 			children = (
 				ED3559CA1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift */,
 				ED6A9DC6202DF88F003F3E15 /* ReviewSummaryItemTableViewCell.swift */,
+				EDAA225A2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift */,
+				EDAA225B2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib */,
 			);
 			path = Cell;
 			sourceTree = "<group>";
@@ -459,7 +465,6 @@
 				FA6C838DBFDD085C623B6E4B /* [CP] Copy Pods Resources */,
 				EDC55E071FE9CFEA00B23097 /* ShellScript */,
 				EDC55E0B1FEA0C7300B23097 /* ShellScript */,
-				ED5CBB74205EB070009D5DF2 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -522,6 +527,7 @@
 				EDEF24961FFBD12500FC51A8 /* Localizable.strings in Resources */,
 				ED332D661FC8759C00279333 /* Assets.xcassets in Resources */,
 				ED332D641FC8759C00279333 /* Main.storyboard in Resources */,
+				EDAA225D2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.xib in Resources */,
 				EDC55E0D1FEA3E2200B23097 /* ServiceAccount.json in Resources */,
 				ED7607AD2036C32600BF12DB /* OpenHourRowView.xib in Resources */,
 			);
@@ -559,6 +565,7 @@
 				"${BUILT_PRODUCTS_DIR}/GoogleToolboxForMac/GoogleToolboxForMac.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework",
+				"${BUILT_PRODUCTS_DIR}/RIGImageGallery/RIGImageGallery.framework",
 				"${BUILT_PRODUCTS_DIR}/TagListView/TagListView.framework",
 				"${BUILT_PRODUCTS_DIR}/nanopb/nanopb.framework",
 			);
@@ -568,6 +575,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/GoogleToolboxForMac.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Protobuf.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/RIGImageGallery.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/TagListView.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/nanopb.framework",
 			);
@@ -575,19 +583,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Restaurant-Demo/Pods-Restaurant-Demo-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		ED5CBB74205EB070009D5DF2 /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 8;
-			files = (
-			);
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 1;
-			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\"";
 		};
 		EDC55E071FE9CFEA00B23097 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -600,7 +595,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 			shellPath = /bin/sh;
-			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9f46a54bfc4906fb913c2da3dbcab6fc91d1b079 7858508ac0fb219b7df99f6226d27930545c5e4d9642d80aa1a4df6d226dfc97";
+			shellScript = "\"${PODS_ROOT}/Fabric/run\" 9f46a54bfc4906fb913c2da3dbcab6fc91d1b079  7858508ac0fb219b7df99f6226d27930545c5e4d9642d80aa1a4df6d226dfc97";
 		};
 		EDC55E0B1FEA0C7300B23097 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -679,6 +674,7 @@
 				ED450254205C34B9001D4A38 /* RestaurantDetailPresenter.swift in Sources */,
 				ED3559D91FCF0D0200935DFF /* RatingEnum.swift in Sources */,
 				EDA28C6B1FD5262100DD2902 /* FloatyDelegate.swift in Sources */,
+				EDAA225C2071466400D56AC9 /* RestaurantDetailPhotoCollectionViewCell.swift in Sources */,
 				ED5B5FA11FDA39E400E8B198 /* EdgeInsetLabelExtension.swift in Sources */,
 				ED3559CB1FCBACAE00935DFF /* RestaurantInfoTableViewCell.swift in Sources */,
 				EDF31EA6205E3B7200245D81 /* RestaurantFilterViewController.swift in Sources */,
@@ -708,7 +704,7 @@
 			children = (
 				ED332D631FC8759C00279333 /* Base */,
 				EDEA24C02034A7AD004F0485 /* en */,
-				EDEA24C22034A7AE004F0485 /* zh-Hant */,
+				EDBE827120766E1E00E0026D /* zh-Hant */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -863,7 +859,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				DEVELOPMENT_TEAM = E4X2Y9E7BF;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Restaurant-Demo/Framework",
@@ -887,6 +885,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = E4X2Y9E7BF;
+				ENABLE_BITCODE = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Restaurant-Demo/Framework",

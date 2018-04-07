@@ -9,7 +9,9 @@
 import UIKit
 import Kingfisher
 
-class RestaurantDetailViewController: UITableViewController, RestaurantDetailViewProtocol {
+class RestaurantDetailViewController: UITableViewController, RestaurantDetailViewProtocol, UICollectionViewDataSource, UICollectionViewDelegate {
+    
+    private static let CELL_ID = "restaurant_detail_photo_cell"
     
     @IBOutlet weak var mIvMainPhotoImageView: UIImageView!
     @IBOutlet weak var mIvStaticMapImageView: UIImageView!
@@ -19,19 +21,21 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
     @IBOutlet weak var mLbPriceLabel: UILabel!
     @IBOutlet weak var mLbReviews: UILabel!
     @IBOutlet weak var mLbIsOpenStatusLabel: UILabel!
-    @IBOutlet var mIvSubPhotos: [UIImageView]!
+    @IBOutlet weak var mCvRestaurantPhotoCollectionView: UICollectionView!
     @IBOutlet weak var mIvRatingImage: UIImageView!
     @IBOutlet var mTcReviewCellItems: [UITableViewCell]!
     @IBOutlet weak var mLbOpenHoursTitleLabel: UILabel!
     @IBOutlet weak var mTcOpenHoursCell: UITableViewCell!
-    @IBOutlet weak var mVOpenHoursContentView: UIView!
+    @IBOutlet weak var mVOpenHoursContentView: UIView!    
+    @IBOutlet weak var mLbNoOpenHoursHintLabel: UILabel!
     
     private var mLoadingAlertController:UIAlertController?
     private var mPresenter:RestaurantDetailPresenterProtocol?
     var mRestaurantSummaryInfo:YelpRestaruantSummaryInfo?
     var mRestaurantDetailInfo:YelpRestaruantDetailInfo?
+    private var mRestaurantDetailPhotos:[String]?
     private var mReviewDetailInfos:[YelpReviewDetailInfo]?
-
+    
     // MARK:- Lif cycle & initialization
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +55,7 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
     override func viewDidDisappear(_ animated: Bool) {
         self.mPresenter?.onViewDidDisappear()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -79,6 +83,30 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
             self.mPresenter?.onReviewItemSelect(reviewDetail: self.mReviewDetailInfos![indexPath.row])
         }
     }
+    
+    // MARK:- CollectionView DataSource
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.mRestaurantDetailPhotos?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: RestaurantDetailViewController.CELL_ID, for: indexPath) as? RestaurantDetailPhotoCollectionViewCell else {
+            fatalError("Cell is not of kind UICollectionViewCell")
+        }
+        
+        cell.setPhotoUrl(url: self.mRestaurantDetailPhotos?[indexPath.row])
+        
+        return cell
+    }
+    
+    // Mark:- CollectionView Delegate
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let photoUrlStrs = self.mRestaurantDetailPhotos else {
+            return
+        }
+        show(Util.createPhotoGallery(sourceViewController:self, currentImgIndex: indexPath.row, urlStrs: photoUrlStrs), sender: nil)
+    }
+    
     
     // MARK: - onStaticMapPressed
     @IBAction func onStaticMapPressed(_ sender: Any) {
@@ -142,52 +170,56 @@ class RestaurantDetailViewController: UITableViewController, RestaurantDetailVie
             self.mLbIsOpenStatusLabel.text = (isOpenNow) ? "OPEN" : "CLOSE"
         }
         
-        for i in stride(from: 0, to: (detailInfo?.photos?.count)!, by: 1) where i < self.mIvSubPhotos.count {
-            self.mIvSubPhotos[i].kf.cancelDownloadTask()
-            self.mIvSubPhotos[i].kf.setImage(with: URL(string: (detailInfo?.photos![i])!), placeholder: #imageLiteral(resourceName: "no_image"))
-        }
+        self.mRestaurantDetailPhotos = detailInfo?.photos
+        self.mCvRestaurantPhotoCollectionView.register(UINib(nibName:"RestaurantDetailPhotoCollectionViewCell", bundle:nil), forCellWithReuseIdentifier: RestaurantDetailViewController.CELL_ID)
+        self.mCvRestaurantPhotoCollectionView.reloadData()
         
         // Add open hour informations
         var prevView:OpenHourRowView? = nil
-        let hoursInfo:YelpRestaurantHoursInfo? = detailInfo?.hours![0]
-        
-        for i in 0..<7 {
-            var businessTime:YelpResaruantBusinessTime? = nil
-            for hourInfo in (hoursInfo?.open)! {
-                if hourInfo.day == i {
-                    businessTime = hourInfo
-                    break;
+        if let hoursInfo:YelpRestaurantHoursInfo? = detailInfo?.hours?[0] {
+            for i in 0..<7 {
+                var businessTime:YelpResaruantBusinessTime? = nil
+                for hourInfo in (hoursInfo?.open)! {
+                    if hourInfo.day == i {
+                        businessTime = hourInfo
+                        break;
+                    }
                 }
-            }
-            
-            let openHourRowView = OpenHourRowView()
-            let isNowWeekDayMatch = YelpUtil.isNowWeekDayFromYelpIndex(index: Util.getNowWeekDay(), yelpIndex: businessTime?.day ?? -1)
-            if isNowWeekDayMatch {
-                openHourRowView.mLbDayLabel.font = UIFont.boldSystemFont(ofSize: 17)
-                openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.boldSystemFont(ofSize: 17)
-            } else {
-                openHourRowView.mLbDayLabel.font = UIFont.systemFont(ofSize: 17)
-                openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.systemFont(ofSize: 17)
-            }
-            
-            openHourRowView.mLbDayLabel.text = YelpUtil.getWeekDayStrByIndex(index: i)
-            openHourRowView.mLbOpenTiemRangeLabel.text = (businessTime == nil || i != businessTime?.day) ? NSLocalizedString("NOT OPEN", comment: "") : String.init(format: "%@ - %@", businessTime?.start ?? "N/A", businessTime?.end ?? "N/A")
-            
-            openHourRowView.translatesAutoresizingMaskIntoConstraints = false
-            self.mVOpenHoursContentView.addSubview(openHourRowView)
-            openHourRowView.leftAnchor.constraint(equalTo: self.mVOpenHoursContentView.leftAnchor, constant: 0).isActive = true
-            openHourRowView.rightAnchor.constraint(equalTo: self.mVOpenHoursContentView.rightAnchor, constant: 0).isActive = true
-            openHourRowView.heightAnchor.constraint(equalToConstant: 30).isActive = true
-            if prevView == nil {
-                openHourRowView.topAnchor.constraint(equalTo: self.mLbOpenHoursTitleLabel.bottomAnchor, constant: 10).isActive = true
-            } else {
-                if i == 6 {
-                    openHourRowView.bottomAnchor.constraint(equalTo: self.mVOpenHoursContentView.bottomAnchor, constant: -10).isActive = true
+                
+                let openHourRowView = OpenHourRowView()
+                let isNowWeekDayMatch = YelpUtil.isNowWeekDayFromYelpIndex(index: Util.getNowWeekDay(), yelpIndex: businessTime?.day ?? -1)
+                if isNowWeekDayMatch {
+                    openHourRowView.mLbDayLabel.font = UIFont.boldSystemFont(ofSize: 17)
+                    openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.boldSystemFont(ofSize: 17)
+                } else {
+                    openHourRowView.mLbDayLabel.font = UIFont.systemFont(ofSize: 17)
+                    openHourRowView.mLbOpenTiemRangeLabel.font = UIFont.systemFont(ofSize: 17)
                 }
-                openHourRowView.topAnchor.constraint(equalTo: (prevView?.bottomAnchor)!, constant: 5).isActive = true
+                
+                openHourRowView.mLbDayLabel.text = YelpUtil.getWeekDayStrByIndex(index: i)
+                openHourRowView.mLbOpenTiemRangeLabel.text = (businessTime == nil || i != businessTime?.day) ? NSLocalizedString("NOT OPEN", comment: "") : String.init(format: "%@ - %@", businessTime?.start ?? "N/A", businessTime?.end ?? "N/A")
+                
+                openHourRowView.translatesAutoresizingMaskIntoConstraints = false
+                self.mVOpenHoursContentView.addSubview(openHourRowView)
+                openHourRowView.leftAnchor.constraint(equalTo: self.mVOpenHoursContentView.leftAnchor, constant: 0).isActive = true
+                openHourRowView.rightAnchor.constraint(equalTo: self.mVOpenHoursContentView.rightAnchor, constant: 0).isActive = true
+                openHourRowView.heightAnchor.constraint(equalToConstant: 30).isActive = true
+                if prevView == nil {
+                    openHourRowView.topAnchor.constraint(equalTo: self.mLbOpenHoursTitleLabel.bottomAnchor, constant: 10).isActive = true
+                } else {
+                    if i == 6 {
+                        openHourRowView.bottomAnchor.constraint(equalTo: self.mVOpenHoursContentView.bottomAnchor, constant: -10).isActive = true
+                    }
+                    openHourRowView.topAnchor.constraint(equalTo: (prevView?.bottomAnchor)!, constant: 5).isActive = true
+                }
+                prevView = openHourRowView
             }
-            prevView = openHourRowView
+            self.mLbNoOpenHoursHintLabel.isHidden = true
+        } else {            
+            self.mLbNoOpenHoursHintLabel.isHidden = false
         }
+        
+        self.tableView.reloadData()
     }
     
     func refreshReviewInfo(reviews: [YelpReviewDetailInfo]?) {
