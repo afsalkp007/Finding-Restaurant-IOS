@@ -33,7 +33,7 @@ class Util {
     static func createPhotoGallery(sourceViewController:UIViewController, currentImgIndex:Int, urlStrs:[String]) -> RIGImageGalleryViewController {
         let urls: [URL?] = urlStrs.map {URL(string:$0)}
         let rigItems: [RIGImageGalleryItem] = urls.map { _ in
-            RIGImageGalleryItem(placeholderImage: UIImage(named: "placeholder") ?? UIImage(),
+            RIGImageGalleryItem(placeholderImage: #imageLiteral(resourceName: "no_image"),
                                 isLoading: true)
         }        
         let rigController = RIGImageGalleryViewController(images: rigItems)
@@ -48,8 +48,10 @@ class Util {
         rigController.dismissHandler = {
            [weak sourceViewController] (rigController:RIGImageGalleryViewController) -> Void in
             sourceViewController?.navigationController?.popViewController(animated: true)
+            rigController.navigationController?.toolbar.isHidden = true
         }
         
+        rigController.navigationController?.toolbar.isHidden = false
         rigController.setCurrentImage(currentImgIndex, animated: false)
         
         return rigController
