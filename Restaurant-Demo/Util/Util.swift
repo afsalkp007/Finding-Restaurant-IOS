@@ -48,10 +48,9 @@ class Util {
         rigController.dismissHandler = {
            [weak sourceViewController] (rigController:RIGImageGalleryViewController) -> Void in
             sourceViewController?.navigationController?.popViewController(animated: true)
-            rigController.navigationController?.toolbar.isHidden = true
+            rigController.navigationController?.setToolbarHidden(true, animated: false)
         }
         
-        rigController.navigationController?.toolbar.isHidden = false
         rigController.setCurrentImage(currentImgIndex, animated: false)
         
         return rigController
