@@ -55,6 +55,10 @@ class RestaurantListPresenter: NSObject, RestaurantListPresenterProtocol, Locati
         self.mIsNeedReFetch = true
     }
     
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        self.mView?.doDismiss(animated: true, completion: nil)
+    }
+    
     // MARK:- fetchRestaurantSummaryInfos
     func fetchRestaurantSummaryInfos(isNeedShowLoading:Bool = true) {
         if isNeedShowLoading {
