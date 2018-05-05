@@ -58,6 +58,9 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     func initView() {
         /* Init NavigationController  */
         self.navigationController?.navigationBar.prefersLargeTitles = true
+        if let barFont = UIFont(name: "Avenir-Light", size: 36.0) {
+            self.navigationController?.navigationBar.largeTitleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white, NSAttributedStringKey.font:barFont]
+        }
         
         /* Init TableView  */
         self.mRcRefreshControl = UIRefreshControl()
@@ -76,18 +79,10 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
         
         /* Init SearchController */
         self.mScNameSearchController = UISearchController(searchResultsController: nil)
-        // Don't hide nav bar during searching
-        self.mScNameSearchController?.hidesNavigationBarDuringPresentation = false
-        // Don't darker the background color during searching
-        self.mScNameSearchController?.dimsBackgroundDuringPresentation = false
-        self.mScNameSearchController?.searchResultsUpdater = self
-        self.mScNameSearchController?.definesPresentationContext = true
-        self.mScNameSearchController?.searchBar.sizeToFit()
-        self.mScNameSearchController?.searchBar.placeholder = "Please input the keyword..."
+        self.mScNameSearchController?.initStyle(updater: self, placeholoderTxt: NSLocalizedString("Please input the search keyword", comment: ""))
         self.navigationItem.searchController = self.mScNameSearchController
         // Hide the search bar when scrolling up, Default is true. if setup as false it will always display
         self.navigationItem.hidesSearchBarWhenScrolling = false
-        self.mScNameSearchController?.searchBar.searchBarStyle = .prominent
         
         /* Init float button */
         let floaty = Floaty()
