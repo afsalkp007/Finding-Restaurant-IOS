@@ -9,5 +9,5 @@
 import Foundation
 
 enum QuickAction:String {
-    case SearchRestaurant
+    case LocationSearchRestaurant
 }
