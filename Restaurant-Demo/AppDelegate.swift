@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Foundation
 import GooglePlaces
 import GoogleMaps
 import Firebase
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         /* Init fabric configs */
         Fabric.with([Crashlytics.self])
+        Fabric.sharedSDK().debug = true
 
         /* Init google map api configs */
         GMSPlacesClient.provideAPIKey("AIzaSyAc5wnmJJydGYodnmlc2jFPQMeAgwLeBug")
@@ -40,16 +42,40 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ImageCache.default.maxDiskCacheSize = 20 * 1024 * 1024
         ImageCache.default.maxCachePeriodInSecond = 60 * 60 * 24 * 1
         
-        return true
+        /* Navigation bar style */
+        UINavigationBar.appearance().barTintColor = UIColor(displayP3Red: 216.0/255.0, green: 74.0/255.0, blue: 32.0/255.0, alpha: 1.0)
+        UIToolbar.appearance().barTintColor = UIColor(displayP3Red: 216.0/255.0, green: 74.0/255.0, blue: 32.0/255.0, alpha: 1.0)
+        UINavigationBar.appearance().tintColor = UIColor.white
+        if let barFont = UIFont(name: "Avenir-Light", size: 24.0) {
+            UINavigationBar.appearance().titleTextAttributes = [NSAttributedStringKey.foregroundColor:UIColor.white, NSAttributedStringKey.font:barFont]
+        }
+        
+        var isLaunchedFromShortcutItem = false
+        
+        if let shortcutItem = launchOptions?[UIApplicationLaunchOptionsKey.shortcutItem] as? UIApplicationShortcutItem {
+            isLaunchedFromShortcutItem = true
+            handleShortcutItem(shortcutItem: shortcutItem)
+        }
+        
+        return !isLaunchedFromShortcutItem
     }
     
     func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        self.handleShortcutItem(shortcutItem: shortcutItem)
+    }
+    
+    func handleShortcutItem(shortcutItem: UIApplicationShortcutItem) {
         // TODO: Route the quick action to main page and under searching status
         guard let actionStr = shortcutItem.type.components(separatedBy: ".").last, let action = QuickAction(rawValue:actionStr) else {
             return
         }
         
-        print("\(#function) and action is \(action.rawValue)")
+        if action == QuickAction.LocationSearchRestaurant {
+            if let navController = self.window?.rootViewController as? UINavigationController, let restaurantListVc = navController.viewControllers[0] as? RestaurantListViewController {
+                navController.popToRootViewController(animated: false)
+                restaurantListVc.receiveShortcutItemAction(shortcutItemAction: action)
+            }
+        }
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

@@ -51,6 +51,7 @@
 		ED7337D1204ADF1400356AE6 /* RestaurantListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7337D0204ADF1400356AE6 /* RestaurantListViewController.swift */; };
 		ED7607AB2036C0CC00BF12DB /* OpenHourRowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED7607AA2036C0CC00BF12DB /* OpenHourRowView.swift */; };
 		ED7607AD2036C32600BF12DB /* OpenHourRowView.xib in Resources */ = {isa = PBXBuildFile; fileRef = ED7607AC2036C32600BF12DB /* OpenHourRowView.xib */; };
+		ED85A01B209E05ED0040A3CA /* UISearchControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = ED85A01A209E05ED0040A3CA /* UISearchControllerExtension.swift */; };
 		EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C601FD5262100DD2902 /* FloatyViewController.swift */; };
 		EDA28C681FD5262100DD2902 /* FloatyWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C611FD5262100DD2902 /* FloatyWindow.swift */; };
 		EDA28C691FD5262100DD2902 /* FloatyManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EDA28C621FD5262100DD2902 /* FloatyManager.swift */; };
@@ -127,6 +128,7 @@
 		ED7337D0204ADF1400356AE6 /* RestaurantListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RestaurantListViewController.swift; sourceTree = "<group>"; };
 		ED7607AA2036C0CC00BF12DB /* OpenHourRowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OpenHourRowView.swift; sourceTree = "<group>"; };
 		ED7607AC2036C32600BF12DB /* OpenHourRowView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = OpenHourRowView.xib; sourceTree = "<group>"; };
+		ED85A01A209E05ED0040A3CA /* UISearchControllerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UISearchControllerExtension.swift; sourceTree = "<group>"; };
 		EDA28C601FD5262100DD2902 /* FloatyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyViewController.swift; sourceTree = "<group>"; };
 		EDA28C611FD5262100DD2902 /* FloatyWindow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyWindow.swift; sourceTree = "<group>"; };
 		EDA28C621FD5262100DD2902 /* FloatyManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FloatyManager.swift; sourceTree = "<group>"; };
@@ -376,6 +378,7 @@
 		ED5B5F9D1FDA373600E8B198 /* Extension */ = {
 			isa = PBXGroup;
 			children = (
+				ED85A01A209E05ED0040A3CA /* UISearchControllerExtension.swift */,
 				ED5B5F9E1FDA377300E8B198 /* NavigationControllerExtension.swift */,
 				ED5B5FA01FDA39E400E8B198 /* EdgeInsetLabelExtension.swift */,
 			);
@@ -690,6 +693,7 @@
 				ED5CBB73205EA6DB009D5DF2 /* PanoramaModel.swift in Sources */,
 				ED3559CE1FCBBB9100935DFF /* YelpRestaurantCategory.swift in Sources */,
 				ED3559D71FCC6A9300935DFF /* YelpRestaurantDetailInfo.swift in Sources */,
+				ED85A01B209E05ED0040A3CA /* UISearchControllerExtension.swift in Sources */,
 				ED5CBB6F205EA645009D5DF2 /* PanoramaPresenter.swift in Sources */,
 				EDA28C671FD5262100DD2902 /* FloatyViewController.swift in Sources */,
 				ED7337CD2048566700356AE6 /* BaseUIViewController.swift in Sources */,

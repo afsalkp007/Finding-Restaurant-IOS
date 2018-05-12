@@ -24,6 +24,7 @@ class RestaurantListPresenter: NSObject, RestaurantListPresenterProtocol, Locati
     private var mSearchKeyword:String?
     private var mIsFirst = true
     private var mIsNeedReFetch = false
+    private var mShortcutItemAction:QuickAction?
     
     // MARK: - LocationStatusDelegate
     func isLocationAuthorized(isAuthorized: Bool) {
@@ -38,10 +39,16 @@ class RestaurantListPresenter: NSObject, RestaurantListPresenterProtocol, Locati
     
     func didUpdateLocation(location: CLLocation) {
         self.mCurLocation = location
-        
         LocationManager.shared.setDelegate(delegate: nil)
         LocationManager.shared.stopLocationUpdate()
-        fetchRestaurantSummaryInfos()
+        
+        print("[Randy] didUpdateLocation")
+        if self.mShortcutItemAction != nil {
+            self.mShortcutItemAction = nil
+            self.onLocationFloatItemClick()
+        } else {
+            fetchRestaurantSummaryInfos()
+        }
     }
     
     // MARK:- GMSPlacePickerViewControllerDelegate
@@ -53,6 +60,10 @@ class RestaurantListPresenter: NSObject, RestaurantListPresenterProtocol, Locati
         
         self.mCurLocation = CLLocation(latitude: place.coordinate.latitude, longitude: place.coordinate.longitude)
         self.mIsNeedReFetch = true
+    }
+    
+    func placePickerDidCancel(_ viewController: GMSPlacePickerViewController) {
+        self.mView?.doDismiss(animated: true, completion: nil)
     }
     
     // MARK:- fetchRestaurantSummaryInfos
@@ -138,6 +149,21 @@ class RestaurantListPresenter: NSObject, RestaurantListPresenterProtocol, Locati
         
     }
     
+    func onHandleShortcutItemAction(shortcutItemAction: QuickAction?) {
+        guard let action = shortcutItemAction else {
+            return
+        }
+        
+        self.mShortcutItemAction = action
+        
+        if action == QuickAction.LocationSearchRestaurant {
+            LocationManager.shared.setDelegate(delegate: self)
+            LocationManager.shared.requestLocationUpdate()
+        } else {
+            NSLog("[Randy] QuickAction.SearchRestaurant is not handled")
+        }
+    }
+    
     func onFilterTagTap(tagType:TagType) {
         self.mModel?.clearFilterConfig(filterType: tagType)
         self.mView?.refreshFilterTagList(filterConfigs: self.mModel?.getFilterConfig())
@@ -161,10 +187,15 @@ class RestaurantListPresenter: NSObject, RestaurantListPresenterProtocol, Locati
             return
         }
         
-        let config = GMSPlacePickerConfig(viewport: nil)
+        let center = CLLocationCoordinate2D(latitude: (self.mCurLocation?.coordinate.latitude)!, longitude: (self.mCurLocation?.coordinate.longitude)!)
+        let northEast = CLLocationCoordinate2D(latitude: center.latitude + 0.001,
+                                               longitude: center.longitude + 0.001)
+        let southWest = CLLocationCoordinate2D(latitude: center.latitude - 0.001,
+                                               longitude: center.longitude - 0.001)
+        let viewport = GMSCoordinateBounds(coordinate: northEast, coordinate: southWest)
+        let config = GMSPlacePickerConfig(viewport: viewport)
         let placePicker = GMSPlacePickerViewController(config: config)
         placePicker.delegate = self as GMSPlacePickerViewControllerDelegate
-        
         self.mView?.doPresent(placePicker, animated: true, completion: nil)
     }
     
