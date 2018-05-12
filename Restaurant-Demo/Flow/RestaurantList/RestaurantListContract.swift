@@ -23,6 +23,8 @@ protocol RestaurantListPresenterProtocol {
     
     func onNewFilterConfigsApply(filterConfigs:FilterConfigs?)
     
+    func onHandleShortcutItemAction(shortcutItemAction:QuickAction?)
+    
     func onViewDidLoad()
     func onViewDidAppear()
     func onViewDidDisappear()
@@ -33,6 +35,7 @@ protocol RestaurantListPresenterProtocol {
 protocol RestaurantListViewProtocol {
     func refreshList(restaurantSummaryInfos:[YelpRestaruantSummaryInfo]?)
     func refreshFilterTagList(filterConfigs:FilterConfigs?)
+    func receiveShortcutItemAction(shortcutItemAction:QuickAction?)
     
     func doPresent(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?)
     func doDismiss(animated flag: Bool, completion: (() -> Swift.Void)?)

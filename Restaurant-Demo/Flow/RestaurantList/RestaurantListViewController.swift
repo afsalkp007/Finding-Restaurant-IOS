@@ -24,18 +24,21 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     private var mLoadingAlertController:UIAlertController?
     private var mPresenter:RestaurantListPresenterProtocol?
     private var mRestaurantSummaryInfos: [YelpRestaruantSummaryInfo]?
+    private var mShortcutItemAction:QuickAction?
     var mFilterConfig:FilterConfigs?
+    private var mIsViewAppear = false
+    private var mIsFirstDisp = true
     
-    // MARK:- Lif cycle & initialization
+    // MARK:- Life cycle & initialization
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         initView()
         
         // 3D touch preview for restaurant detail
         if traitCollection.forceTouchCapability == UIForceTouchCapability.available {
             registerForPreviewing(with: self as UIViewControllerPreviewingDelegate, sourceView: self.view)
         }
-        
         self.mRestaurantSummaryInfos = Array<YelpRestaruantSummaryInfo>()
         self.mPresenter = RestaurantListPresenter()
         self.mPresenter?.attachView(view: self)
@@ -43,10 +46,14 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        self.mIsViewAppear = true
+        
+        self.receiveShortcutItemAction(shortcutItemAction: self.mShortcutItemAction)
         self.mPresenter?.onViewDidAppear()
     }
     
     override func viewDidDisappear(_ animated: Bool) {
+        self.mIsViewAppear = false
         self.mPresenter?.onViewDidDisappear()
     }
     
@@ -168,7 +175,7 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         // TODO: It's workaround to avoid the crash when searchcontroller is activie and go back from detail page
         self.mScNameSearchController?.isActive = false
-                
+        
         self.mPresenter?.onRestaurantListItemSelect(summaryInfo: self.mRestaurantSummaryInfos?[indexPath.row])
     }
     
@@ -197,10 +204,30 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     }
     
     // MARK:- RestaurantListViewProtocol
+    
+    func receiveShortcutItemAction(shortcutItemAction: QuickAction?) {
+        self.mShortcutItemAction = shortcutItemAction
+        
+        if self.mShortcutItemAction != nil, self.mIsViewAppear, !self.mIsFirstDisp {
+            //[TODO:]
+            // flow won't go to refreshList, so call onHandleShortcutItemAction directly.
+            self.mPresenter?.onHandleShortcutItemAction(shortcutItemAction: self.mShortcutItemAction)
+            self.mShortcutItemAction = nil
+        }
+    }
+    
     func refreshList(restaurantSummaryInfos: [YelpRestaruantSummaryInfo]?) {
         self.mRestaurantSummaryInfos = restaurantSummaryInfos
+        self.mIsFirstDisp = false
         self.mRcRefreshControl?.endRefreshing()
         self.tableView.reloadData()
+
+        if self.mShortcutItemAction != nil {
+            // TODO:
+            // flow from app first launched, it will do refresh list.
+            self.mPresenter?.onHandleShortcutItemAction(shortcutItemAction: self.mShortcutItemAction)
+            self.mShortcutItemAction = nil
+        }
     }
     
     func refreshFilterTagList(filterConfigs: FilterConfigs?) {
@@ -271,11 +298,13 @@ class RestaurantListViewController: UITableViewController, RestaurantListViewPro
     }
     
     func doPresent(_ viewControllerToPresent: UIViewController, animated flag: Bool, completion: (() -> Swift.Void)?) {
+        self.navigationController?.navigationBar.prefersLargeTitles = false
         ImageCache.default.clearMemoryCache()
-        self.present(viewControllerToPresent, animated: flag, completion: completion)
+        self.navigationController?.pushViewController(viewControllerToPresent, animated: true)
     }
     func doDismiss(animated flag: Bool, completion: (() -> Swift.Void)?) {
-        self.dismiss(animated: flag, completion: completion)
+        self.navigationController?.navigationBar.prefersLargeTitles = true
+        self.navigationController?.popViewController(animated: true)
     }
     
     func doPerformSegue(withIdentifier identifier: String, sender: Any?) {
